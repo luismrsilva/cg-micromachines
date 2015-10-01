@@ -1,0 +1,17 @@
+/*
+ * GameObject.hpp
+ *
+ * */
+
+ #ifndef __GAMEOBJECT_H
+ #define __GAMEOBJECT_H
+
+class GameObject{
+  public:
+    GameObject();
+    ~GameObject();
+    void draw();
+    void update(double delta_t);
+};
+
+ #endif

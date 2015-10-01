@@ -1,6 +1,6 @@
 /*
- * Vector3.h
- * 
+ * Vector3.hpp
+ *
  * */
 
 #ifndef __VECTOR3_H
@@ -11,7 +11,7 @@ class Vector3 {
 		double _x;
 		double _y;
 		double _z;
-		
+
 	public:
 		Vector3();
 		Vector3(double x, double y, double z);
