@@ -3,10 +3,12 @@
  *
  * */
 
- #ifndef __GAMEOBJECT_H
- #define __GAMEOBJECT_H
+#ifndef __GAMEOBJECT_H
+#define __GAMEOBJECT_H
+ 
+#include "Entity.hpp"
 
-class GameObject{
+class GameObject : Entity {
   public:
     GameObject();
     ~GameObject();
