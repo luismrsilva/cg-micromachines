@@ -32,7 +32,7 @@ void Roadside::draw(){
 	
 	glPushMatrix();
 	
-	glTranslate3f(pos->getX(), pos->getY(), pos->getZ());
+	glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 	
 	for(float x = -1.2; x < 0.6f; x+=0.1f){
 		float y = log(x + 1.5f);

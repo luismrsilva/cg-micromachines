@@ -8,7 +8,7 @@
  
 #include "Entity.hpp"
 
-class GameObject : Entity {
+class GameObject : public Entity {
   public:
     GameObject();
     ~GameObject();

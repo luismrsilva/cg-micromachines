@@ -3,20 +3,20 @@
  *
  * */
 
- #include "GameObject.hpp"
+#include "GameObject.hpp"
 
- GameObject::GameObject(){
+GameObject::GameObject(){
 
- }
+}
 
- GameObject::~GameObject(){
+GameObject::~GameObject(){
 
- }
+}
 
- GameObject::draw(){
+void GameObject::draw(){
 
- }
+}
 
- GameObject::update(double delta_t){
+void GameObject::update(double delta_t){
 
- }
+}

@@ -8,7 +8,7 @@
 
 #include "GameObject.hpp"
 
-class StaticObject : GameObject {
+class StaticObject : public GameObject {
 	public:
 		StaticObject();
 		~StaticObject();
