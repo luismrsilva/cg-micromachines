@@ -11,7 +11,6 @@ class Vector3 {
 		double _x;
 		double _y;
 		double _z;
-
 	public:
 		Vector3();
 		Vector3(double x, double y, double z);
