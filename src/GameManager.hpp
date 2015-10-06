@@ -6,6 +6,8 @@
 #ifndef __GAMEMANAGER_H
 #define __GAMEMANAGER_H
 
+#include <GL/glut.h>
+
 class GameManager {
   public:
     GameManager();

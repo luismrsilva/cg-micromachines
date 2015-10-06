@@ -6,11 +6,11 @@
 #include "DynamicObject.hpp"
 
 
-DynamicObject::StaticObject(){
+DynamicObject::DynamicObject(){
 
 }
 
-DynamicObject::~StaticObject(){
+DynamicObject::~DynamicObject(){
 
 }
 

@@ -6,13 +6,13 @@
 #ifndef __BUTTER_H
 #define __BUTTER_H
 
-#include "DynamicObject.hpp"
+#include "Obstacle.hpp"
 
 class Butter : public Obstacle {
 	public:
 		Butter();
 		~Butter();
-    void draw();
+		void draw();
 };
 
 #endif //__BUTTER_H

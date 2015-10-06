@@ -6,7 +6,7 @@
 #include "GameManager.hpp"
 #include "Camera.hpp"
 #include "GameObject.hpp"
-#include "LightSource.hpp"
+//#include "LightSource.hpp"
 
 GameManager::GameManager(){
 
