@@ -8,9 +8,6 @@
 #include <math.h>
 #include <GL/glut.h>
 
-#include <iostream>
-using namespace std;
-
 Roadside::Roadside(){
 
 }
@@ -25,14 +22,12 @@ static void drawTorus(GLfloat x, GLfloat y, GLfloat z){
 
 	glTranslatef(x, y, z);
 	glColor3f(0.0f, 1.0f, 0.0f);
-	glutSolidTorus(0.005f, 0.015f, 6, 16);
+	glutSolidTorus(0.1f, 0.5f, 6, 16);
 	
 	glPopMatrix();
 }
 
 void Roadside::draw(){
-	cout << "Roadside::draw()" << endl;
-	
 	Vector3 *pos = this->getPosition();
 	
 	glPushMatrix();
@@ -75,6 +70,30 @@ void Roadside::draw(){
 		drawTorus(x, y, 0);
 		drawTorus(x + 5.0f, y, 0);
 	}
+
+	//10 curva quarto
+
+	//11 reta
+	for (float x = -95.0; x < 50.0f; x += 1.0f) {
+		float y = 53.4f;
+		drawTorus(x, y, 0);
+		drawTorus(x, y + 5.0f, 0);
+
+	//12 curva meia
+
+	//13 reta
+
+	//14 curva meia
+	
+	//15 reta
+
+	//16 curva meia
+
+	//17 reta
+
+	//18 curva meia
+	
+	//19 reta
 
 	
 	glPopMatrix();
