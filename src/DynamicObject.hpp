@@ -13,10 +13,12 @@ class DynamicObject : public GameObject {
 	public:
 		DynamicObject();
 		~DynamicObject();
-    void update(double delta_t);
-    void setSpeed(const Vector3 speed);
-    void setSpeed(double x, double y, double z);
-    Vector3 getSpeed();
+		void update(double delta_t);
+		void setSpeed(const Vector3 speed);
+		void setSpeed(double x, double y, double z);
+		Vector3 getSpeed();
+	private:
+		Vector3 *_speed;
 };
 
 #endif //__DYNAMIC_OBJECT_H

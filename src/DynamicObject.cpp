@@ -7,11 +7,11 @@
 
 
 DynamicObject::DynamicObject(){
-
+	_speed = new Vector3();
 }
 
 DynamicObject::~DynamicObject(){
-
+	delete _speed;
 }
 
 void DynamicObject::update(double delta_t){
@@ -27,5 +27,5 @@ void DynamicObject::setSpeed(double x, double y, double z){
 }
 
 Vector3 DynamicObject::getSpeed() {
-	return _speed;
+	return *_speed;
 }
