@@ -15,7 +15,7 @@
 #include <iostream>
 using namespace std;
 
-#define	WORLD_MAX	-2.0f
+#define	WORLD_MAX	2.0f
 
 GameManager::GameManager(){
 	
