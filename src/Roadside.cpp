@@ -19,10 +19,10 @@ Roadside::~Roadside(){
 /* Draws a torus on x, y, z position */
 static void drawTorus(GLfloat x, GLfloat y, GLfloat z){
 	glPushMatrix();
-	
+
 	glTranslatef(x, y, z);
-	glColor3f(1.0f, 1.0f, 0.0f);
-	glutSolidTorus(0.011f, 0.03f, 6, 16);
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glutSolidTorus(0.005f, 0.015f, 6, 16);
 	
 	glPopMatrix();
 }
@@ -34,11 +34,43 @@ void Roadside::draw(){
 	
 	glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 	
-	for(float x = -1.2; x < 0.6f; x+=0.1f){
-		float y = log(x + 1.5f);
+	// 1
+	for (float y = 50.0; y < 90.0f; y += 1.0f) {
+		float x = -95.0f;
 		drawTorus(x, y, 0);
-		drawTorus(x+0.8f, y, 0);
+		drawTorus(x + 5.0f, y, 0);
 	}
+
+	// 2, 3
+	for (float x = -95.0; x < 50.0f; x += 1.0f) {
+		float y = 90.0f;
+		drawTorus(x, y, 0);
+		drawTorus(x, y + 5.0f, 0);
+	}
+
+	// 4 circunf quarto
+	for (float x = 50.0; x < 95.0f; x += 1.0f) {
+		float y = 90.0f;
+		drawTorus(x, y, 0);
+		drawTorus(x, y + 5.0f, 0);
+	}
+
+	// 5, 6
+	for (float y = 50.0; y < -50.0f; y -= 1.0f) {
+		float x = -90.0f;
+		drawTorus(x, y, 0);
+		drawTorus(x + 5.0f, y, 0);
+	}
+
+	// 7 circunf meia
+
+	// 8, 9 
+	for (float y = -50.0; y < 50.0f; y += 1.0f) {
+		float x = 50.0f;
+		drawTorus(x, y, 0);
+		drawTorus(x + 5.0f, y, 0);
+	}
+
 	
 	glPopMatrix();
 }
