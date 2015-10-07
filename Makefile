@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -O2 -MMD
+CXXFLAGS = -O2 -MMD -Wall -pedantic
 LDLIBS = -lGL -lGLU -lglut
 
 CPP_FILES := $(wildcard src/*.cpp)
@@ -19,7 +19,7 @@ micromachines: $(OBJ_FILES)
 
 
 obj/%.o: src/%.cpp
-	g++ $(CC_FLAGS) -c -o $@ $<
+	g++ $(CXXFLAGS) -c -o $@ $<
 
 
 
