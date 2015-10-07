@@ -26,6 +26,6 @@ void DynamicObject::setSpeed(double x, double y, double z){
 
 }
 
-Vector3 DynamicObject::getSpeed(){
-
+void DynamicObject::getSpeed() { //tava vector3
+	
 }
