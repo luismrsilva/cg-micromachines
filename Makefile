@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -O2 -MMD -Wall -pedantic
+CXXFLAGS = -O2 -MMD -Wall -pedantic -ggdb
 LDLIBS = -lGL -lGLU -lglut
 
 HPP_FILES := $(wildcard src/*.hpp)
