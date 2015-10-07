@@ -9,16 +9,18 @@
 //#include "LightSource.hpp"
 
 #include "Roadside.hpp"
+#include "Butter.hpp"
 #include <GL/glut.h>
 
 #include <iostream>
 using namespace std;
 
-#define	WORLD_MAX	100.0f
+#define	WORLD_MAX	-2.0f
 
 GameManager::GameManager(){
 	
 	_game_objects.push_back(new Roadside());
+	_game_objects.push_back(new Butter());
 	
 }
 
@@ -46,6 +48,12 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 					-WORLD_MAX,	WORLD_MAX,
 					-WORLD_MAX,	WORLD_MAX);
 	}
+	
+	/* pos, look at, up_v*/
+	gluLookAt(	0, 0, 0,
+				0, 0, 1,
+				0, 1, 0);
+	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
