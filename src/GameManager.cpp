@@ -51,7 +51,7 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 	
 	/* pos, look at, up_v*/
 	gluLookAt(	0, 0, 0,  // position of the eye point
-				0, 0, 1,  // center - position of the reference point
+				0, 0, -1,  // center - position of the reference point
 				0, 1, 0); // up - specifies the direction of the up point
 	
 	glMatrixMode(GL_MODELVIEW);
