@@ -2,6 +2,7 @@ CXX = g++
 CXXFLAGS = -O2 -MMD -Wall -pedantic
 LDLIBS = -lGL -lGLU -lglut
 
+HPP_FILES := $(wildcard src/*.hpp)
 CPP_FILES := $(wildcard src/*.cpp)
 OBJ_FILES := $(addprefix obj/,$(notdir $(CPP_FILES:.cpp=.o)))
 
@@ -14,7 +15,7 @@ run: micromachines
 	./micromachines
 
 
-micromachines: $(OBJ_FILES)
+micromachines: $(OBJ_FILES) $(HPP_FILES)
 	$(CXX) -o micromachines $(OBJ_FILES) $(CXXFLAGS) $(LDLIBS)
 
 
