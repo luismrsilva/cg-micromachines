@@ -78,6 +78,7 @@ void Roadside::draw(){
 		float y = 53.4f;
 		drawTorus(x, y, 0);
 		drawTorus(x, y + 5.0f, 0);
+	}
 
 	//12 curva meia
 
