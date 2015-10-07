@@ -8,6 +8,9 @@
 #include <math.h>
 #include <GL/glut.h>
 
+#include <iostream>
+using namespace std;
+
 Roadside::Roadside(){
 
 }
@@ -28,6 +31,8 @@ static void drawTorus(GLfloat x, GLfloat y, GLfloat z){
 }
 
 void Roadside::draw(){
+	cout << "Roadside::draw()" << endl;
+	
 	Vector3 *pos = this->getPosition();
 	
 	glPushMatrix();

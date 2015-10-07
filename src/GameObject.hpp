@@ -9,11 +9,11 @@
 #include "Entity.hpp"
 
 class GameObject : public Entity {
-  public:
-    GameObject();
-    ~GameObject();
-    void draw();
-    void update(double delta_t);
+	public:
+		GameObject();
+		virtual ~GameObject();
+		virtual void draw();
+		void update(double delta_t);
 };
 
  #endif
