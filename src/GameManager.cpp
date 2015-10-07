@@ -10,6 +10,8 @@
 
 #include <GL/glut.h>
 
+#define	WORLD_MAX	100.0f
+
 GameManager::GameManager(){
 
 }
@@ -31,13 +33,13 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 	glLoadIdentity();
 	
 	if(w<h){
-		glOrtho(	-2.0f,	2.0f,
-					-2.0f*h/w,	2.0f*h/w,
-					-2.0f,	2.0f);
+		glOrtho(	-WORLD_MAX,	WORLD_MAX,
+					-WORLD_MAX*h/w,	WORLD_MAX*h/w,
+					-WORLD_MAX,	WORLD_MAX);
 	}else{		
-		glOrtho(	-2.0f*w/h,	2.0f*w/h,
-					-2.0f,	2.0f,
-					-2.0f,	2.0f);
+		glOrtho(	-WORLD_MAX*w/h,	WORLD_MAX*w/h,
+					-WORLD_MAX,	WORLD_MAX,
+					-WORLD_MAX,	WORLD_MAX);
 	}
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
