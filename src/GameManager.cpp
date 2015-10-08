@@ -3,6 +3,8 @@
  *
  * */
 
+#include <iostream>
+using namespace std;
 #include "GameManager.hpp"
 #include "Camera.hpp"
 #include "GameObject.hpp"
@@ -13,8 +15,6 @@
 #include "Car.hpp"
 #include <GL/glut.h>
 
-#include <iostream>
-using namespace std;
 
 #define	WORLD_MAX	2.0f
 

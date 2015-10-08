@@ -6,11 +6,9 @@
 #include "Roadside.hpp"
 #include "Vector3.hpp"
 #include <math.h>
-#include <GL/glut.h>
-
 #include <iostream>
 using namespace std;
-
+#include <GL/glut.h>
 #include "myunits.hpp"
 
 Roadside::Roadside(){
