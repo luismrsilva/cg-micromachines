@@ -8,6 +8,9 @@
 #include <math.h>
 #include <GL/glut.h>
 
+#include <iostream>
+using namespace std;
+
 #include "myunits.hpp"
 
 Roadside::Roadside(){
@@ -24,17 +27,41 @@ static void drawTorus(GLfloat x, GLfloat y, GLfloat z){
 
 	glTranslatef(x, y, z);
 	glColor3f(1.0f, 1.0f, 0.0f);
-	glutSolidTorus(0.01f, 0.02f, 6, 16);
+	glutSolidTorus( cm(1), cm(2), 12, 32);
 	
 	glPopMatrix();
 }
 
 static void drawTorusLineXY(double sX, double sY, double eX, double eY){
-	double m = (eY-sY)/((eX-sX));
-	double b = sY - m*sX;
+	double m, b;
+	m = (eY-sY)/(eX-sX);
+	b = sY - m*sX;
 	
-	for(double x = sX; x <= eX; x+=0.1f){
-		drawTorus(x, m*x+b, 0);
+	if(sY > eY){
+		double t = eY;
+		eY = sY;
+		sY = t;
+	}
+	
+	if(sX > eX){
+		double t = eX;
+		eX = sX;
+		sX = t;
+	}else if(sX == eX){
+		for(double y = sY; y <= eY; y+=0.1f){
+			drawTorus(sX, y, 0);
+		}
+		return;
+	}
+	
+	if(m > 1){
+		for(double y = sY; y <= eY; y+=0.1f){
+			drawTorus((y-b)/m, y, 0);
+		}
+	}else{
+		for(double x = sX; x <= eX; x+=0.1f){
+			drawTorus(x, m*x+b, 0);
+		}
 	}
 	
 }
@@ -48,10 +75,37 @@ void Roadside::draw(){
 	
 	
 	drawTorusLineXY(-1.4,  1.4,	 1.4,  1.4);
+	drawTorusLineXY(-1.2,  1.2,	 1.2,  1.2);
 	
 	drawTorusLineXY( 1.4,  1.4,	 1.4, -1.4);
+	drawTorusLineXY( 1.2,  1.2,	 1.2, -1.2);
 	
+	drawTorusLineXY(  0.0, -1.4,	 1.4, -1.4);
+	drawTorusLineXY(  0.2, -1.2,	 1.2, -1.2);
 	
+	drawTorusLineXY(  0.0, -1.4,	 1.4, -1.4);
+	drawTorusLineXY(  0.2, -1.2,	 1.2, -1.2);
+	
+	drawTorusLineXY(  0.0, -1.4,	 0.0,  0.0);
+	drawTorusLineXY(  0.2, -1.2,	 0.2, -0.2);
+	
+	drawTorusLineXY(  0.0,  0.0,	 0.4,  0.0);
+	drawTorusLineXY(  0.2, -0.2,	 0.6, -0.2);
+	
+	drawTorusLineXY(0,0,0.8,0);
+	drawTorusLineXY(0.2,-0.2,1.0,-0.2);
+
+	drawTorusLineXY(0.8,0,0.8,0.8);
+	drawTorusLineXY(1.0,-0.2,1.0,1.0);
+	drawTorusLineXY(0.8,0.8,-0.4,0.8);
+	drawTorusLineXY(1.0,1.0,-0.6,1.0);
+
+	drawTorusLineXY(-0.4,0.8,-0.4,-1.4);
+	drawTorusLineXY(-0.6,1.0,-0.6,-1.2);
+	drawTorusLineXY(-0.6,-1.2,-1.2,-1.2);
+	drawTorusLineXY(-0.4,-1.4,-1.4,-1.4);
+	drawTorusLineXY(-1.2,-1.2,-1.2,1.2);
+	drawTorusLineXY(-1.4,-1.4,-1.4,1.4);
 	
 	
 	glPopMatrix();
