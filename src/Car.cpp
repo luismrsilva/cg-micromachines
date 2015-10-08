@@ -15,7 +15,8 @@ Car::~Car(){
 }
 
 void Car::draw(){
-    //glScalef(20.0f, 20.0f, 20.0f);
+	glPushMatrix();
+    glScalef(2.0f, 2.0f, 2.0f);
     glColor3f(0.2f, 0.0f, 0.8f);
 	glBegin(GL_POLYGON);
 		glVertex3f(	-0.02f,	-0.02f,	 0.0f);
@@ -52,4 +53,6 @@ void Car::draw(){
 		glutSolidTorus(0.002f, 0.005f, 16, 32);
 	glPopMatrix();
     //dglScalef(0.1f, 0.1f, 0.1f);
+    
+    glPopMatrix();
 }
