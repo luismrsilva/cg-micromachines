@@ -19,19 +19,19 @@ void myDisplay(void){
 void turnKeyPressed(int key, bool status){
 	switch (key){
 		case GLUT_KEY_UP:		isKeyPressed[0] = status; break;
-		case GLUT_KEY_DOWN: 	isKeyPressed[1] = status; break;
-		case GLUT_KEY_LEFT: 	isKeyPressed[2] = status; break;
-		case GLUT_KEY_RIGHT: 	isKeyPressed[3] = status; break;
+		case GLUT_KEY_DOWN:		isKeyPressed[1] = status; break;
+		case GLUT_KEY_LEFT:		isKeyPressed[2] = status; break;
+		case GLUT_KEY_RIGHT:	isKeyPressed[3] = status; break;
 	}
 }
 
 void myKeySpecial(int key, int x, int y){
-	std::cout << "called keyspecial: +" << key << std::endl;
+	cout << "called keyspecial: +" << key << endl;
 	turnKeyPressed(key , true);
 }
 
 void myKeyUpSpecial(int key, int x, int y){
-	std::cout << "called keyspecial: -" << key << std::endl;
+	cout << "called keyspecial: -" << key << endl;
 	turnKeyPressed(key , false);
 }
 
@@ -40,13 +40,12 @@ void myKeyboardFunc(unsigned char key, int x, int y){
 	static GLenum mode = GL_FILL;
 	switch(key){
 		case 'a':
-			if(mode == GL_FILL){
-				mode = GL_LINE;
-			}else{
-				mode = GL_FILL;
-			}
+			mode = (mode == GL_FILL) ? GL_LINE : GL_FILL;
 			glPolygonMode(GL_FRONT_AND_BACK, mode);
 			glutPostRedisplay();
+			break;
+		case 'x':
+			exit(0);
 			break;
 		default:
 			break;
