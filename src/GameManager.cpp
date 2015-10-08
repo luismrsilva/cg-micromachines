@@ -10,6 +10,7 @@
 
 #include "Roadside.hpp"
 #include "Butter.hpp"
+#include "Car.hpp"
 #include <GL/glut.h>
 
 #include <iostream>
@@ -20,6 +21,7 @@ using namespace std;
 GameManager::GameManager(){
 	
 	_game_objects.push_back(new Roadside());
+	_game_objects.push_back(new Car());
 	_game_objects.push_back(new Butter());
 	
 }
@@ -62,7 +64,7 @@ void drawCube(GLfloat x, GLfloat y, GLfloat z){
 	glPushMatrix();
 	
 	glTranslatef(x, y, z);
-	glColor3f(1.0f, 1.0f, 1.0f);
+	glColor3f(0.1f, 0.4f, 0.1f);
 	glutSolidCube(3.0f);
 	
 	glPopMatrix();
