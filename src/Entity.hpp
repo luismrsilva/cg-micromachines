@@ -13,6 +13,7 @@ class Entity {
 		Vector3* _position;
 	public:
 		Entity();
+		Entity(double x, double y, double z);
 		~Entity();
 		Vector3* getPosition();
 		Vector3* setPosition(double x, double y, double z);

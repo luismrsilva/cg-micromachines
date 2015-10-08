@@ -10,6 +10,10 @@ Entity::Entity(){
 	_position = new Vector3();
 }
 
+Entity::Entity(double x, double y, double z) : Entity(){
+	this->setPosition(x, y, z);
+}
+
 Entity::~Entity(){
 	delete _position;
 }

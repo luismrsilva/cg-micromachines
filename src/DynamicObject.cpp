@@ -10,6 +10,10 @@ DynamicObject::DynamicObject(){
 	_speed = new Vector3();
 }
 
+DynamicObject::DynamicObject(double x, double y, double z) : GameObject(x, y, z){
+	DynamicObject();
+}
+
 DynamicObject::~DynamicObject(){
 	delete _speed;
 }

@@ -16,6 +16,10 @@ Butter::Butter(){
 
 }
 
+Butter::Butter(double x, double y, double z) : Obstacle(x, y, z){
+
+}
+
 Butter::~Butter(){
 
 }

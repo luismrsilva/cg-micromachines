@@ -11,6 +11,7 @@
 class Obstacle : public DynamicObject {
 	public:
 		Obstacle();
+		Obstacle(double x, double y, double z);
 		~Obstacle();
 };
 

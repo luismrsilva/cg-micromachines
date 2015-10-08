@@ -12,6 +12,10 @@ GameObject::GameObject(){
 
 }
 
+GameObject::GameObject(double x, double y, double z) : Entity(x, y, z){
+
+}
+
 GameObject::~GameObject(){
 
 }
