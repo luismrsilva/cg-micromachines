@@ -47,7 +47,7 @@ void Car::draw(){
 		glutWireTorus(0.02f, 0.05f, 16, 32);
 
 		glColor3f(0.6f, 0.2f, 0.2f);	// red-dark
-		glTranslatef(0.0f, -0.35.0f, 0.0f);
+		glTranslatef(0.0f, -0.35f, 0.0f);
 		glutWireTorus(0.02f, 0.05f, 16, 32);
 	glPopMatrix();
 }
