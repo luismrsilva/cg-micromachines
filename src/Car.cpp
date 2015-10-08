@@ -35,19 +35,19 @@ void Car::draw(){
 		glRotatef(-90, 0, 1, 0);
 		glColor3f(0.4f, 0.4f, 0.4f);	// gray
 
-		glTranslatef(0.0f, 0.0f, 0.02f);
-		glutWireTorus(0.02f, 0.05f, 16, 32);
+		glTranslatef(0.0f, 0.0f, 0.002f);
+		glutWireTorus(0.002f, 0.005f, 16, 32);
 
 		glColor3f(0.0f, 1.0f, 0.0f);	// green
-		glTranslatef(0.0f, 0.35f, 0.0f);
-		glutWireTorus(0.02f, 0.05f, 16, 32);
+		glTranslatef(0.0f, 0.035f, 0.0f);
+		glutWireTorus(0.002f, 0.005f, 16, 32);
 
 		glColor3f(0.0f, 0.0f, 1.0f);	// blue
-		glTranslatef(0.0f, 0.0f, -0.40f);
-		glutWireTorus(0.02f, 0.05f, 16, 32);
+		glTranslatef(0.0f, 0.0f, -0.040f);
+		glutWireTorus(0.002f, 0.005f, 16, 32);
 
 		glColor3f(0.6f, 0.2f, 0.2f);	// red-dark
-		glTranslatef(0.0f, -0.35f, 0.0f);
-		glutWireTorus(0.02f, 0.05f, 16, 32);
+		glTranslatef(0.0f, -0.035f, 0.0f);
+		glutWireTorus(0.002f, 0.005f, 16, 32);
 	glPopMatrix();
 }
