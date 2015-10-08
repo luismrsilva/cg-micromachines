@@ -7,10 +7,10 @@
 #include <iostream>
 #include "Vector3.hpp"
 #include <math.h>
-#include <GL/glut.h>
 
 #include "myunits.hpp"
 using namespace std;
+#include <GL/glut.h>
 
 Butter::Butter(){
 
