@@ -27,7 +27,7 @@ static void drawTorus(GLfloat x, GLfloat y, GLfloat z){
 
 	glTranslatef(x, y, z);
 	glColor3f(1.0f, 1.0f, 0.0f);
-	glutSolidTorus( cm(1), cm(2), 12, 32);
+	glutSolidTorus( cm(1), cm(2), 6, 12);
 	
 	glPopMatrix();
 }

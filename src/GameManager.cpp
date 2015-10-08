@@ -88,7 +88,7 @@ void GameManager::display(){
 }
 
 void GameManager::keyPressed(){
-
+	
 }
 
 void GameManager::onTimer(){
