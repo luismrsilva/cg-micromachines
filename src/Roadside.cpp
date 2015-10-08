@@ -21,10 +21,19 @@ static void drawTorus(GLfloat x, GLfloat y, GLfloat z){
 	glPushMatrix();
 
 	glTranslatef(x, y, z);
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glutSolidTorus(0.1f, 0.5f, 6, 16);
+	glColor3f(1.0f, 1.0f, 0.0f);
+	glutSolidTorus(0.01f, 0.02f, 6, 16);
 	
 	glPopMatrix();
+}
+
+static void drawTorusLineXY(double sX, double sY, double eX, double eY){
+	double m = (eY-sY)/((eX-sX));
+	double b = sY - m*sX;
+	
+	for(double x = sX; x <= eX; x+=0.2f){
+		drawTorus(x, m*x+b, 0);
+	}
 }
 
 void Roadside::draw(){
@@ -33,6 +42,10 @@ void Roadside::draw(){
 	glPushMatrix();
 	
 	glTranslatef(pos->getX(), pos->getY(), pos->getZ());
+	
+	
+	
+	drawTorusLineXY(0.0, 0.0, 1.0, 3.0);
 	
 	// 1
 	for (float y = 50.0; y < 90.0f; y += 1.0f) {
