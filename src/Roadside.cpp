@@ -72,8 +72,8 @@ void Roadside::draw(){
 	glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 	
 	
-	drawTorusLineXY(-1.4,  1.4,	 1.4,  1.4);
-	drawTorusLineXY(-1.2,  1.2,	 1.2,  1.2);
+	drawTorusLineXY(-1.4,  1.4,	 1.45,  1.4);
+	drawTorusLineXY(-1.2,  1.2,	 1.25,  1.2);
 	
 	drawTorusLineXY( 1.4,  1.4,	 1.4, -1.4);
 	drawTorusLineXY( 1.2,  1.2,	 1.2, -1.2);
@@ -95,8 +95,9 @@ void Roadside::draw(){
 
 	drawTorusLineXY(0.8,0,0.8,0.8);
 	drawTorusLineXY(1.0,-0.2,1.0,1.0);
-	drawTorusLineXY(0.8,0.8,-0.4,0.8);
-	drawTorusLineXY(1.0,1.0,-0.6,1.0);
+	
+	drawTorusLineXY(0.85,0.8,-0.4,0.8);
+	drawTorusLineXY(1.05,1.0,-0.6,1.0);
 
 	drawTorusLineXY(-0.4,0.8,-0.4,-1.4);
 	drawTorusLineXY(-0.6,1.0,-0.6,-1.2);
