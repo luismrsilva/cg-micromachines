@@ -11,8 +11,9 @@
 class Orange : public Obstacle {
 	public:
 		Orange();
+		Orange(double x, double y, double z);
 		~Orange();
-    void draw();
+		void draw();
 };
 
 #endif //__ORANGE_H

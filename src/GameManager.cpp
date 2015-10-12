@@ -12,6 +12,7 @@ using namespace std;
 
 #include "Roadside.hpp"
 #include "Butter.hpp"
+#include "Orange.hpp"
 #include "Car.hpp"
 #include <GL/glut.h>
 #include "debug.hpp"
@@ -28,6 +29,9 @@ GameManager::GameManager(){
 	_game_objects.push_back(new Butter(-0.9, -1, 0));
 	_game_objects.push_back(new Butter(0.2, 0.4, 0));
 	_game_objects.push_back(new Butter(0.7, -0.7, 0));
+	_game_objects.push_back(new Orange(-1.3, 0.7, 0));
+	_game_objects.push_back(new Orange(0.85, 0.9, 0));
+	_game_objects.push_back(new Orange(1.3, -0.9, 0));
 
 }
 
