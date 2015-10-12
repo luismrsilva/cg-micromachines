@@ -5,6 +5,7 @@
 
 #include <iostream>
 using namespace std;
+#include <string.h>
 #include "GameManager.hpp"
 #include "Camera.hpp"
 #include "GameObject.hpp"
@@ -21,6 +22,9 @@ using namespace std;
 #define	WORLD_MAX	1.6f
 
 GameManager::GameManager(){
+	
+	_isKeyPressed = (bool*) malloc(4 * sizeof(bool));
+	memset(_isKeyPressed, false, 4);
 
 	_game_objects.push_back(new Roadside());
 	_game_objects.push_back(new Car());
@@ -36,6 +40,7 @@ GameManager::GameManager(){
 }
 
 GameManager::~GameManager(){
+	free(_isKeyPressed);
 }
 
 void GameManager::init(){
@@ -110,4 +115,14 @@ void GameManager::idle(){
 
 void GameManager::update(){
 
+}
+
+void GameManager::setKeyPressed(int glut_key, bool status){
+	switch (glut_key){
+		case GLUT_KEY_UP:		_isKeyPressed[UP] = status; break;
+		case GLUT_KEY_LEFT:		_isKeyPressed[LEFT] = status; break;
+		case GLUT_KEY_DOWN:		_isKeyPressed[DOWN] = status; break;
+		case GLUT_KEY_RIGHT:	_isKeyPressed[RIGHT] = status; break;
+		default: break;
+	}
 }

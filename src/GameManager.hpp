@@ -24,8 +24,15 @@ class GameManager {
 		void idle();
 		void update();
 		void init();
+		void setKeyPressed(int glut_key, bool status);
 	private:
 		vector<GameObject*> _game_objects;
+		bool *_isKeyPressed;
+		
+		enum KEYS{
+			UP, LEFT, DOWN, RIGHT
+		};
+
 };
 
  #endif // __GAMEMANAGER_H
