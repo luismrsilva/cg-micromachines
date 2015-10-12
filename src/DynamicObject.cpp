@@ -19,14 +19,15 @@ DynamicObject::~DynamicObject(){
 }
 
 void DynamicObject::update(double delta_t){
-
+	//this->setPosition(double x, double y, double z);
 }
 
-void DynamicObject::setSpeed(const Vector3 speed){
-
+void DynamicObject::setSpeed(Vector3 speed){
+	_speed->set(speed.getX(), speed.getY(), speed.getZ());
 }
 
 void DynamicObject::setSpeed(double x, double y, double z){
+	_speed->set(x, y, z);
 
 }
 
