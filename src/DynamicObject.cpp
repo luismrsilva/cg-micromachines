@@ -19,7 +19,7 @@ DynamicObject::~DynamicObject(){
 }
 
 void DynamicObject::update(double delta_t){
-	//this->setPosition(double x, double y, double z);
+	getPosition()->operator+(*_speed * delta_t);
 }
 
 void DynamicObject::setSpeed(Vector3 speed){
