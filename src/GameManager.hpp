@@ -20,7 +20,7 @@ class GameManager {
 		void display();
 		void reshape(GLsizei w, GLsizei h);
 		void keyPressed();
-		void onTimer();
+		void onTimer(int val);
 		void idle();
 		void update();
 		void init();

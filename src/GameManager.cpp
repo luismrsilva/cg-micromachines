@@ -94,8 +94,9 @@ void GameManager::keyPressed(){
 
 }
 
-void GameManager::onTimer(){
-
+void GameManager::onTimer(int val){
+	update();
+	gluPostRedisplay();
 }
 
 void GameManager::idle(){

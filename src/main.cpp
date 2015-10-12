@@ -61,7 +61,7 @@ void myKeyboardFunc(unsigned char key, int x, int y){
 	}
 }
 
-void myDraw(int val){
+void onTimer(int val){
 	//glutTimerFunc(20, myDraw, 0);	// draws every 20ms
 
 	if (isKeyPressed[UP]) speed[1] += 0.1f;	// ↑  y++
@@ -69,7 +69,7 @@ void myDraw(int val){
 	if (isKeyPressed[DOWN]) speed[1] -= 0.1f;	// ↓  y--
 	if (isKeyPressed[RIGHT]) speed[0] += 0.1f;	// →  x--
 
-	glutPostRedisplay();
+	gameManager->onTimer(val);
 }
 
 int main(int argc, char *argv[]){
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]){
 	glutSpecialFunc(myKeySpecial);
 	glutSpecialUpFunc(myKeyUpSpecial);
 
-	glutTimerFunc(20, myDraw, 0);
+	glutTimerFunc(20, onTimer, 20);
 
 	glutMainLoop();
 
