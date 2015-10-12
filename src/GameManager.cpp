@@ -22,12 +22,16 @@ using namespace std;
 #define	WORLD_MAX	1.6f
 
 GameManager::GameManager(){
+	D_TRACE();
 	
 	_isKeyPressed = (bool*) malloc(4 * sizeof(bool));
 	memset(_isKeyPressed, false, 4);
 
 	_game_objects.push_back(new Roadside());
-	_game_objects.push_back(new Car());
+	
+	_car = new Car();
+	_game_objects.push_back(_car);
+	
 	_game_objects.push_back(new Butter(-0.9, 1, 0));
 	_game_objects.push_back(new Butter(-0.9, 0, 0));
 	_game_objects.push_back(new Butter(-0.9, -1, 0));
@@ -40,7 +44,13 @@ GameManager::GameManager(){
 }
 
 GameManager::~GameManager(){
+	D_TRACE();
 	free(_isKeyPressed);
+	
+	for(vector<GameObject*>::iterator i = _game_objects.begin();
+		i != _game_objects.end(); i++){
+		delete (*i);
+	}
 }
 
 void GameManager::init(){

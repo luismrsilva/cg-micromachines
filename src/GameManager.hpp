@@ -12,6 +12,7 @@
 using namespace std;
 
 #include "GameObject.hpp"
+#include "Car.hpp"
 
 class GameManager {
 	public:
@@ -26,6 +27,7 @@ class GameManager {
 		void init();
 		void setKeyPressed(int glut_key, bool status);
 	private:
+		Car *_car;
 		vector<GameObject*> _game_objects;
 		bool *_isKeyPressed;
 		
