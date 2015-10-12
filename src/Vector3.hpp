@@ -23,6 +23,9 @@ class Vector3 {
 		Vector3 operator*(double num);
 		Vector3 operator+(const Vector3 vec);
 		Vector3 operator-(const Vector3 vec);
+		Vector3 rotateZ(double deg);
+		double getXYModulus();
+		Vector3 increaseMod(double mod_inc);
 };
 
 #endif

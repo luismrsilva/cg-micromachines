@@ -4,6 +4,7 @@
  * */
  
 #include "Vector3.hpp"
+#include <math.h>
 
 
 Vector3::Vector3(){
@@ -65,3 +66,26 @@ Vector3 Vector3::operator-(const Vector3 vec){
 	_z -= vec._z;
 	return *this;
 }
+
+Vector3 Vector3::rotateZ(double deg){
+	double mod = getXYModulus();
+	double angle = atan(_y/_x) * 180 / M_PI;
+	angle += deg;
+	_x = mod * cos(angle);
+	_y = mod * sin(angle);
+	return *this;
+}
+
+double Vector3::getXYModulus(){
+	return sqrt( pow(_x, 2) + pow (_y, 2) );
+}
+
+Vector3 Vector3::increaseMod(double mod_inc){
+	double mod = getXYModulus();
+	double angle = atan(_y/_x) * 180 / M_PI;
+	mod += mod_inc;
+	_x = mod * cos(angle);
+	_y = mod * sin(angle);
+	return *this;
+}
+
