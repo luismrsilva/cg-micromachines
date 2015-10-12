@@ -9,6 +9,10 @@ GameManager *gameManager;
 bool isKeyPressed[] = {false, false, false, false};
 float speed[] = {0.0f, 0.0f, 0.0f};	// should be direction vector, etc...
 
+enum KEYS{
+	UP, LEFT, DOWN, RIGHT
+};
+
 void myReshape(GLsizei w, GLsizei h){
 	gameManager->reshape(w, h);
 }
@@ -19,10 +23,10 @@ void myDisplay(void){
 
 void turnKeyPressed(int key, bool status){
 	switch (key){
-		case GLUT_KEY_UP:		isKeyPressed[0] = status; break;
-		case GLUT_KEY_LEFT:		isKeyPressed[1] = status; break;
-		case GLUT_KEY_DOWN:		isKeyPressed[2] = status; break;
-		case GLUT_KEY_RIGHT:	isKeyPressed[3] = status; break;
+		case GLUT_KEY_UP:		isKeyPressed[UP] = status; break;
+		case GLUT_KEY_LEFT:		isKeyPressed[LEFT] = status; break;
+		case GLUT_KEY_DOWN:		isKeyPressed[DOWN] = status; break;
+		case GLUT_KEY_RIGHT:	isKeyPressed[RIGHT] = status; break;
 	}
 }
 
@@ -60,10 +64,10 @@ void myKeyboardFunc(unsigned char key, int x, int y){
 void myDraw(int val){
 	//glutTimerFunc(20, myDraw, 0);	// draws every 20ms
 
-	if (isKeyPressed[0]) speed[1] += 0.1f;	// ↑  y++
-	if (isKeyPressed[1]) speed[0] -= 0.1f;	// ←  x--
-	if (isKeyPressed[2]) speed[1] -= 0.1f;	// ↓  y--
-	if (isKeyPressed[3]) speed[0] += 0.1f;	// →  x--
+	if (isKeyPressed[UP]) speed[1] += 0.1f;	// ↑  y++
+	if (isKeyPressed[LEFT]) speed[0] -= 0.1f;	// ←  x--
+	if (isKeyPressed[DOWN]) speed[1] -= 0.1f;	// ↓  y--
+	if (isKeyPressed[RIGHT]) speed[0] += 0.1f;	// →  x--
 
 	glutPostRedisplay();
 }
