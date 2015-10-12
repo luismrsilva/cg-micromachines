@@ -26,7 +26,7 @@ Butter::~Butter(){
 
 /* Draws a cube of butter on x, y, z position */
 void Butter::draw(){
-	cout << "Butter::draw()" << endl;
+	//cout << "Butter::draw()" << endl;
 	Vector3 *pos = this->getPosition();
 
 	glPushMatrix();

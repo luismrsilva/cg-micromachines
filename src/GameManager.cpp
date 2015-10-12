@@ -14,6 +14,7 @@ using namespace std;
 #include "Butter.hpp"
 #include "Car.hpp"
 #include <GL/glut.h>
+#include "debug.hpp"
 
 
 #define	WORLD_MAX	1.6f
@@ -75,7 +76,7 @@ void drawCube(GLfloat x, GLfloat y, GLfloat z){
 }
 
 void GameManager::display(){
-	cout << "GameManager::display()" << endl;
+	D_TRACE();
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0f, 1.0f, 1.0f);

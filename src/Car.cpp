@@ -9,6 +9,8 @@
 using namespace std;
 #include <GL/glut.h>
 
+#include "debug.hpp"
+
 	Vector3 *pos;
 
 Car::Car(){
@@ -20,7 +22,7 @@ Car::~Car(){
 }
 
 void Car::draw(){
-	cout << "Car::draw()" << endl;
+	D_TRACE();
 
 	pos->set(pos->getX(), pos->getY()+0.1f, pos->getZ());
 

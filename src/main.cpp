@@ -5,6 +5,8 @@ using namespace std;
 #include <GL/glut.h>
 #include "GameManager.hpp"
 
+#include "debug.hpp"
+
 GameManager *gameManager;
 bool isKeyPressed[] = {false, false, false, false};
 float speed[] = {0.0f, 0.0f, 0.0f};	// should be direction vector, etc...
@@ -31,13 +33,13 @@ void turnKeyPressed(int key, bool status){
 }
 
 void myKeySpecial(int key, int x, int y){
-	cout << "called keyspecial: +" << key << endl;
+	D_TRACE();
 	turnKeyPressed(key , true);
 	gameManager->display();
 }
 
 void myKeyUpSpecial(int key, int x, int y){
-	cout << "called keyspecial: -" << key << endl;
+	D_TRACE();
 	turnKeyPressed(key , false);
 }
 

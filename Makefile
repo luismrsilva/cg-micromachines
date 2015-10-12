@@ -22,6 +22,8 @@ micromachines: $(OBJ_FILES) $(HPP_FILES)
 obj/%.o: src/%.cpp
 	g++ $(CXXFLAGS) -c -o $@ $<
 
+debug: CXXFLAGS+=-g -DDEBUG
+debug: all $(OBJ_FILES) $(HPP_FILES)
 
 
 clean:
