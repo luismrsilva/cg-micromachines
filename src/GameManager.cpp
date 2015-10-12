@@ -16,7 +16,7 @@ using namespace std;
 #include <GL/glut.h>
 
 
-#define	WORLD_MAX	2.0f
+#define	WORLD_MAX	1.6f
 
 GameManager::GameManager(){
 
