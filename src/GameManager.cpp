@@ -110,12 +110,12 @@ void GameManager::display(){
 	glFlush();
 }
 
-void GameManager::keyPressed(){
-
+void GameManager::keyPressed(unsigned char key, int x, int y){
+	
 }
 
 void GameManager::onTimer(int val){
-	update();
+	update(((double) val)/1000.);
 	glutPostRedisplay();
 }
 
@@ -123,8 +123,24 @@ void GameManager::idle(){
 
 }
 
-void GameManager::update(){
+#define ANGLE_DELTA	5.
+#define SPEED_DELTA	0.05
 
+void GameManager::update(double delta_t){
+	D_TRACE(<< "speed before");
+	_car->getSpeed().println();
+
+	if(_isKeyPressed[LEFT] ^ _isKeyPressed[RIGHT]){
+		_car->setSpeed(_car->getSpeed().rotateZ(
+			_isKeyPressed[LEFT] ? ANGLE_DELTA : -ANGLE_DELTA
+		));
+	}
+	if(_isKeyPressed[UP] ^ _isKeyPressed[DOWN]){
+		_car->setSpeed(_car->getSpeed().increaseMod(
+			_isKeyPressed[UP] ? SPEED_DELTA : -SPEED_DELTA
+		));
+	}
+	_car->update(delta_t);
 }
 
 void GameManager::setKeyPressed(int glut_key, bool status){

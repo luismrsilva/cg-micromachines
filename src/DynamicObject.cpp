@@ -2,7 +2,7 @@
  * DynamicObject.cpp
  *
  * */
-
+#include "debug.hpp"
 #include "DynamicObject.hpp"
 
 
@@ -19,7 +19,12 @@ DynamicObject::~DynamicObject(){
 }
 
 void DynamicObject::update(double delta_t){
-	getPosition()->operator+(*_speed * delta_t);
+	D_TRACE( << " " << delta_t);
+	Vector3 v = (*_speed).operator*(delta_t) + (*getPosition());
+	v.println();
+	
+	setPosition(v.getX(), v.getY(), v.getZ());
+	_speed->println();
 }
 
 void DynamicObject::setSpeed(Vector3 speed){

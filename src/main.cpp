@@ -46,12 +46,15 @@ void myKeyboardFunc(unsigned char key, int x, int y){
 			exit(0);
 			break;
 		default:
+			gameManager->keyPressed(key, x, y);
 			break;
 	}
 }
 
+#define TIMER_PERIOD 20
+
 void onTimer(int val){
-	glutTimerFunc(20, onTimer, 20);
+	glutTimerFunc(TIMER_PERIOD, onTimer, TIMER_PERIOD);
 	gameManager->onTimer(val);
 }
 
@@ -69,7 +72,7 @@ int main(int argc, char *argv[]){
 	glutSpecialFunc(myKeySpecial);
 	glutSpecialUpFunc(myKeyUpSpecial);
 
-	glutTimerFunc(20, onTimer, 20);
+	glutTimerFunc(TIMER_PERIOD, onTimer, TIMER_PERIOD);
 
 	glutMainLoop();
 

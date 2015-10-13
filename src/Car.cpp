@@ -13,7 +13,6 @@ using namespace std;
 #include "debug.hpp"
 
 Car::Car(){
-
 }
 
 Car::~Car(){
@@ -23,12 +22,13 @@ Car::~Car(){
 void Car::draw(){
 	D_TRACE();
 
-	/*Vector3 *speed = this->getSpeed();
-	speed->set(speed->getX(), speed->getY()+0.1f, speed->getZ());*/
+	Vector3 *pos = this->getPosition();
+	
+	D_PRINT("car_pos: " << pos->getX() << ", " << pos->getY() << ", " << pos->getZ());
 
 	glPushMatrix();
-		glTranslatef(0.1f, -0.4f, 0.0f);	// initial position
-		//glTranslatef(speed->getX(), speed->getY(), speed->getZ());
+		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
+		glRotatef(this->getSpeed().getXYAngle()-90., 0, 0, 1.);
 	    glScalef(2.0f, 2.0f, 2.0f);
 
 		glPushMatrix();
@@ -41,7 +41,6 @@ void Car::draw(){
 			glColor3f(0.7f, 0.6f, 1.0f);
 			glScalef(1, 1.2, 0.8); // longer and less tall
 			glTranslatef(0.0f, -0.01f, 0.0f);
-			//glutSolidCube(cm(2));
 			glutSolidSphere(cm(1.5), 32, 32);
 		glPopMatrix();
 
