@@ -12,6 +12,7 @@
 using namespace std;
 
 #include "GameObject.hpp"
+#include "Car.hpp"
 
 class GameManager {
 	public:
@@ -19,13 +20,21 @@ class GameManager {
 		~GameManager();
 		void display();
 		void reshape(GLsizei w, GLsizei h);
-		void keyPressed();
+		void keyPressed(unsigned char key, int x, int y);
 		void onTimer(int val);
 		void idle();
-		void update();
+		void update(double delta_t);
 		void init();
+		void setKeyPressed(int glut_key, bool status);
 	private:
+		Car *_car;
 		vector<GameObject*> _game_objects;
+		bool *_isKeyPressed;
+		
+		enum KEYS{
+			UP, LEFT, DOWN, RIGHT
+		};
+
 };
 
  #endif // __GAMEMANAGER_H

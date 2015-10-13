@@ -3,8 +3,11 @@
  *
  * */
 
+#include "game_config.hpp"
+
 #include <iostream>
 using namespace std;
+#include <string.h>
 #include "GameManager.hpp"
 #include "Camera.hpp"
 #include "GameObject.hpp"
@@ -18,12 +21,18 @@ using namespace std;
 #include "debug.hpp"
 
 
-#define	WORLD_MAX	1.6f
 
 GameManager::GameManager(){
+	D_TRACE();
+	
+	_isKeyPressed = (bool*) malloc(4 * sizeof(bool));
+	memset(_isKeyPressed, false, 4);
 
 	_game_objects.push_back(new Roadside());
-	_game_objects.push_back(new Car());
+	
+	_car = new Car();
+	_game_objects.push_back(_car);
+	
 	_game_objects.push_back(new Butter(-0.9, 1, 0));
 	_game_objects.push_back(new Butter(-0.9, 0, 0));
 	_game_objects.push_back(new Butter(-0.9, -1, 0));
@@ -36,13 +45,20 @@ GameManager::GameManager(){
 }
 
 GameManager::~GameManager(){
+	D_TRACE();
+	free(_isKeyPressed);
+	
+	for(vector<GameObject*>::iterator i = _game_objects.begin();
+		i != _game_objects.end(); i++){
+		delete (*i);
+	}
 }
 
 void GameManager::init(){
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(700, 700);
 	glutInitWindowPosition(-1, -1);
-	glutCreateWindow("tg010/cg-micromachines");
+	glutCreateWindow(GAME_WINDOW_TITLE);
 }
 
 void GameManager::reshape(GLsizei w, GLsizei h){
@@ -51,13 +67,13 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 	glLoadIdentity();
 
 	if(w<h){
-		glOrtho(	-WORLD_MAX,	WORLD_MAX,
-					-WORLD_MAX*h/w,	WORLD_MAX*h/w,
-					-WORLD_MAX,	WORLD_MAX);
+		glOrtho(	-GAME_WORLD_MAX,	GAME_WORLD_MAX,
+					-GAME_WORLD_MAX*h/w,	GAME_WORLD_MAX*h/w,
+					-GAME_WORLD_MAX,	GAME_WORLD_MAX);
 	}else{
-		glOrtho(	-WORLD_MAX*w/h,	WORLD_MAX*w/h,
-					-WORLD_MAX,	WORLD_MAX,
-					-WORLD_MAX,	WORLD_MAX);
+		glOrtho(	-GAME_WORLD_MAX*w/h,	GAME_WORLD_MAX*w/h,
+					-GAME_WORLD_MAX,	GAME_WORLD_MAX,
+					-GAME_WORLD_MAX,	GAME_WORLD_MAX);
 	}
 
 	/* pos, look at, up_v*/
@@ -95,12 +111,12 @@ void GameManager::display(){
 	glFlush();
 }
 
-void GameManager::keyPressed(){
-
+void GameManager::keyPressed(unsigned char key, int x, int y){
+	
 }
 
 void GameManager::onTimer(int val){
-	update();
+	update(((double) val)/1000.);
 	glutPostRedisplay();
 }
 
@@ -108,6 +124,34 @@ void GameManager::idle(){
 
 }
 
-void GameManager::update(){
 
+void GameManager::update(double delta_t){
+	D_TRACE(<< "speed before");
+	_car->getSpeed().println();
+
+	if(_isKeyPressed[LEFT] ^ _isKeyPressed[RIGHT]){
+		double a = (_isKeyPressed[LEFT]
+						? GAME_CAR_ANGLE_ACCELARATION
+						: -GAME_CAR_ANGLE_ACCELARATION);
+		_car->setSpeed(_car->getSpeed().rotateZ(a*delta_t));
+	}
+	if(_isKeyPressed[UP] ^ _isKeyPressed[DOWN]){
+		double a = (_isKeyPressed[UP]
+						? GAME_CAR_SPEED_ACCELARATION
+						: -GAME_CAR_SPEED_ACCELARATION);
+		_car->setSpeed(_car->getSpeed().increaseMod(a*delta_t));
+	}
+	
+	
+	_car->update(delta_t);
+}
+
+void GameManager::setKeyPressed(int glut_key, bool status){
+	switch (glut_key){
+		case GLUT_KEY_UP:		_isKeyPressed[UP] = status; break;
+		case GLUT_KEY_LEFT:		_isKeyPressed[LEFT] = status; break;
+		case GLUT_KEY_DOWN:		_isKeyPressed[DOWN] = status; break;
+		case GLUT_KEY_RIGHT:	_isKeyPressed[RIGHT] = status; break;
+		default: break;
+	}
 }

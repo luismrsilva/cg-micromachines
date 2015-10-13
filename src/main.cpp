@@ -6,71 +6,67 @@ using namespace std;
 #include "GameManager.hpp"
 
 #include "debug.hpp"
+#include "game_config.hpp"
 
 GameManager *gameManager;
-bool isKeyPressed[] = {false, false, false, false};
-float speed[] = {0.0f, 0.0f, 0.0f};	// should be direction vector, etc...
-
-enum KEYS{
-	UP, LEFT, DOWN, RIGHT
-};
 
 void myReshape(GLsizei w, GLsizei h){
 	gameManager->reshape(w, h);
 }
 
-void myDisplay(void){
-	gameManager->display();
-}
+char title[128];
 
-void turnKeyPressed(int key, bool status){
-	switch (key){
-		case GLUT_KEY_UP:		isKeyPressed[UP] = status; break;
-		case GLUT_KEY_LEFT:		isKeyPressed[LEFT] = status; break;
-		case GLUT_KEY_DOWN:		isKeyPressed[DOWN] = status; break;
-		case GLUT_KEY_RIGHT:	isKeyPressed[RIGHT] = status; break;
+void myDisplay(void){
+	static int frames = 0;
+	static int start = glutGet(GLUT_ELAPSED_TIME);
+	gameManager->display();
+	frames++;
+	
+	if(glutGet(GLUT_ELAPSED_TIME) - start > 1000){
+		start = glutGet(GLUT_ELAPSED_TIME);
+		sprintf(title, "%s (%d fps)", GAME_WINDOW_TITLE, frames);
+		glutSetWindowTitle(title);
+		frames = 0;
 	}
 }
 
 void myKeySpecial(int key, int x, int y){
 	D_TRACE();
-	turnKeyPressed(key , true);
-	gameManager->display();
+	gameManager->setKeyPressed(key, true);
 }
 
 void myKeyUpSpecial(int key, int x, int y){
 	D_TRACE();
-	turnKeyPressed(key , false);
+	gameManager->setKeyPressed(key, false);
 }
 
 void myKeyboardFunc(unsigned char key, int x, int y){
-	cout << "key " << key << endl;
+	D_PRINT("key: " << key);
 	static GLenum mode = GL_FILL;
 	switch(key){
 		case 'a':
+		case 'A':
 			mode = (mode == GL_FILL) ? GL_LINE : GL_FILL;
 			glPolygonMode(GL_FRONT_AND_BACK, mode);
 			glutPostRedisplay();
 			break;
 		case 'd':
+		case 'D':
 			glutPostRedisplay();
 			break;
 		case 'x':
+		case 'X':
 			exit(0);
 			break;
 		default:
+			gameManager->keyPressed(key, x, y);
 			break;
 	}
 }
 
+
 void onTimer(int val){
-	//glutTimerFunc(20, myDraw, 0);	// draws every 20ms
-
-	if (isKeyPressed[UP]) speed[1] += 0.1f;	// ↑  y++
-	if (isKeyPressed[LEFT]) speed[0] -= 0.1f;	// ←  x--
-	if (isKeyPressed[DOWN]) speed[1] -= 0.1f;	// ↓  y--
-	if (isKeyPressed[RIGHT]) speed[0] += 0.1f;	// →  x--
-
+	glutTimerFunc(GAME_TIMER_PERIOD, onTimer, GAME_TIMER_PERIOD);
 	gameManager->onTimer(val);
 }
 
@@ -88,7 +84,7 @@ int main(int argc, char *argv[]){
 	glutSpecialFunc(myKeySpecial);
 	glutSpecialUpFunc(myKeyUpSpecial);
 
-	glutTimerFunc(20, onTimer, 20);
+	glutTimerFunc(GAME_TIMER_PERIOD, onTimer, GAME_TIMER_PERIOD);
 
 	glutMainLoop();
 
