@@ -25,7 +25,10 @@ class Vector3 {
 		Vector3 operator-(const Vector3 vec);
 		Vector3 rotateZ(double deg);
 		double getXYModulus();
+		double getXYAngle();
 		Vector3 increaseMod(double mod_inc);
+		void print();
+		void println();
 };
 
 #endif
