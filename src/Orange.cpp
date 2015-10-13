@@ -32,7 +32,7 @@ void Orange::draw(){
 	glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 	glScalef(1, 1, 1);
 	glColor3f(1.0f, 0.6f, 0.0f);
-	glutSolidSphere(cm(5.5), 200, 200);
+	glutSolidSphere(cm(5.5), 8, 8);
 	glPopMatrix();
 
 }
