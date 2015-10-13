@@ -3,6 +3,8 @@
  *
  * */
 
+#include "game_config.hpp"
+
 #include <iostream>
 using namespace std;
 #include <string.h>
@@ -19,7 +21,6 @@ using namespace std;
 #include "debug.hpp"
 
 
-#define	WORLD_MAX	1.6f
 
 GameManager::GameManager(){
 	D_TRACE();
@@ -57,7 +58,7 @@ void GameManager::init(){
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(700, 700);
 	glutInitWindowPosition(-1, -1);
-	glutCreateWindow("tg010/cg-micromachines");
+	glutCreateWindow(GAME_WINDOW_TITLE);
 }
 
 void GameManager::reshape(GLsizei w, GLsizei h){
@@ -66,13 +67,13 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 	glLoadIdentity();
 
 	if(w<h){
-		glOrtho(	-WORLD_MAX,	WORLD_MAX,
-					-WORLD_MAX*h/w,	WORLD_MAX*h/w,
-					-WORLD_MAX,	WORLD_MAX);
+		glOrtho(	-GAME_WORLD_MAX,	GAME_WORLD_MAX,
+					-GAME_WORLD_MAX*h/w,	GAME_WORLD_MAX*h/w,
+					-GAME_WORLD_MAX,	GAME_WORLD_MAX);
 	}else{
-		glOrtho(	-WORLD_MAX*w/h,	WORLD_MAX*w/h,
-					-WORLD_MAX,	WORLD_MAX,
-					-WORLD_MAX,	WORLD_MAX);
+		glOrtho(	-GAME_WORLD_MAX*w/h,	GAME_WORLD_MAX*w/h,
+					-GAME_WORLD_MAX,	GAME_WORLD_MAX,
+					-GAME_WORLD_MAX,	GAME_WORLD_MAX);
 	}
 
 	/* pos, look at, up_v*/
@@ -123,23 +124,25 @@ void GameManager::idle(){
 
 }
 
-#define ANGLE_DELTA	5.
-#define SPEED_DELTA	0.05
 
 void GameManager::update(double delta_t){
 	D_TRACE(<< "speed before");
 	_car->getSpeed().println();
 
 	if(_isKeyPressed[LEFT] ^ _isKeyPressed[RIGHT]){
-		_car->setSpeed(_car->getSpeed().rotateZ(
-			_isKeyPressed[LEFT] ? ANGLE_DELTA : -ANGLE_DELTA
-		));
+		double a = (_isKeyPressed[LEFT]
+						? GAME_CAR_ANGLE_ACCELARATION
+						: -GAME_CAR_ANGLE_ACCELARATION);
+		_car->setSpeed(_car->getSpeed().rotateZ(a*delta_t));
 	}
 	if(_isKeyPressed[UP] ^ _isKeyPressed[DOWN]){
-		_car->setSpeed(_car->getSpeed().increaseMod(
-			_isKeyPressed[UP] ? SPEED_DELTA : -SPEED_DELTA
-		));
+		double a = (_isKeyPressed[UP]
+						? GAME_CAR_SPEED_ACCELARATION
+						: -GAME_CAR_SPEED_ACCELARATION);
+		_car->setSpeed(_car->getSpeed().increaseMod(a*delta_t));
 	}
+	
+	
 	_car->update(delta_t);
 }
 

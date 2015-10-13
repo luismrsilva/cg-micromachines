@@ -6,6 +6,7 @@ using namespace std;
 #include "GameManager.hpp"
 
 #include "debug.hpp"
+#include "game_config.hpp"
 
 GameManager *gameManager;
 
@@ -13,8 +14,20 @@ void myReshape(GLsizei w, GLsizei h){
 	gameManager->reshape(w, h);
 }
 
+char title[128];
+
 void myDisplay(void){
+	static int frames = 0;
+	static int start = glutGet(GLUT_ELAPSED_TIME);
 	gameManager->display();
+	frames++;
+	
+	if(glutGet(GLUT_ELAPSED_TIME) - start > 1000){
+		start = glutGet(GLUT_ELAPSED_TIME);
+		sprintf(title, "%s (%d fps)", GAME_WINDOW_TITLE, frames);
+		glutSetWindowTitle(title);
+		frames = 0;
+	}
 }
 
 void myKeySpecial(int key, int x, int y){
@@ -51,10 +64,9 @@ void myKeyboardFunc(unsigned char key, int x, int y){
 	}
 }
 
-#define TIMER_PERIOD 20
 
 void onTimer(int val){
-	glutTimerFunc(TIMER_PERIOD, onTimer, TIMER_PERIOD);
+	glutTimerFunc(GAME_TIMER_PERIOD, onTimer, GAME_TIMER_PERIOD);
 	gameManager->onTimer(val);
 }
 
@@ -72,7 +84,7 @@ int main(int argc, char *argv[]){
 	glutSpecialFunc(myKeySpecial);
 	glutSpecialUpFunc(myKeyUpSpecial);
 
-	glutTimerFunc(TIMER_PERIOD, onTimer, TIMER_PERIOD);
+	glutTimerFunc(GAME_TIMER_PERIOD, onTimer, GAME_TIMER_PERIOD);
 
 	glutMainLoop();
 
