@@ -1,5 +1,5 @@
 #include <math.h>
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
 #include <GL/glut.h>
@@ -24,7 +24,7 @@ void myDisplay(void){
 	
 	if(glutGet(GLUT_ELAPSED_TIME) - start > 1000){
 		start = glutGet(GLUT_ELAPSED_TIME);
-		sprintf(title, "%s (%d fps)", GAME_WINDOW_TITLE, frames);
+		sprintf_s(title, "%s (%d fps)", GAME_WINDOW_TITLE, frames);
 		glutSetWindowTitle(title);
 		frames = 0;
 	}

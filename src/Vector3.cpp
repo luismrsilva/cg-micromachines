@@ -6,7 +6,9 @@
 #include "debug.hpp"
 #include <iostream>
 #include "Vector3.hpp"
+#define _USE_MATH_DEFINES
 #include <math.h>
+
 
 
 Vector3::Vector3(){
