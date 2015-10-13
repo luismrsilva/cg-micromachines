@@ -24,7 +24,13 @@ void myDisplay(void){
 	
 	if(glutGet(GLUT_ELAPSED_TIME) - start > 1000){
 		start = glutGet(GLUT_ELAPSED_TIME);
-		sprintf_s(title, "%s (%d fps)", GAME_WINDOW_TITLE, frames);
+		#ifdef _MSC_VER
+			sprintf_s
+		#else
+			sprintf
+		#endif
+		(title, "%s (%d fps)", GAME_WINDOW_TITLE, frames);
+		
 		glutSetWindowTitle(title);
 		frames = 0;
 	}
