@@ -136,11 +136,6 @@ void GameManager::idle(){
 
 }
 
-
-#define GAME_CAR_ANGLE_ACCELARATION(v)	160*v
-#define GAME_CAR_SPEED_ACCELARATION		6.
-#define GAME_CAR_SPEED_DRAG(v)		(0.03 + 250*1.225/2. * 0.81 * cm(10)*cm(10) * v * v)
-
 void GameManager::update(double delta_t){
 	D_TRACE(<< "speed before");
 	_car->getSpeed().println();
@@ -159,7 +154,7 @@ void GameManager::update(double delta_t){
 	if(_isKeyPressed[UP] ^ _isKeyPressed[DOWN]){
 		double da = delta_t*(_isKeyPressed[UP]
 						? GAME_CAR_SPEED_ACCELARATION
-						: -GAME_CAR_SPEED_ACCELARATION);
+						: -0.5*GAME_CAR_SPEED_ACCELARATION);
 		if(_car->getSpeed().getXYModulus() == 0.){
 			_car->setSpeed(Vector3(da, _car->getXYAngle()));
 			_car->setGoingForward(da >= 0);
