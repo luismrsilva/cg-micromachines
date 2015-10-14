@@ -116,7 +116,14 @@ void GameManager::display(){
 }
 
 void GameManager::keyPressed(unsigned char key, int x, int y){
-	
+	switch(key){
+		case 'r':
+		case 'R':
+			_car->setPosition(0,0,0);
+			break;
+		default:
+			break;
+	}
 }
 
 void GameManager::onTimer(int val){
