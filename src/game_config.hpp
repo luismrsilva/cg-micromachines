@@ -7,6 +7,9 @@
 #ifndef __GAME_CONFIG_INCLUDED
 #define __GAME_CONFIG_INCLUDED
 
+#include "myunits.hpp"
+
+
 
 #define GAME_WINDOW_TITLE		"tg010/cg-micromachines"
 
@@ -17,10 +20,11 @@
 
 
 // Key accelaraton
-#define GAME_CAR_ANGLE_ACCELARATION	500
-#define GAME_CAR_SPEED_ACCELARATION	1
+#define GAME_CAR_ANGLE_ACCELARATION(v)	160*v
+#define GAME_CAR_SPEED_ACCELARATION		6.
+#define GAME_CAR_SPEED_DRAG(v)		(0.03 + 250*1.225/2. * 0.81 * cm(10)*cm(10) * v * v)
 
-#define GAME_CAR_SPEED_DRAG			50
+
 
 
 // World map limits

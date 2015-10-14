@@ -120,6 +120,7 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 'r':
 		case 'R':
 			_car->setPosition(0,0,0);
+			_car->setSpeed(Vector3(0,0,0));
 			break;
 		default:
 			break;
@@ -136,14 +137,20 @@ void GameManager::idle(){
 }
 
 
+#define GAME_CAR_ANGLE_ACCELARATION(v)	160*v
+#define GAME_CAR_SPEED_ACCELARATION		6.
+#define GAME_CAR_SPEED_DRAG(v)		(0.03 + 250*1.225/2. * 0.81 * cm(10)*cm(10) * v * v)
+
 void GameManager::update(double delta_t){
 	D_TRACE(<< "speed before");
 	_car->getSpeed().println();
+	
+	double speed = _car->getSpeed().getXYModulus();
 
 	if(_isKeyPressed[LEFT] ^ _isKeyPressed[RIGHT]){
 		double da = delta_t*(_isKeyPressed[LEFT]
-						? GAME_CAR_ANGLE_ACCELARATION
-						: -GAME_CAR_ANGLE_ACCELARATION);
+						? GAME_CAR_ANGLE_ACCELARATION(speed)
+						: -GAME_CAR_ANGLE_ACCELARATION(speed));
 		if(!_car->isGoingForward())
 			da *= -1.0;
 		_car->setSpeed(_car->getSpeed().rotateZ(da));
@@ -161,8 +168,17 @@ void GameManager::update(double delta_t){
 				da *= -1.0;
 			_car->setSpeed(_car->getSpeed().increaseMod(da));
 		}
+		
+		cout << "da: " << (da/((double)delta_t)) << endl;
 	}
 	
+	
+	double da = -GAME_CAR_SPEED_DRAG(speed) * delta_t;
+	cout << "speed: " << speed << endl;
+	cout << "drag: " << (double)da/((double)delta_t) << endl;
+	
+	_car->setSpeed(_car->getSpeed().increaseMod(da));
+
 	
 	_car->update(delta_t);
 }
