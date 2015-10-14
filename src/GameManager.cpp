@@ -5,6 +5,10 @@
 
 #include "game_config.hpp"
 
+
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 #include <iostream>
 using namespace std;
 #include <string.h>
@@ -130,16 +134,26 @@ void GameManager::update(double delta_t){
 	_car->getSpeed().println();
 
 	if(_isKeyPressed[LEFT] ^ _isKeyPressed[RIGHT]){
-		double a = (_isKeyPressed[LEFT]
+		double da = delta_t*(_isKeyPressed[LEFT]
 						? GAME_CAR_ANGLE_ACCELARATION
 						: -GAME_CAR_ANGLE_ACCELARATION);
-		_car->setSpeed(_car->getSpeed().rotateZ(a*delta_t));
+		if(!_car->isGoingForward())
+			da *= -1.0;
+		_car->setSpeed(_car->getSpeed().rotateZ(da));
+		_car->rotateZ(da);
 	}
 	if(_isKeyPressed[UP] ^ _isKeyPressed[DOWN]){
-		double a = (_isKeyPressed[UP]
+		double da = delta_t*(_isKeyPressed[UP]
 						? GAME_CAR_SPEED_ACCELARATION
 						: -GAME_CAR_SPEED_ACCELARATION);
-		_car->setSpeed(_car->getSpeed().increaseMod(a*delta_t));
+		if(_car->getSpeed().getXYModulus() == 0.){
+			_car->setSpeed(Vector3(da, _car->getXYAngle()));
+			_car->setGoingForward(da >= 0);
+		}else{
+			if(!_car->isGoingForward())
+				da *= -1.0;
+			_car->setSpeed(_car->getSpeed().increaseMod(da));
+		}
 	}
 	
 	

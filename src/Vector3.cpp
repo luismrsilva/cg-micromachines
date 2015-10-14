@@ -21,6 +21,12 @@ Vector3::Vector3(double x, double y, double z){
 	_z = z;
 }
 
+Vector3::Vector3(double mod, double angleXY_deg){
+	_x = mod * cos(angleXY_deg * M_PI/180);
+	_y = mod * sin(angleXY_deg * M_PI/180);
+	_z = 0;
+}
+
 Vector3::~Vector3(){
 	
 }
@@ -79,6 +85,8 @@ Vector3 Vector3::increaseMod(double mod_inc){
 	double mod = getXYModulus();
 	double angle = getXYAngle();
 	mod += mod_inc;
+	if(mod < 0.)
+		mod = 0.;
 	_x = mod * cos(angle * M_PI/180);
 	_y = mod * sin(angle * M_PI/180);
 	return *this;

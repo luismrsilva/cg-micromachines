@@ -3,6 +3,8 @@
  *
  * */
 
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include "Car.hpp"
 #include "Vector3.hpp"
 #include "myunits.hpp"
@@ -13,10 +15,30 @@ using namespace std;
 #include "debug.hpp"
 
 Car::Car(){
+	_angle_deg = 0;
+	_isGoingForward = true;
 }
 
 Car::~Car(){
 
+}
+
+bool Car::isGoingForward(){
+	return _isGoingForward;
+}
+
+bool Car::setGoingForward(bool forward){
+	_isGoingForward = forward;
+	return _isGoingForward;
+}
+
+double Car::getXYAngle(){
+	return _angle_deg;
+}
+
+double Car::rotateZ(double deg){
+	_angle_deg = fmod(180 + _angle_deg + deg, 360)-180;
+	return _angle_deg;
 }
 
 void Car::draw(){
@@ -28,7 +50,7 @@ void Car::draw(){
 
 	glPushMatrix();
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
-		glRotatef(this->getSpeed().getXYAngle()-90., 0, 0, 1.);
+		glRotatef(this->_angle_deg-90., 0, 0, 1.);
 	    glScalef(2.0f, 2.0f, 2.0f);
 
 		glPushMatrix();
