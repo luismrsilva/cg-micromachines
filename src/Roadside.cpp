@@ -85,7 +85,7 @@ void Roadside::draw(){
 	drawTorusLineXY(-1.4,-1.1, -1.4, 1.1);	// left outer
 
 	drawTorusLineXY(-1.1, 1.4, 1.15, 1.4);	// top outer
-	drawTorusLineXY(-0.6, 1.0, 1.1,  1.0);	// top inner
+	drawTorusLineXY(-0.6, 1.0, 1.0,  1.0);	// top inner
 
 	drawTorusLineXY( 1.4, 1.1, 1.4, -1.1);	// right outer
 	drawTorusLineXY( 1.0, 1.1, 1.0, -0.8);	// right inner
@@ -113,12 +113,12 @@ void Roadside::draw(){
 	drawTorusBezierXY(-1.0,-0.8,	-1.0,-1.0,	-0.8,-1.0,	3);
 	drawTorusBezierXY(-0.8,-1.0,	-0.6,-1.0,	-0.6,-0.8,	3);
 	drawTorusBezierXY(-0.6,	1.0,	-1.0, 1.0,	-1.0, 0.6,	6);
-	drawTorusBezierXY( 0.4,	0.0,	 0.6, 0.0,	 0.6, 0.2,	4);
-	drawTorusBezierXY( 0.6,	0.4,	 0.6, 0.6,	 0.4, 0.6,	4);
-	drawTorusBezierXY( 0.0,	0.6,	-0.2, 0.6,	-0.2, 0.4,	4);
-	drawTorusBezierXY( 0.4,-0.4,	 0.2,-0.4,	 0.2,-0.6,	4);
-	drawTorusBezierXY( 0.2,-0.8,	 0.2,-1.0,	 0.4,-1.0,	4);
-	drawTorusBezierXY( 0.8,-1.0,	 1.0,-1.0,	 1.0,-0.8,	4);
+	drawTorusBezierXY( 0.4,	0.0,	 0.6, 0.0,	 0.6, 0.2,	3);
+	drawTorusBezierXY( 0.6,	0.4,	 0.6, 0.6,	 0.4, 0.6,	3);
+	drawTorusBezierXY( 0.0,	0.6,	-0.2, 0.6,	-0.2, 0.4,	3);
+	drawTorusBezierXY( 0.4,-0.4,	 0.2,-0.4,	 0.2,-0.6,	3);
+	drawTorusBezierXY( 0.2,-0.8,	 0.2,-1.0,	 0.4,-1.0,	3);
+	drawTorusBezierXY( 0.8,-1.0,	 1.0,-1.0,	 1.0,-0.8,	3);
 
 
 	glPopMatrix();
