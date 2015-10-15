@@ -81,53 +81,45 @@ void Roadside::draw(){
 
 	glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 
-	drawTorusLineXY(-1.0,-1.0, -1.0, 1.0);	// left inner
+	drawTorusLineXY(-1.0,-0.7, -1.0, 0.7);	// left inner
 	drawTorusLineXY(-1.4,-1.1, -1.4, 1.1);	// left outer
 
 	drawTorusLineXY(-1.1, 1.4, 1.15, 1.4);	// top outer
-	drawTorusLineXY(-1.0, 1.0, 1.1,  1.0);	// top inner
+	drawTorusLineXY(-0.6, 1.0, 1.1,  1.0);	// top inner
 
 	drawTorusLineXY( 1.4, 1.1, 1.4, -1.1);	// right outer
-	drawTorusLineXY( 1.0, 1.1, 1.0, -1.0);	// right inner
+	drawTorusLineXY( 1.0, 1.1, 1.0, -0.8);	// right inner
 
-	drawTorusLineXY(-1.1, -1.4, 1.15, -1.4);	// bottom outer
+	drawTorusLineXY(-1.1, -1.4, 1.2, -1.4);	// bottom outer
 
-	drawTorusLineXY(-0.2, 0.6, -0.2, -1.4);	// middle center right
-	drawTorusLineXY(-0.6, 1.0, -0.6,-1.0);	// middle center left
+	drawTorusLineXY(-0.2, 0.5, -0.2, -1.4);	// center right
+	drawTorusLineXY(-0.6, 1.0, -0.6, -0.8);	// center left
 
-	drawTorusLineXY( 0.2, -1.0, 1.1, -1.0);	// P-down down
-	drawTorusLineXY( 0.2, -1.0, 0.2, -0.4);	// P-down left
-	drawTorusLineXY( 0.2,-0.4, 1.0,-0.4);	// P-down up
+	drawTorusLineXY( 0.4, -1.0, 0.9, -1.0);	// P-down down
+	drawTorusLineXY( 0.2, -0.8, 0.2, -0.5);	// P-down left
+	drawTorusLineXY( 0.4, -0.4, 1.0, -0.4);	// P-down up
 
-	drawTorusLineXY(-0.2, 0.0, 0.6, 0.0);	// P-up down
-	drawTorusLineXY( 0.6, 0.0, 0.6, 0.7);	// P-up right
-	drawTorusLineXY( 0.6, 0.6,-0.2, 0.6);	// P-up up
+	drawTorusLineXY(-0.2, 0.0, 0.5, 0.0);	// P-up down
+	drawTorusLineXY( 0.6, 0.2, 0.6, 0.5);	// P-up right
+	drawTorusLineXY( 0.5, 0.6, 0.0, 0.6);	// P-up up
 
-	drawTorusLineXY(-0.6,-1.0, -1.0,-1.0);	// bottom left inner
-	
-	 // top left corner
-	drawTorusBezierXY(-1.4, 1.1, -1.4, 1.4, -1.1, 1.4, 5);
-	
-	 // top right corner
-	drawTorusBezierXY(1.4, 1.1, 1.4, 1.4, 1.1, 1.4, 5);
-	
-	 // bottom left corner
-	drawTorusBezierXY(-1.4, -1.1, -1.4, -1.4, -1.1, -1.4, 5);
-	
-	 // bottom right corner
-	drawTorusBezierXY(1.4, -1.1, 1.4, -1.4, 1.1, -1.4, 5);
-	
-	
-	drawTorusBezierXY(-1.0,	-0.8,	-1.0,	-1.0,	-0.8,	-1.0,	5);
-	drawTorusBezierXY(-0.8,	-1.0,	-0.6,	-1.0,	-0.6,	-0.8,	5);
-	drawTorusBezierXY(-0.6,	1.0,	-1.0,	1.0,	-1.0,	0.6,	5);
-	drawTorusBezierXY(0.4,	0.0,	0.6,	0.0,	0.6,	0.2,	5);
-	drawTorusBezierXY(0.6,	0.4,	0.6,	0.6,	0.4,	0.6,	5);
-	drawTorusBezierXY(0.0,	0.6,	-0.2,	0.6,	-0.2,	0.4,	5);
-	drawTorusBezierXY(0.4,	-0.4,	0.2,	-0.4,	0.2,	-0.6,	5);
-	drawTorusBezierXY(0.2,	-0.8,	0.2,	-1.0,	0.4,	-1.0,	5);
-	drawTorusBezierXY(0.8,	-1.0,	1.0,	-1.0,	1.0,	-0.8,	5);
-	
+	// Corner Curves
+	drawTorusBezierXY(-1.4, 1.1, -1.4, 1.4, -1.1, 1.4, 5);	// top left
+	drawTorusBezierXY( 1.4, 1.1,  1.4, 1.4,  1.1, 1.4, 5);	// top right
+	drawTorusBezierXY(-1.4,-1.1, -1.4,-1.4, -1.1,-1.4, 5);	// bottom left
+	drawTorusBezierXY( 1.4,-1.1,  1.4,-1.4,  1.1,-1.4, 5);	// bottom right
+
+	// Other Curves
+	drawTorusBezierXY(-1.0,-0.8,	-1.0,-1.0,	-0.8,-1.0,	3);
+	drawTorusBezierXY(-0.8,-1.0,	-0.6,-1.0,	-0.6,-0.8,	3);
+	drawTorusBezierXY(-0.6,	1.0,	-1.0, 1.0,	-1.0, 0.6,	6);
+	drawTorusBezierXY( 0.4,	0.0,	 0.6, 0.0,	 0.6, 0.2,	4);
+	drawTorusBezierXY( 0.6,	0.4,	 0.6, 0.6,	 0.4, 0.6,	4);
+	drawTorusBezierXY( 0.0,	0.6,	-0.2, 0.6,	-0.2, 0.4,	4);
+	drawTorusBezierXY( 0.4,-0.4,	 0.2,-0.4,	 0.2,-0.6,	4);
+	drawTorusBezierXY( 0.2,-0.8,	 0.2,-1.0,	 0.4,-1.0,	4);
+	drawTorusBezierXY( 0.8,-1.0,	 1.0,-1.0,	 1.0,-0.8,	4);
+
 
 	glPopMatrix();
 }
