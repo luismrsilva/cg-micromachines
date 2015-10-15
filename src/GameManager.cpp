@@ -28,30 +28,30 @@ using namespace std;
 
 GameManager::GameManager(){
 	D_TRACE();
-	
+
 	_isKeyPressed = (bool*) malloc(4 * sizeof(bool));
 	memset(_isKeyPressed, false, 4);
 
 	_game_objects.push_back(new Roadside());
-	
+
 	_car = new Car();
 	_game_objects.push_back(_car);
-	
-	_game_objects.push_back(new Butter(-0.9, 1, 0));
-	_game_objects.push_back(new Butter(-0.9, 0, 0));
-	_game_objects.push_back(new Butter(-0.9, -1, 0));
-	_game_objects.push_back(new Butter(0.2, 0.4, 0));
-	_game_objects.push_back(new Butter(0.7, -0.7, 0));
-	_game_objects.push_back(new Orange(-1.2, 0.7, 0));
-	_game_objects.push_back(new Orange(1.0, 1.0, 0));
-	_game_objects.push_back(new Orange(1.2, -0.9, 0));
+
+	_game_objects.push_back(new Butter(-0.8, 0.7, 0));
+	_game_objects.push_back(new Butter(-0.8, 0.0, 0));
+	_game_objects.push_back(new Butter(-0.8,-0.8, 0));
+	_game_objects.push_back(new Butter( 0.2, 0.4, 0));
+	_game_objects.push_back(new Butter( 0.7,-0.7, 0));
+	_game_objects.push_back(new Orange(-1.1, 0.7, 0));
+	_game_objects.push_back(new Orange( 1.0, 1.0, 0));
+	_game_objects.push_back(new Orange( 1.3,-1.3, 0));
 
 }
 
 GameManager::~GameManager(){
 	D_TRACE();
 	free(_isKeyPressed);
-	
+
 	for(vector<GameObject*>::iterator i = _game_objects.begin();
 		i != _game_objects.end(); i++){
 		delete (*i);
@@ -139,7 +139,7 @@ void GameManager::idle(){
 void GameManager::update(double delta_t){
 	D_TRACE(<< "speed before");
 	_car->getSpeed().println();
-	
+
 	double speed = _car->getSpeed().getXYModulus();
 
 	if(_isKeyPressed[LEFT] ^ _isKeyPressed[RIGHT]){
@@ -163,18 +163,18 @@ void GameManager::update(double delta_t){
 				da *= -1.0;
 			_car->setSpeed(_car->getSpeed().increaseMod(da));
 		}
-		
+
 		cout << "da: " << (da/((double)delta_t)) << endl;
 	}
-	
-	
+
+
 	double da = -GAME_CAR_SPEED_DRAG(speed) * delta_t;
 	cout << "speed: " << speed << endl;
 	cout << "drag: " << (double)da/((double)delta_t) << endl;
-	
+
 	_car->setSpeed(_car->getSpeed().increaseMod(da));
 
-	
+
 	_car->update(delta_t);
 }
 

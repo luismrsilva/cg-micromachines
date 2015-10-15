@@ -71,41 +71,29 @@ void Roadside::draw(){
 
 	glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 
+	drawTorusLineXY(-1.0,-1.0, -1.0, 1.0);	// left inner
+	drawTorusLineXY(-1.4,-1.4, -1.4, 1.4);	// left outer
 
-	drawTorusLineXY(-1.4,  1.4,	 1.45,  1.4);
-	drawTorusLineXY(-1.2,  1.2,	 1.25,  1.2);
+	drawTorusLineXY(-1.4, 1.4, 1.45, 1.4);	// top outer
+	drawTorusLineXY(-1.0, 1.0, 1.1,  1.0);	// top inner
 
-	drawTorusLineXY( 1.4,  1.4,	 1.4, -1.4);
-	drawTorusLineXY( 1.2,  1.2,	 1.2, -1.2);
+	drawTorusLineXY( 1.4, 1.4, 1.4, -1.4);	// right outer
+	drawTorusLineXY( 1.0, 1.1, 1.0, -1.0);	// right inner
 
-	drawTorusLineXY(  0.0, -1.4,	 1.4, -1.4);
-	drawTorusLineXY(  0.2, -1.2,	 1.2, -1.2);
+	drawTorusLineXY(-1.4, -1.4, 1.4, -1.4);	// bottom outer
 
-	drawTorusLineXY(  0.0, -1.4,	 1.4, -1.4);
-	drawTorusLineXY(  0.2, -1.2,	 1.2, -1.2);
+	drawTorusLineXY(-0.2, 0.6, -0.2, -1.4);	// middle center right
+	drawTorusLineXY(-0.6, 1.0, -0.6,-1.0);	// middle center left
 
-	drawTorusLineXY(  0.0, -1.4,	 0.0,  0.0);
-	drawTorusLineXY(  0.2, -1.2,	 0.2, -0.2);
+	drawTorusLineXY( 0.2, -1.0, 1.1, -1.0);	// P-down down
+	drawTorusLineXY( 0.2, -1.0, 0.2, -0.4);	// P-down left
+	drawTorusLineXY( 0.2,-0.4, 1.0,-0.4);	// P-down up
 
-	drawTorusLineXY(  0.0,  0.0,	 0.4,  0.0);
-	drawTorusLineXY(  0.2, -0.2,	 0.6, -0.2);
+	drawTorusLineXY(-0.2, 0.0, 0.6, 0.0);	// P-up down
+	drawTorusLineXY( 0.6, 0.0, 0.6, 0.7);	// P-up right
+	drawTorusLineXY( 0.6, 0.6,-0.2, 0.6);	// P-up up
 
-	drawTorusLineXY(0,0,0.8,0);
-	drawTorusLineXY(0.2,-0.2,1.0,-0.2);
-
-	drawTorusLineXY(0.8,0,0.8,0.8);
-	drawTorusLineXY(1.0,-0.2,1.0,1.0);
-
-	drawTorusLineXY(0.85,0.8,-0.4,0.8);
-	drawTorusLineXY(1.05,1.0,-0.6,1.0);
-
-	drawTorusLineXY(-0.4,0.8,-0.4,-1.4);
-	drawTorusLineXY(-0.6,1.0,-0.6,-1.2);
-	drawTorusLineXY(-0.6,-1.2,-1.2,-1.2);
-	drawTorusLineXY(-0.4,-1.4,-1.4,-1.4);
-	drawTorusLineXY(-1.2,-1.2,-1.2,1.2);
-	drawTorusLineXY(-1.4,-1.4,-1.4,1.4);
-
+	drawTorusLineXY(-0.6,-1.0, -1.0,-1.0);	// bottom left inner
 
 	glPopMatrix();
 }
