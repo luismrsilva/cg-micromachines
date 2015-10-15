@@ -36,6 +36,10 @@ double Car::getXYAngle(){
 	return _angle_deg;
 }
 
+void Car::setXYAngle(double deg){
+	_angle_deg = deg;
+}
+
 double Car::rotateZ(double deg){
 	_angle_deg = fmod(180 + _angle_deg + deg, 360)-180;
 	return _angle_deg;

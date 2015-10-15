@@ -121,6 +121,7 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 'R':
 			_car->setPosition(0,0,0);
 			_car->setSpeed(Vector3(0,0,0));
+			_car->setXYAngle(0.0);
 			break;
 		default:
 			break;
