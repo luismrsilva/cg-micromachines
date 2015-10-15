@@ -8,6 +8,9 @@ using namespace std;
 #include "debug.hpp"
 #include "game_config.hpp"
 
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 GameManager *gameManager;
 
 void myReshape(GLsizei w, GLsizei h){
@@ -63,6 +66,13 @@ void myKeyboardFunc(unsigned char key, int x, int y){
 		case 'x':
 		case 'X':
 			exit(0);
+			break;
+		case 'c':
+		case 'C':
+		{	// only works for 700x700px window
+			double ratio = (GAME_WORLD_MAX)/350.;
+			cout << "Cursor: " << ratio*(x-350) << ", " << -ratio*(y-350) << endl;
+		}
 			break;
 		default:
 			gameManager->keyPressed(key, x, y);
