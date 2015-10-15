@@ -34,9 +34,6 @@ GameManager::GameManager(){
 
 	_game_objects.push_back(new Roadside());
 
-	_car = new Car();
-	_game_objects.push_back(_car);
-
 	_game_objects.push_back(new Butter(-1.1, 0.7, 0));
 	_game_objects.push_back(new Butter(-1.3, 0.0, 0));
 	_game_objects.push_back(new Butter(-1.1,-0.8, 0));
@@ -45,6 +42,9 @@ GameManager::GameManager(){
 	_game_objects.push_back(new Orange(-1.3, 1.1, 0));
 	_game_objects.push_back(new Orange( 0.0, 1.1, 0));
 	_game_objects.push_back(new Orange( 1.3,-0.8, 0));
+
+	_car = new Car();
+	_game_objects.push_back(_car);
 
 }
 
