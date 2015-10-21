@@ -6,7 +6,8 @@
 #include "Camera.hpp"
 
 Camera::Camera(double near, double far){
-
+	_near = near;
+	_far = far;
 }
 
 Camera::~Camera(){
