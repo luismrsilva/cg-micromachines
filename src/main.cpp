@@ -24,7 +24,7 @@ void myDisplay(void){
 	static int start = glutGet(GLUT_ELAPSED_TIME);
 	gameManager->display();
 	frames++;
-	
+
 	if(glutGet(GLUT_ELAPSED_TIME) - start > 1000){
 		start = glutGet(GLUT_ELAPSED_TIME);
 		#ifdef _MSC_VER
@@ -33,7 +33,7 @@ void myDisplay(void){
 			sprintf
 		#endif
 		(title, "%s (%d fps)", GAME_WINDOW_TITLE, frames);
-		
+
 		glutSetWindowTitle(title);
 		frames = 0;
 	}
@@ -82,8 +82,11 @@ void myKeyboardFunc(unsigned char key, int x, int y){
 
 
 void onTimer(int val){
+	static int prev = glutGet(GLUT_ELAPSED_TIME);
+	int now = glutGet(GLUT_ELAPSED_TIME);
 	glutTimerFunc(GAME_TIMER_PERIOD, onTimer, GAME_TIMER_PERIOD);
-	gameManager->onTimer(val);
+	gameManager->onTimer(now-prev); // use elapsed delta time
+	prev = now;
 }
 
 int main(int argc, char *argv[]){
