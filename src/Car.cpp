@@ -53,7 +53,6 @@ void Car::draw(){
 	D_PRINT("car_pos: " << pos->getX() << ", " << pos->getY() << ", " << pos->getZ());
 
 	glPushMatrix();
-		glTranslatef(0.1, -0.2, 0);
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 		glRotatef(this->_angle_deg-90., 0, 0, 1.);
 	    glScalef(2.0f, 2.0f, 2.0f);
