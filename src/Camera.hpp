@@ -9,7 +9,7 @@
 #include "Entity.hpp"
 
 class Camera : public Entity {
-  private:
+  protected:
     double _near;
     double _far;
   public:
