@@ -124,6 +124,9 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			_car->setSpeed(Vector3(0,0,0));
 			_car->setXYAngle(0.0);
 			break;
+		case '1':
+		case '2':
+		case '3':
 		default:
 			break;
 	}
