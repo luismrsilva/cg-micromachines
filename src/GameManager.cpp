@@ -44,7 +44,6 @@ GameManager::GameManager(){
 	_game_objects.push_back(new Orange( 1.3,-0.8, 0));
 
 	_car = new Car();
-	_car->setPosition(0.1, -0.2, 0.0);
 	_game_objects.push_back(_car);
 
 }
@@ -106,7 +105,7 @@ void GameManager::display(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0f, 1.0f, 1.0f);
 
-	drawCube(0, 0, 0);
+	drawCube(0, 0, -1.6f);
 
 	for(vector<GameObject*>::iterator i = _game_objects.begin();
 		i != _game_objects.end(); i++){
@@ -120,7 +119,7 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 	switch(key){
 		case 'r':
 		case 'R':
-			_car->setPosition(0.1, -0.2, 0.0);
+			_car->setPosition(0,0,0);
 			_car->setSpeed(Vector3(0,0,0));
 			_car->setXYAngle(0.0);
 			break;
