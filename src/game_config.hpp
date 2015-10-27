@@ -1,7 +1,7 @@
 /*
  * game_config.hpp
  * Game configuration constants
- * 
+ *
  * */
 
 #ifndef __GAME_CONFIG_INCLUDED
@@ -29,7 +29,8 @@
 
 // World map limits
 
-#define	GAME_WORLD_MAX	1.6f
+#define GAME_WORLD_MAX  1.6f
+#define TABLE_LIMIT     1.5f
 
 
 #endif //__GAME_CONFIG_INCLUDED
