@@ -39,6 +39,7 @@ GameManager::GameManager(){
 	_game_objects.push_back(new Butter(-1.1,-0.8, 0));
 	_game_objects.push_back(new Butter(-0.4, 0.4, 0));
 	_game_objects.push_back(new Butter( 0.7,-1.1, 0));
+
 	_game_objects.push_back(new Orange(-1.3, 1.1, 0));
 	_game_objects.push_back(new Orange( 0.0, 1.1, 0));
 	_game_objects.push_back(new Orange( 1.3,-0.8, 0));
@@ -93,13 +94,11 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 	glLoadIdentity();
 }
 
-void drawCube(GLfloat x, GLfloat y, GLfloat z){
+void drawTable(GLfloat x, GLfloat y, GLfloat z){
 	glPushMatrix();
-
-	glTranslatef(x, y, z);
-	glColor3f(0.1f, 0.3f, 0.1f);
-	glutSolidCube(3.0f);
-
+		glTranslatef(x, y, z);
+		glColor3f(0.1f, 0.3f, 0.1f);
+		glutSolidCube(TABLE_LIMIT*2);
 	glPopMatrix();
 }
 
@@ -109,7 +108,7 @@ void GameManager::display(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0f, 1.0f, 1.0f);
 
-	drawCube(0, 0, -1.6f);
+	drawTable(0, 0, -1.6f);
 
 	for(vector<GameObject*>::iterator i = _game_objects.begin();
 		i != _game_objects.end(); i++){
