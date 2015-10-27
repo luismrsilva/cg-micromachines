@@ -41,18 +41,17 @@ Roadside::Roadside(){
 	// Other Curves
 	drawCheerioBezierXY(-1.0,-0.8,	-1.0,-1.0,	-0.8,-1.0,	3);
 	drawCheerioBezierXY(-0.8,-1.0,	-0.6,-1.0,	-0.6,-0.8,	3);
-	drawCheerioBezierXY(-0.6,	1.0,	-1.0, 1.0,	-1.0, 0.6,	6);
-	drawCheerioBezierXY( 0.4,	0.0,	 0.6, 0.0,	 0.6, 0.2,	3);
-	drawCheerioBezierXY( 0.6,	0.4,	 0.6, 0.6,	 0.4, 0.6,	3);
-	drawCheerioBezierXY( 0.0,	0.6,	-0.2, 0.6,	-0.2, 0.4,	3);
+	drawCheerioBezierXY(-0.6, 1.0,	-1.0, 1.0,	-1.0, 0.6,	6);
+	drawCheerioBezierXY( 0.4, 0.0,	 0.6, 0.0,	 0.6, 0.2,	3);
+	drawCheerioBezierXY( 0.6, 0.4,	 0.6, 0.6,	 0.4, 0.6,	3);
+	drawCheerioBezierXY( 0.0, 0.6,	-0.2, 0.6,	-0.2, 0.4,	3);
 	drawCheerioBezierXY( 0.4,-0.4,	 0.2,-0.4,	 0.2,-0.6,	3);
 	drawCheerioBezierXY( 0.2,-0.8,	 0.2,-1.0,	 0.4,-1.0,	3);
 	drawCheerioBezierXY( 0.8,-1.0,	 1.0,-1.0,	 1.0,-0.8,	3);
 }
 
 Roadside::~Roadside(){
-	for(vector<Cheerio*>::iterator i = _cheerios.begin();
-		i != _cheerios.end(); i++){
+	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
 		delete (*i);
 	}
 }
@@ -107,8 +106,7 @@ void Roadside::drawCheerioBezierXY(double x1, double y1, double x2, double y2,
 }
 
 void Roadside::draw(){
-	/*for(vector<Cheerio*>::iterator i = _cheerios.begin();
-		i != _cheerios.end(); i++){
-		i->draw();
-	}*/
+	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
+		(*i)->draw();
+	}
 }
