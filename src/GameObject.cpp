@@ -4,7 +4,7 @@
  * */
 
 #include "GameObject.hpp"
-
+#include "Entity.hpp"
 #include <iostream>
 using namespace std;
 
@@ -27,3 +27,4 @@ void GameObject::draw(){
 void GameObject::update(double delta_t){
 
 }
+

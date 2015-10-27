@@ -42,7 +42,10 @@ GameManager::GameManager(){
 	_game_objects.push_back(new Orange(-1.3, 1.1, 0));
 	_game_objects.push_back(new Orange( 0.0, 1.1, 0));
 	_game_objects.push_back(new Orange( 1.3,-0.8, 0));
-
+	/*Orange *orange = new Orange();
+	orange->moveToRandomPosition();
+	_game_objects.push_back(orange);
+	*/
 	_car = new Car();
 	_car->setPosition(0.1, -0.2, 0.0);
 	_game_objects.push_back(_car);

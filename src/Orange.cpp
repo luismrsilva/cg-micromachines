@@ -27,7 +27,6 @@ Orange::~Orange(){
 /* Draws an orange on x, y, z position */
 void Orange::draw(){
 	Vector3 * pos = this->getPosition();
-
 	glPushMatrix();
 	glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 	glScalef(1, 1, 1);

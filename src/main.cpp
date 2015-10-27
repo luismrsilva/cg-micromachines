@@ -10,6 +10,7 @@ using namespace std;
 
 #define _USE_MATH_DEFINES
 #include <cmath>
+#include <time.h>
 
 GameManager *gameManager;
 
@@ -90,7 +91,7 @@ void onTimer(int val){
 }
 
 int main(int argc, char *argv[]){
-
+	srand(time(NULL));
 	glutInit(&argc, argv);
 
 	gameManager = new GameManager();

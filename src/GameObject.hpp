@@ -7,6 +7,8 @@
 #define __GAMEOBJECT_H
  
 #include "Entity.hpp"
+#include <cstdlib>
+
 
 class GameObject : public Entity {
 	public:

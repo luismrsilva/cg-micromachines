@@ -4,7 +4,7 @@
  * */
 
 #include "Entity.hpp"
-
+#include <cstdlib>
 
 Entity::Entity(){
 	_position = new Vector3();
@@ -33,3 +33,8 @@ Vector3* Entity::setPosition(Vector3 *p){
 	return _position;
 }
 
+void Entity::moveToRandomPosition() {
+	setPosition((double) (rand() % 28 - 14.0) / 10.0f,
+				(double) (rand() % 28 - 14.0) / 10.0f, 
+				(double) (rand() % 28 - 14.0) / 10.0f);
+}
