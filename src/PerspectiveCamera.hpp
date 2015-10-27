@@ -8,7 +8,7 @@
 
 #include "Camera.hpp"
 
-class PerspectiveCamera : Camera {
+class PerspectiveCamera : public Camera {
 	public:
 		void update();
 		void computeProjectionMatrix();
