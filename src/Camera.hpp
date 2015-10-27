@@ -15,9 +15,9 @@ class Camera : public Entity {
   public:
     Camera(double near, double far);
     ~Camera();
-    void update();
-    void computeProjectionMatrix();
-    void computeVisualizationMatrix();
+    virtual void update();
+    virtual void computeProjectionMatrix();
+    virtual void computeVisualizationMatrix();
 };
 
  #endif // __CAMERA_H

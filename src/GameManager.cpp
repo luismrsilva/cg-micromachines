@@ -23,11 +23,14 @@ using namespace std;
 #include "Car.hpp"
 #include <GL/glut.h>
 #include "debug.hpp"
-
+#include "OrthogonalCamera.hpp"
 
 
 GameManager::GameManager(){
 	D_TRACE();
+
+	_viewWidth = 0;
+	_viewHeight = 0;
 
 	_isKeyPressed = (bool*) malloc(4 * sizeof(bool));
 	memset(_isKeyPressed, false, 4);
@@ -47,6 +50,15 @@ GameManager::GameManager(){
 	_car->setPosition(0.1, -0.2, 0.0);
 	_game_objects.push_back(_car);
 
+	_cameras.push_back(
+		new OrthogonalCamera(this,
+			-GAME_WORLD_MAX, GAME_WORLD_MAX,
+			-GAME_WORLD_MAX, GAME_WORLD_MAX,
+			GAME_WORLD_MAX, -GAME_WORLD_MAX
+		)
+	);
+	_currentCamera = _cameras[0];
+
 }
 
 GameManager::~GameManager(){
@@ -64,30 +76,22 @@ void GameManager::init(){
 	glutInitWindowSize(700, 700);
 	glutInitWindowPosition(-1, -1);
 	glutCreateWindow(GAME_WINDOW_TITLE);
+	_viewWidth = 700;
+	_viewHeight = 700;
+}
+
+
+GLsizei GameManager::getViewWidth(){
+	return _viewWidth;
+}
+GLsizei GameManager::getViewHeight(){
+	return _viewHeight;
 }
 
 void GameManager::reshape(GLsizei w, GLsizei h){
 	glViewport(0, 0, w, h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	if(w<h){
-		glOrtho(	-GAME_WORLD_MAX,	GAME_WORLD_MAX,
-					-GAME_WORLD_MAX*h/w,	GAME_WORLD_MAX*h/w,
-					-GAME_WORLD_MAX,	GAME_WORLD_MAX);
-	}else{
-		glOrtho(	-GAME_WORLD_MAX*w/h,	GAME_WORLD_MAX*w/h,
-					-GAME_WORLD_MAX,	GAME_WORLD_MAX,
-					-GAME_WORLD_MAX,	GAME_WORLD_MAX);
-	}
-
-	/* pos, look at, up_v*/
-	gluLookAt(	0, 0, 0,  // position of the eye point
-				0, 0, -1,  // center - position of the reference point
-				0, 1, 0); // up - specifies the direction of the up point
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	_viewWidth = w;
+	_viewHeight = h;
 }
 
 void drawCube(GLfloat x, GLfloat y, GLfloat z){
@@ -102,6 +106,17 @@ void drawCube(GLfloat x, GLfloat y, GLfloat z){
 
 void GameManager::display(){
 	D_TRACE();
+
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	_currentCamera->update();
+
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0f, 1.0f, 1.0f);
