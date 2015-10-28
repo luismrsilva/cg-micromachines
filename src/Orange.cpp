@@ -12,18 +12,18 @@
 using namespace std;
 #include <GL/glut.h>
 
-Orange::Orange(){
-	reset();
+Orange::Orange() : Obstacle(){
+	resetPosition();
 }
 
 Orange::Orange(double x, double y, double z) : Obstacle(x, y, z){
-	reset();
+	resetPosition();
 }
 
 Orange::~Orange(){
 }
 
-void Orange::reset(){
+void Orange::resetPosition(){
 	moveToRandomPosition();
 	//this->setSpeed(Vector3(0, 0, 0));
 }

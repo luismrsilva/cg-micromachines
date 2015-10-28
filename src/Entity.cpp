@@ -10,7 +10,8 @@ Entity::Entity(){
 	_position = new Vector3();
 }
 
-Entity::Entity(double x, double y, double z) : Entity(){
+Entity::Entity(double x, double y, double z){
+	_position = new Vector3();
 	this->setPosition(x, y, z);
 }
 

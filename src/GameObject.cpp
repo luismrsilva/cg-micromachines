@@ -8,7 +8,7 @@
 #include <iostream>
 using namespace std;
 
-GameObject::GameObject(){
+GameObject::GameObject() : Entity(){
 
 }
 

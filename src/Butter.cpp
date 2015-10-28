@@ -12,7 +12,7 @@
 using namespace std;
 #include <GL/glut.h>
 
-Butter::Butter(){
+Butter::Butter() : Obstacle(){
 
 }
 

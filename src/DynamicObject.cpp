@@ -6,12 +6,12 @@
 #include "DynamicObject.hpp"
 
 
-DynamicObject::DynamicObject(){
+DynamicObject::DynamicObject() : GameObject(){
 	_speed = new Vector3();
 }
 
 DynamicObject::DynamicObject(double x, double y, double z) : GameObject(x, y, z){
-	DynamicObject();
+	_speed = new Vector3();
 }
 
 DynamicObject::~DynamicObject(){
