@@ -177,18 +177,19 @@ void GameManager::update(double delta_t){
 
 	double speed = _car->getSpeed().getXYModulus();
 
-	/* update moving camera */
+	/* update moving camera so it follows the car */
 	if( _currentCamera == _movingCamera ){
 		Vector3 pos = *(_car->getPosition());
-		Vector3 speed = _car->getSpeed();
+		Vector3 speed_v = _car->getSpeed();
 
-		Vector3 *new_pos = new Vector3();
-		new_pos->set(pos.getX() - speed.getX(),
-					pos.getY() - speed.getY(),
-					0.5 + pos.getZ() - speed.getZ()
-					);
+		Vector3 new_pos =
+				pos									// pos do carro
+			+	Vector3(0, 0, 0.3 + speed*0.25)		// aumeta Z com a velocidade
+			-	speed_v * 0.5						// afasta-se com a velocidade
+			-	Vector3(0.5, _car->getXYAngle()		// mantem distancia minima ao carro
+			);
 		_movingCamera->setPosition(new_pos);
-		_movingCamera->setCenter(pos);
+		_movingCamera->setCenter(pos);				// olha para o carro
 	}
 
 	/* change car speed according to keys */

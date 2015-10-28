@@ -11,14 +11,14 @@
 
 class Entity {
 	private:
-		Vector3* _position;
+		Vector3 *_position;
 	public:
 		Entity();
 		Entity(double x, double y, double z);
 		~Entity();
-		Vector3* getPosition();
+		Vector3* getPosition() const;
 		Vector3* setPosition(double x, double y, double z);
-		Vector3* setPosition(Vector3 *p);
+		Vector3* setPosition(const Vector3 &pos);
 		void moveToRandomPosition();
 };
 

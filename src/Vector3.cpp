@@ -1,6 +1,6 @@
 /*
  * Vector3.cpp
- * 
+ *
  * */
 
 #include "debug.hpp"
@@ -28,18 +28,18 @@ Vector3::Vector3(double mod, double angleXY_deg){
 }
 
 Vector3::~Vector3(){
-	
+
 }
 
-double Vector3::getX(){
+double Vector3::getX() const{
 	return _x;
 }
 
-double Vector3::getY(){
+double Vector3::getY() const{
 	return _y;
 }
 
-double Vector3::getZ(){
+double Vector3::getZ() const{
 	return _z;
 }
 
@@ -49,23 +49,23 @@ void Vector3::set(double x, double y, double z){
 	_z = z;
 }
 
-Vector3 Vector3::operator=(const Vector3 vec){
-	_x = vec._x;
-	_y = vec._y;
-	_z = vec._z;
+Vector3 Vector3::operator=(const Vector3 &vec){
+	_x = vec.getX();
+	_y = vec.getY();
+	_z = vec.getZ();
 	return *this;
 }
 
-Vector3 Vector3::operator*(double num){
-	return Vector3(_x * num, _y *num, _z * num);
+Vector3 Vector3::operator*(double num) const{
+	return Vector3(getX() * num, getY() *num, getZ() * num);
 }
 
-Vector3 Vector3::operator+(const Vector3 vec){
-	return Vector3(_x + vec._x, _y + vec._y, _z + vec._z);
+Vector3 Vector3::operator+(const Vector3 &vec) const{
+	return Vector3(getX() + vec.getX(), getY() + vec.getY(), getZ() + vec.getZ());
 }
 
-Vector3 Vector3::operator-(const Vector3 vec){
-	return Vector3(_x - vec._x, _y - vec._y, _z - vec._z);
+Vector3 Vector3::operator-(const Vector3 &vec) const{
+	return Vector3(getX() - vec.getX(), getY() - vec.getY(), getZ() - vec.getZ());
 }
 
 Vector3 Vector3::rotateZ(double deg){
@@ -77,7 +77,7 @@ Vector3 Vector3::rotateZ(double deg){
 	return *this;
 }
 
-double Vector3::getXYModulus(){
+double Vector3::getXYModulus() const{
 	return sqrt( pow(_x, 2) + pow (_y, 2) );
 }
 
@@ -92,15 +92,17 @@ Vector3 Vector3::increaseMod(double mod_inc){
 	return *this;
 }
 
-void Vector3::print(){
-	std::cout << "Vector3(" << _x << ", " << _y << ", " << _z << ")";
+void Vector3::print() const{
+	std::cout	<< "Vector3(" << getX() << ", "
+				<< getY() << ", " << getZ() << ")";
 }
 
-void Vector3::println(){
-	std::cout << "Vector3(" << _x << ", " << _y << ", " << _z << ")" << std::endl;
+void Vector3::println() const{
+	print();
+	std::cout << std::endl;
 }
 
-double Vector3::getXYAngle(){
+double Vector3::getXYAngle() const{
 	double angle = atan2(_y, _x) * 180 / M_PI;
 	if(angle != angle) // check if NaN
 		angle = 0;

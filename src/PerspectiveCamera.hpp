@@ -14,8 +14,8 @@ class PerspectiveCamera : public Camera {
 		void computeVisualizationMatrix();
 		PerspectiveCamera(double fovy, double aspect, double zNear, double zFar);
 		~PerspectiveCamera();
-		void setCenter(Vector3 center);
-		void setUp(Vector3 up);
+		void setCenter(const Vector3 &center);
+		void setUp(const Vector3 &up);
 	private:
 		double _fovy;
 		double _aspect;

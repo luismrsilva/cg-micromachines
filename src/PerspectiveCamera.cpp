@@ -15,11 +15,11 @@ PerspectiveCamera::PerspectiveCamera(double fovy, double aspect, double zNear, d
 }
 
 
-void PerspectiveCamera::setCenter(Vector3 center){
+void PerspectiveCamera::setCenter(const Vector3 &center){
 	_center = center;
 }
 
-void PerspectiveCamera::setUp(Vector3 up){
+void PerspectiveCamera::setUp(const Vector3 &up){
 	_up = up;
 }
 
@@ -30,6 +30,11 @@ void PerspectiveCamera::computeProjectionMatrix() {
 
 void PerspectiveCamera::computeVisualizationMatrix() {
 	Vector3 * pos = this->getPosition();
+
+	D_PRINT("pcam_pos:\t" << pos->getX() << ", " << pos->getY() << ", " << pos->getZ());
+	D_PRINT("pcam_cen:\t" << _center.getX() << ", " << _center.getY() << ", " << _center.getZ());
+	D_PRINT("pcam_up:\t" << _up.getX() << ", " << _up.getY() << ", " << _up.getZ());
+
 	gluLookAt(	pos->getX(), pos->getY(), pos->getZ(),
 				_center.getX(), _center.getY(), _center.getZ(),
 				_up.getX(), _up.getY(), _up.getZ());
