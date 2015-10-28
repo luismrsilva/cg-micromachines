@@ -57,8 +57,9 @@ GameManager::GameManager(){
 	);
 
 	PerspectiveCamera *fixedPerspCam = new PerspectiveCamera(60, 1, 0.1, 10.);
-	fixedPerspCam->setPosition(0, -2.5, 2.5);
-	fixedPerspCam->setCenter(Vector3(0, 0.5, -1));
+	fixedPerspCam->setPosition(0, 0, 2.65);
+	fixedPerspCam->setCenter(Vector3(0, 0.0, -1));
+	fixedPerspCam->setUp(Vector3(0, 1.2, 0));
 
 	_cameras.push_back(fixedPerspCam);
 
