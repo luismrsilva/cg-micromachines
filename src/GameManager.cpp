@@ -56,11 +56,15 @@ GameManager::GameManager(){
 		)
 	);
 
-	PerspectiveCamera *fixedPerspCam = new PerspectiveCamera(60, 3./4., 0.1, 10.);
+	PerspectiveCamera *fixedPerspCam = new PerspectiveCamera(60, 1, 0.1, 10.);
 	fixedPerspCam->setPosition(0, -2.5, 2.5);
 	fixedPerspCam->setCenter(Vector3(0, 0.5, -1));
 
 	_cameras.push_back(fixedPerspCam);
+
+
+	_movingCamera = new PerspectiveCamera(60, 1, 0.1, 10.);
+	_cameras.push_back(_movingCamera);
 
 	_currentCamera = _cameras[0];
 
@@ -150,6 +154,8 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			_currentCamera = _cameras[1];
 			break;
 		case '3':
+			_currentCamera = _cameras[2];
+			break;
 		default:
 			break;
 	}
@@ -170,13 +176,29 @@ void GameManager::update(double delta_t){
 
 	double speed = _car->getSpeed().getXYModulus();
 
+	/* update moving camera */
+	if( _currentCamera == _movingCamera ){
+		Vector3 pos = *(_car->getPosition());
+		Vector3 speed = _car->getSpeed();
+
+		Vector3 *new_pos = new Vector3();
+		new_pos->set(pos.getX() - speed.getX(),
+					pos.getY() - speed.getY(),
+					0.5 + pos.getZ() - speed.getZ()
+					);
+		_movingCamera->setPosition(new_pos);
+		_movingCamera->setCenter(pos);
+	}
+
+	/* change car speed according to keys */
+
 	if(_isKeyPressed[LEFT] ^ _isKeyPressed[RIGHT]){
 		double da = delta_t*GAME_CAR_ANGLE_ACCELARATION(speed)*(_isKeyPressed[LEFT] ? 1 : -1);
 		if(!_car->isGoingForward()) da *= -1.0;
 		_car->setSpeed(_car->getSpeed().rotateZ(da));
 		_car->rotateZ(da);
 	}
-	
+
 	if(_isKeyPressed[UP] ^ _isKeyPressed[DOWN]){
 		double da = delta_t*GAME_CAR_SPEED_ACCELARATION*(_isKeyPressed[UP] ? 1 : -0.5);
 		if(_car->getSpeed().getXYModulus() == 0.){
@@ -191,6 +213,9 @@ void GameManager::update(double delta_t){
 	double da = -GAME_CAR_SPEED_DRAG(speed) * delta_t;
 	_car->setSpeed(_car->getSpeed().increaseMod(da));
 	cout << "CAR speed: " << speed << "| " << "drag: " << (double)da/((double)delta_t) << endl;
+
+
+	/* update all objects */
 
 	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
 		(*i)->update(delta_t);
