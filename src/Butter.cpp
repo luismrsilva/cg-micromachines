@@ -31,7 +31,7 @@ void Butter::draw(){
 
 	glPushMatrix();
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
-		glScalef(1, 0.5, 1);
+		glScalef(1, 0.5, 0.6);
 		glColor3f(0.8f, 0.8f, 0.5f);
 		glutSolidCube(cm(10));
 	glPopMatrix();

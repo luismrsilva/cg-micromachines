@@ -59,22 +59,23 @@ void Car::draw(){
 
 		glPushMatrix();	// car body
 		    glColor3f(0.7f, 0.0f, 0.1f);
-			glScalef(1, 2, 1);
+			glScalef(1, 2, 0.6);
+			glTranslatef(0.0f, 0.0f, 0.01f);
 			glutSolidCube(cm(4));
 		glPopMatrix();
 
 		glPushMatrix();	// car window
 			glColor3f(0.7f, 0.6f, 1.0f);
-			glScalef(1, 1.2, 0.8); // longer and less tall
-			glTranslatef(0.0f, -0.01f, 0.0f);
-			glutSolidSphere(cm(1.5), 32, 32);
+			glScalef(1, 1.2, 1.2); // longer and taller
+			glTranslatef(0.0f, -0.01f, 0.016f);
+			glutSolidSphere(cm(1.5), 16, 16);
 		glPopMatrix();
 
 		glPushMatrix();	// car tires
 			glRotatef(-90, 0, 1, 0);
 			glColor3f(0.06f, 0.06f, 0.06f);	// tire color
 
-			glTranslatef(0.0f, -0.02f, 0.024f);
+			glTranslatef(0.0f, -0.024f, 0.024f);
 			glutSolidTorus(0.004f, 0.005f, 8, 16);
 			glTranslatef(0.0f, 0.045f, 0.0f);
 			glutSolidTorus(0.004f, 0.005f, 8, 16);

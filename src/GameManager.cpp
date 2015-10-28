@@ -90,9 +90,18 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 
 void drawTable(GLfloat x, GLfloat y, GLfloat z){
 	glPushMatrix();
-		glTranslatef(x, y, z);
 		glColor3f(0.1f, 0.3f, 0.1f);
+		glTranslatef(x, y, z);
 		glutSolidCube(TABLE_LIMIT*2);
+	glPopMatrix();
+}
+
+void drawStartLine(){
+	glPushMatrix();
+		glColor3f(0.0f, 0.0f, 0.0f);
+		glTranslatef(0.28, -0.2, 0);
+		glScalef(0.1, 4, 0.1);
+		glutSolidCube(0.1);
 	glPopMatrix();
 }
 
@@ -117,6 +126,7 @@ void GameManager::display(){
 	glColor3f(1.0f, 1.0f, 1.0f);
 
 	drawTable(0, 0, -1.6f);
+	drawStartLine();
 
 	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
 		(*i)->draw();
