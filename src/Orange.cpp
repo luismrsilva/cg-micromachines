@@ -29,6 +29,7 @@ Orange::~Orange(){
 
 void Orange::resetPosition(){
 	moveToRandomPosition();
+	setSpeed(Vector3(this->getSpeed().getXYModulus(), (double) (rand() % 3600) / 10.0f));
 }
 
 void Orange::update(double delta_t){
@@ -42,8 +43,8 @@ void Orange::update(double delta_t){
 void Orange::draw(){
 	Vector3 * pos = this->getPosition();
 	glPushMatrix();
+		//glRotatef(40.0, 0., 0., 1.);
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
-		//glRotatef(-2., 0, 0, 1.); TODO
 		glScalef(1, 1, 1);
 		glColor3f(1.0f, 0.6f, 0.0f);
 		glutSolidSphere(cm(5.5), 8, 8);
