@@ -14,6 +14,7 @@ class Orange : public Obstacle {
 		Orange(double x, double y, double z);
 		~Orange();
 		void draw();
+		void update(double delta_t);
 		void resetPosition();
 };
 
