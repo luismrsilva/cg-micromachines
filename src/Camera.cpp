@@ -15,7 +15,8 @@ Camera::~Camera(){
 }
 
 void Camera::update(){
-
+	computeProjectionMatrix();
+	computeVisualizationMatrix();
 }
 
 void Camera::computeProjectionMatrix(){
