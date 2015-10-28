@@ -5,7 +5,7 @@
 
 #include "Camera.hpp"
 
-Camera::Camera(double near, double far){
+Camera::Camera(double near, double far) : Entity(){
 	_near = near;
 	_far = far;
 }

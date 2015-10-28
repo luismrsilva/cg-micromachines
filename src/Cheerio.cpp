@@ -12,7 +12,7 @@
 using namespace std;
 #include <GL/glut.h>
 
-Cheerio::Cheerio(){
+Cheerio::Cheerio() : Obstacle(){
 
 }
 

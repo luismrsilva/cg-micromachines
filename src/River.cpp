@@ -5,7 +5,7 @@
 
 #include "River.hpp"
 
-River::River(){
+River::River() : StaticObject(){
 
 }
 

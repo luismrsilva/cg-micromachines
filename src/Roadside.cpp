@@ -12,7 +12,7 @@ using namespace std;
 #include <GL/glut.h>
 #include "myunits.hpp"
 
-Roadside::Roadside(){
+Roadside::Roadside() : StaticObject(){
 	drawCheerioLineXY(-1.0,-0.7, -1.0, 0.7);	// left inner
 	drawCheerioLineXY(-1.4,-1.1, -1.4, 1.1);	// left outer
 	drawCheerioLineXY(-1.1, 1.4, 1.15, 1.4);	// top outer

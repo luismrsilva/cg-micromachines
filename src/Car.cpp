@@ -14,7 +14,7 @@ using namespace std;
 
 #include "debug.hpp"
 
-Car::Car(){
+Car::Car() : DynamicObject(){
 	_angle_deg = 0;
 	_isGoingForward = true;
 }

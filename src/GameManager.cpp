@@ -172,35 +172,29 @@ void GameManager::update(double delta_t){
 
 	if(_isKeyPressed[LEFT] ^ _isKeyPressed[RIGHT]){
 		double da = delta_t*GAME_CAR_ANGLE_ACCELARATION(speed)*(_isKeyPressed[LEFT] ? 1 : -1);
-		if(!_car->isGoingForward())
-			da *= -1.0;
+		if(!_car->isGoingForward()) da *= -1.0;
 		_car->setSpeed(_car->getSpeed().rotateZ(da));
 		_car->rotateZ(da);
 	}
+	
 	if(_isKeyPressed[UP] ^ _isKeyPressed[DOWN]){
 		double da = delta_t*GAME_CAR_SPEED_ACCELARATION*(_isKeyPressed[UP] ? 1 : -0.5);
 		if(_car->getSpeed().getXYModulus() == 0.){
 			_car->setSpeed(Vector3(da, _car->getXYAngle()));
 			_car->setGoingForward(da >= 0);
 		}else{
-			if(!_car->isGoingForward())
-				da *= -1.0;
+			if(!_car->isGoingForward()) da *= -1.0;
 			_car->setSpeed(_car->getSpeed().increaseMod(da));
 		}
-
-		cout << "da: " << (da/((double)delta_t)) << endl;
 	}
 
 	double da = -GAME_CAR_SPEED_DRAG(speed) * delta_t;
-	cout << "speed: " << speed << endl;
-	cout << "drag: " << (double)da/((double)delta_t) << endl;
-
 	_car->setSpeed(_car->getSpeed().increaseMod(da));
+	cout << "CAR speed: " << speed << "| " << "drag: " << (double)da/((double)delta_t) << endl;
 
 	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
 		(*i)->update(delta_t);
 	}
-
 
 }
 
