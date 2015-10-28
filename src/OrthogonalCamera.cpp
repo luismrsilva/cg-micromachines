@@ -7,18 +7,17 @@
 #include "game_config.hpp"
 #include <GL/glut.h>
 
-OrthogonalCamera::OrthogonalCamera(GameManager *gameManager, double left, double right, double bottom, double top, double near, double far) : Camera(near, far){
+OrthogonalCamera::OrthogonalCamera(double left, double right, double bottom, double top, double near, double far) : Camera(near, far){
 	_left = left;
 	_right = right;
 	_bottom = bottom;
 	_top = top;
-	_gameManager = gameManager;
 }
 
 
 void OrthogonalCamera::computeProjectionMatrix(){
-	GLsizei w = _gameManager->getViewWidth();
-	GLsizei h = _gameManager->getViewHeight();
+	GLsizei w = glutGet(GLUT_WINDOW_WIDTH);
+	GLsizei h = glutGet(GLUT_WINDOW_HEIGHT);
 	if(w<h){
 		glOrtho(	_left,		_right,
 					_bottom*h/w,_top*h/w,

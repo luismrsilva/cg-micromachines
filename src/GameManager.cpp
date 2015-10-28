@@ -24,13 +24,11 @@ using namespace std;
 #include <GL/glut.h>
 #include "debug.hpp"
 #include "OrthogonalCamera.hpp"
+#include "PerspectiveCamera.hpp"
 
 
 GameManager::GameManager(){
 	D_TRACE();
-
-	_viewWidth = 0;
-	_viewHeight = 0;
 
 	_isKeyPressed = (bool*) malloc(4 * sizeof(bool));
 	memset(_isKeyPressed, false, 4);
@@ -55,12 +53,20 @@ GameManager::GameManager(){
 	_game_objects.push_back(_car);
 
 	_cameras.push_back(
-		new OrthogonalCamera(this,
+		new OrthogonalCamera(
 			-GAME_WORLD_MAX, GAME_WORLD_MAX,
 			-GAME_WORLD_MAX, GAME_WORLD_MAX,
 			GAME_WORLD_MAX, -GAME_WORLD_MAX
 		)
 	);
+
+	PerspectiveCamera *fixedPerspCam = new PerspectiveCamera(60, 3./4., 0.1, 10.);
+	fixedPerspCam->setPosition(0, -2.5, 2.5);
+	fixedPerspCam->setCenter(Vector3(0, 0.5, -1));
+
+
+	_cameras.push_back(fixedPerspCam);
+
 	_currentCamera = _cameras[0];
 
 }
@@ -80,22 +86,11 @@ void GameManager::init(){
 	glutInitWindowSize(700, 700);
 	glutInitWindowPosition(-1, -1);
 	glutCreateWindow(GAME_WINDOW_TITLE);
-	_viewWidth = 700;
-	_viewHeight = 700;
-}
-
-
-GLsizei GameManager::getViewWidth(){
-	return _viewWidth;
-}
-GLsizei GameManager::getViewHeight(){
-	return _viewHeight;
 }
 
 void GameManager::reshape(GLsizei w, GLsizei h){
 	glViewport(0, 0, w, h);
-	_viewWidth = w;
-	_viewHeight = h;
+	/* Cameras take care of aspect ratio too */
 }
 
 void drawTable(GLfloat x, GLfloat y, GLfloat z){
@@ -142,7 +137,11 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			_car->setXYAngle(0.0);
 			break;
 		case '1':
+			_currentCamera = _cameras[0];
+			break;
 		case '2':
+			_currentCamera = _cameras[1];
+			break;
 		case '3':
 		default:
 			break;

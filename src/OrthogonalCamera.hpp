@@ -13,7 +13,7 @@ class OrthogonalCamera : public Camera {
 	public:
 		void computeProjectionMatrix();
 		void computeVisualizationMatrix();
-		OrthogonalCamera(GameManager *gameManager, double left, double right, double bottom, double top, double near, double far);
+		OrthogonalCamera(double left, double right, double bottom, double top, double near, double far);
 		~OrthogonalCamera();
 	private:
 		double _left;

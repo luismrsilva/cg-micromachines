@@ -27,8 +27,6 @@ class GameManager {
 		void update(double delta_t);
 		void init();
 		void setKeyPressed(int glut_key, bool status);
-		GLsizei getViewWidth();
-		GLsizei getViewHeight();
 	private:
 		Car *_car;
 		vector<GameObject*> _game_objects;
@@ -38,8 +36,6 @@ class GameManager {
 		enum KEYS{
 			UP, LEFT, DOWN, RIGHT
 		};
-		GLsizei _viewWidth;
-		GLsizei _viewHeight;
 		Camera *_currentCamera;
 
 };
