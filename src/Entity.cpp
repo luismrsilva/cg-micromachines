@@ -1,6 +1,6 @@
 /*
  * Entity.cpp
- * 
+ *
  * */
 
 #include "Entity.hpp"
@@ -35,6 +35,6 @@ Vector3* Entity::setPosition(Vector3 *p){
 
 void Entity::moveToRandomPosition() {
 	setPosition((double) (rand() % 28 - 14.0) / 10.0f,
-				(double) (rand() % 28 - 14.0) / 10.0f, 
-				(double) (rand() % 28 - 14.0) / 10.0f);
+				(double) (rand() % 28 - 14.0) / 10.0f,
+				(double) 0);
 }

@@ -41,13 +41,9 @@ GameManager::GameManager(){
 	_game_objects.push_back(new Butter(-0.4, 0.4, 0));
 	_game_objects.push_back(new Butter( 0.7,-1.1, 0));
 
-	_game_objects.push_back(new Orange(-1.3, 1.1, 0));
-	_game_objects.push_back(new Orange( 0.0, 1.1, 0));
-	_game_objects.push_back(new Orange( 1.3,-0.8, 0));
-	/*Orange *orange = new Orange();
-	orange->moveToRandomPosition();
-	_game_objects.push_back(orange);
-	*/
+	for (int i=0; i<3; i++)
+		_game_objects.push_back(new Orange());
+
 	_car = new Car();
 	_car->setPosition(0.1, -0.2, 0.0);
 	_game_objects.push_back(_car);
@@ -63,7 +59,6 @@ GameManager::GameManager(){
 	PerspectiveCamera *fixedPerspCam = new PerspectiveCamera(60, 3./4., 0.1, 10.);
 	fixedPerspCam->setPosition(0, -2.5, 2.5);
 	fixedPerspCam->setCenter(Vector3(0, 0.5, -1));
-
 
 	_cameras.push_back(fixedPerspCam);
 
@@ -120,8 +115,7 @@ void GameManager::display(){
 
 	drawTable(0, 0, -1.6f);
 
-	for(vector<GameObject*>::iterator i = _game_objects.begin();
-		i != _game_objects.end(); i++){
+	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
 		(*i)->draw();
 	}
 
@@ -164,18 +158,14 @@ void GameManager::update(double delta_t){
 	double speed = _car->getSpeed().getXYModulus();
 
 	if(_isKeyPressed[LEFT] ^ _isKeyPressed[RIGHT]){
-		double da = delta_t*(_isKeyPressed[LEFT]
-						? GAME_CAR_ANGLE_ACCELARATION(speed)
-						: -GAME_CAR_ANGLE_ACCELARATION(speed));
+		double da = delta_t*GAME_CAR_ANGLE_ACCELARATION(speed)*(_isKeyPressed[LEFT] ? 1 : -1);
 		if(!_car->isGoingForward())
 			da *= -1.0;
 		_car->setSpeed(_car->getSpeed().rotateZ(da));
 		_car->rotateZ(da);
 	}
 	if(_isKeyPressed[UP] ^ _isKeyPressed[DOWN]){
-		double da = delta_t*(_isKeyPressed[UP]
-						? GAME_CAR_SPEED_ACCELARATION
-						: -0.5*GAME_CAR_SPEED_ACCELARATION);
+		double da = delta_t*GAME_CAR_SPEED_ACCELARATION*(_isKeyPressed[UP] ? 1 : -0.5);
 		if(_car->getSpeed().getXYModulus() == 0.){
 			_car->setSpeed(Vector3(da, _car->getXYAngle()));
 			_car->setGoingForward(da >= 0);
@@ -188,15 +178,18 @@ void GameManager::update(double delta_t){
 		cout << "da: " << (da/((double)delta_t)) << endl;
 	}
 
-
 	double da = -GAME_CAR_SPEED_DRAG(speed) * delta_t;
 	cout << "speed: " << speed << endl;
 	cout << "drag: " << (double)da/((double)delta_t) << endl;
 
 	_car->setSpeed(_car->getSpeed().increaseMod(da));
 
+	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
+		(*i)->update(delta_t);
+	}
 
-	_car->update(delta_t);
+	_car->update(delta_t);	// doing this twice
+
 }
 
 void GameManager::setKeyPressed(int glut_key, bool status){
