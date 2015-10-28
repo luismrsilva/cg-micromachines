@@ -15,7 +15,7 @@
 
 
 // Time between updates in ms
-#define GAME_TIMER_PERIOD		20
+#define GAME_TIMER_PERIOD	20
 
 
 
@@ -29,8 +29,8 @@
 
 // World map limits
 
-#define GAME_WORLD_MAX  1.6f
-#define TABLE_LIMIT     1.5f
+#define GAME_WORLD_MAX 		1.6f
+#define GAME_TABLE_LIMIT 	1.5f
 
 
 #endif //__GAME_CONFIG_INCLUDED

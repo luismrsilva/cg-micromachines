@@ -58,7 +58,7 @@ Roadside::~Roadside(){
 
 /* Draws a torus on x, y, z position */
 void Roadside::drawCheerio(GLfloat x, GLfloat y, GLfloat z){
-	_cheerios.push_back(new Cheerio(x, y, z-0.08f));
+	_cheerios.push_back(new Cheerio(x, y, z));
 }
 
 void Roadside::drawCheerioLineXY(double sX, double sY, double eX, double eY){

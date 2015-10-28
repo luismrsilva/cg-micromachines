@@ -55,7 +55,7 @@ void Car::draw(){
 	glPushMatrix();
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 		glRotatef(this->_angle_deg-90., 0, 0, 1.);
-	    glScalef(2.0f, 2.0f, 2.0f);
+	    glScalef(1.4f, 1.4f, 1.4f);
 
 		glPushMatrix();	// car body
 		    glColor3f(0.7f, 0.0f, 0.1f);

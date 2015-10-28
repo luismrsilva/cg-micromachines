@@ -38,7 +38,7 @@ GameManager::GameManager(){
 	_game_objects.push_back(new Butter(-1.1, 0.7, 0));
 	_game_objects.push_back(new Butter(-1.3, 0.0, 0));
 	_game_objects.push_back(new Butter(-1.1,-0.8, 0));
-	_game_objects.push_back(new Butter(-0.4, 0.4, 0));
+	_game_objects.push_back(new Butter(-0.4, 0.8, 0));
 	_game_objects.push_back(new Butter( 0.7,-1.1, 0));
 
 	for (int i=0; i<3; i++)
@@ -95,16 +95,16 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 
 void drawTable(GLfloat x, GLfloat y, GLfloat z){
 	glPushMatrix();
-		glColor3f(0.1f, 0.3f, 0.1f);
+		glColor3f(0.1f, 0.24f, 0.1f);
 		glTranslatef(x, y, z);
-		glutSolidCube(TABLE_LIMIT*2);
+		glutSolidCube(GAME_TABLE_LIMIT*2);
 	glPopMatrix();
 }
 
-void drawStartLine(){
+void drawStartLine(GLfloat x, GLfloat y, GLfloat z){
 	glPushMatrix();
 		glColor3f(0.0f, 0.0f, 0.0f);
-		glTranslatef(0.28, -0.2, 0);
+		glTranslatef(x, y, z);
 		glScalef(0.1, 4, 0.1);
 		glutSolidCube(0.1);
 	glPopMatrix();
@@ -130,8 +130,8 @@ void GameManager::display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(1.0f, 1.0f, 1.0f);
 
-	drawTable(0, 0, -1.6f);
-	drawStartLine();
+	drawTable(0, 0, -1.52f);
+	drawStartLine(0.28, -0.2, -0.1);
 
 	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
 		(*i)->draw();
