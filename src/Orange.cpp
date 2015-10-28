@@ -25,7 +25,10 @@ Orange::~Orange(){
 
 void Orange::resetPosition(){
 	moveToRandomPosition();
-	//this->setSpeed(Vector3(0, 0, 0));
+	setSpeed(Vector3(	(double) (rand() % 8 + 2) / 100.0f,
+						(double) (rand() % 3600) / 10.0f
+					)
+			);
 }
 
 /* Draws an orange on x, y, z position */
