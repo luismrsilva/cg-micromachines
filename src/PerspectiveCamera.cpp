@@ -11,7 +11,7 @@ PerspectiveCamera::PerspectiveCamera(double fovy, double aspect, double zNear, d
 	_fovy = fovy;
 	_aspect = aspect;
 	_center = Vector3(0, 0, -1);
-	_up = Vector3(0, 1, 0);
+	_up = Vector3(0, 0, 1);
 }
 
 

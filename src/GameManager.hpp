@@ -14,6 +14,7 @@ using namespace std;
 #include "GameObject.hpp"
 #include "Car.hpp"
 #include "Camera.hpp"
+#include "PerspectiveCamera.hpp"
 
 class GameManager {
 	public:
@@ -37,6 +38,7 @@ class GameManager {
 			UP, LEFT, DOWN, RIGHT
 		};
 		Camera *_currentCamera;
+		PerspectiveCamera *_movingCamera;
 
 };
 
