@@ -52,7 +52,7 @@ GameManager::GameManager(){
 		new OrthogonalCamera(
 			-GAME_WORLD_MAX, GAME_WORLD_MAX,
 			-GAME_WORLD_MAX, GAME_WORLD_MAX,
-			GAME_WORLD_MAX, -GAME_WORLD_MAX
+			-GAME_WORLD_MAX, GAME_WORLD_MAX
 		)
 	);
 
@@ -77,7 +77,7 @@ GameManager::~GameManager(){
 }
 
 void GameManager::init(){
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(700, 700);
 	glutInitWindowPosition(-1, -1);
 	glutCreateWindow(GAME_WINDOW_TITLE);
@@ -108,9 +108,12 @@ void GameManager::display(){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	glClearDepth(1.0f);
+	glDepthFunc(GL_LEQUAL);
+	glEnable(GL_DEPTH_TEST);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(1.0f, 1.0f, 1.0f);
 
 	drawTable(0, 0, -1.6f);
