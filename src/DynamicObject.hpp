@@ -14,7 +14,7 @@ class DynamicObject : public GameObject {
 		DynamicObject();
 		DynamicObject(double x, double y, double z);
 		~DynamicObject();
-		void update(double delta_t);
+		void update(double delta_t) override;
 		void setSpeed(const Vector3 speed);
 		void setSpeed(double x, double y, double z);
 		Vector3 getSpeed();

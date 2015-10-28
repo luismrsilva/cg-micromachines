@@ -16,7 +16,7 @@ class GameObject : public Entity {
 		GameObject(double x, double y, double z);
 		virtual ~GameObject();
 		virtual void draw();
-		void update(double delta_t);
+		virtual void update(double delta_t);
 };
 
 #endif

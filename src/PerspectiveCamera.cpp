@@ -25,7 +25,6 @@ void PerspectiveCamera::setUp(Vector3 up){
 
 void PerspectiveCamera::computeProjectionMatrix() {
 	double aspect = (double)glutGet(GLUT_WINDOW_WIDTH)/glutGet(GLUT_WINDOW_HEIGHT);
-	D_TRACE( "aspect: " << aspect);
 	gluPerspective(_fovy, aspect, _near, _far);
 }
 

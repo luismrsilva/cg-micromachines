@@ -201,7 +201,6 @@ void GameManager::update(double delta_t){
 		(*i)->update(delta_t);
 	}
 
-	_car->update(delta_t);	// doing this twice
 
 }
 
