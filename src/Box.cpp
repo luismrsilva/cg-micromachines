@@ -4,6 +4,7 @@
  * */
 
 #define _USE_MATH_DEFINES
+#include <cmath>
 #include "Vector3.hpp"
 #include "Entity.hpp"
 #include "myunits.hpp"
@@ -11,6 +12,7 @@
 #include <stdbool.h>
 #include "Box.hpp"
 #include "debug.hpp"
+#include <stdlib.h>
 
 
 Box::Box() : Entity() {
@@ -82,6 +84,28 @@ bool Box::isIntersecting(const Box &box) const{
 		if (b->_bottom <= a->_bottom && a->_bottom <= b->_top) {
 			return true;
 		}
+	}
+
+	#define dist(x,y)	sqrt(x*x+y*y)
+
+	double a_w = abs(a->_right - a->_left)/2;
+	double a_h = abs(a->_bottom - a->_top)/2;
+	double b_w = abs(b->_right - b->_left)/2;
+	double b_h = abs(b->_bottom - b->_top)/2;
+
+	double a_x = (a->_left + a->_right)/2;
+	double a_y = (a->_bottom + a->_top)/2;
+	double b_x = (b->_left + b->_right)/2;
+	double b_y = (a->_bottom + a->_top)/2;
+
+	double x_dist = a_w + b_w;
+	double y_dist = a_h + b_h;
+
+	if(dist(a_x, b_x) < x_dist){
+		return true;
+	}
+	if(dist(a_y, b_y) < y_dist){
+		return true;
 	}
 
 	return false;
