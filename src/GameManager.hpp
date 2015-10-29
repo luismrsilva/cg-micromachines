@@ -33,6 +33,7 @@ class GameManager {
 		void init();
 		void setKeyPressed(int glut_key, bool status);
 		void orangeSpeedInc(float inc);
+		void orangeRespawn();
 	private:
 		Car *_car;
 		Roadside *_roadside;

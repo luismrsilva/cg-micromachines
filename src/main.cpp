@@ -92,9 +92,14 @@ void onTimer(int val){
 
 
 void orangeSpeedIncrease(int val){
-	float increment = 1 + ((10+(rand()%20))/100.0);	// 10% to 30%
+	float increment = 1 + ((10+(rand()%10))/100.0);	// 10% to 20%
 	glutTimerFunc(10+(rand()%10)*1000, orangeSpeedIncrease, 0);
 	gameManager->orangeSpeedInc(increment);
+}
+
+void orangeRespawn(int val){
+	glutTimerFunc(10+(rand()%10)*1000, orangeSpeedIncrease, 0);
+	gameManager->orangeRespawn();
 }
 
 int main(int argc, char *argv[]){
@@ -113,6 +118,7 @@ int main(int argc, char *argv[]){
 
 	glutTimerFunc(GAME_TIMER_PERIOD, onTimer, GAME_TIMER_PERIOD);
 	glutTimerFunc(10+(rand()%10)*1000, orangeSpeedIncrease, 0);
+	glutTimerFunc(4+(rand()%6)*1000, orangeRespawn, 0);
 
 	glutMainLoop();
 

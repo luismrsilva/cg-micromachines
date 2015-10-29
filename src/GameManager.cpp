@@ -35,6 +35,12 @@ void GameManager::orangeSpeedInc(float inc){
 	}
 }
 
+void GameManager::orangeRespawn(){
+	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
+		if (!(*i)->isActive()) (*i)->resetPosition();
+	}
+}
+
 GameManager::GameManager(){
 	D_TRACE();
 

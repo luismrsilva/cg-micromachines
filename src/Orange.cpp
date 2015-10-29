@@ -25,10 +25,14 @@ Orange::Orange() : Obstacle(){
 }
 
 Orange::Orange(double x, double y, double z) : Obstacle(x, y, z){
-	Orange();
+	Orange();	// should always be random
 }
 
 Orange::~Orange(){
+}
+
+bool Orange::isActive(){
+	return _active;
 }
 
 void Orange::resetPosition(){
