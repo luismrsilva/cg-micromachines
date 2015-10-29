@@ -54,6 +54,11 @@ void Car::update(double delta_t){
 	DynamicObject::update(delta_t);
 }
 
+void Car::updateBox(){
+	D_TRACE();
+	_box.changeTo(cm(13), cm(13), *getPosition());
+}
+
 void Car::draw(){
 	D_TRACE();
 
@@ -95,4 +100,6 @@ void Car::draw(){
 		glPopMatrix();
 
     glPopMatrix();
+
+    DynamicObject::draw();
 }
