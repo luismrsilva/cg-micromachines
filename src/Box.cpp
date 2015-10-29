@@ -5,19 +5,22 @@
 
 #define _USE_MATH_DEFINES
 #include "Vector3.hpp"
-#include "GameObject.hpp"
+#include "Entity.hpp"
 #include "myunits.hpp"
 #include <GL/glut.h>
-
-#include "debug.hpp"
 #include <stdbool.h>
 #include "Box.hpp"
 
-Box::Box(double left, double right, double top, double bottom) : GameObject() {
+
+Box::Box() : Entity() {
+	_left = _right = _top = _bottom = 0;
+}
+
+Box::Box(double left, double right, double top, double bottom) :  Entity() {
 	changeTo(left, right, top, bottom);
 }
 
-Box::Box(double width, double height, const Vector3 &center) : GameObject() {
+Box::Box(double width, double height, const Vector3 &center) : Entity() {
 	changeTo(width, height, center);
 }
 
@@ -33,7 +36,7 @@ void Box::changeTo(double left, double right, double top, double bottom) {
 }
 
 void Box::changeTo(double width, double height, const Vector3 &center) {
-	setPosition(center);
+//	setPosition(center);
 	_left = center.getX() - (width / 2);
 	_right = center.getX() + (width / 2);
 	_top = center.getY() + (height / 2);
@@ -61,15 +64,15 @@ bool Box::isIntersecting(const Box &box) const{
 	}
 
 	//Verificar se ha intersecao horizontal
-	if (b->_left <= a->_left <= b->_right) {
+	if (b->_left <= a->_left && a->_left <= b->_right) {
 		if (a->_top < b->_top) {
 			a = (Box*)&box;
 			b = (Box*) this;
 		}
-		//Verificar se ha intersecao vertical
-		if (b->_bottom <= a->_bottom <= b->_top) {
-			return true;
-		}
+	//Verificar se ha intersecao vertical
+	if (b->_bottom <= a->_bottom && a->_bottom <= b->_top) {
+		return true;
+	}
 	}
 
 	return false;

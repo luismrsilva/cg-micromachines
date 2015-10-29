@@ -5,13 +5,13 @@
 
 #ifndef __BOX_H
 #define __BOX_H
-
-#include "GameObject.hpp"
-#include "Vector3.hpp"
 #include <stdbool.h>
+#include "Entity.hpp"
+#include "Vector3.hpp"
 
-class Box : public GameObject{
+class Box : public Entity {
 	public:
+		Box();
 		Box(double left, double right, double top, double bottom);
 		Box(double width, double height, const Vector3 &center);
 		~Box();

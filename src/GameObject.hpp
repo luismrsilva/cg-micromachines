@@ -7,6 +7,7 @@
 #define __GAMEOBJECT_H
  
 #include "Entity.hpp"
+#include "Box.hpp"
 #include <cstdlib>
 
 
@@ -17,6 +18,9 @@ class GameObject : public Entity {
 		virtual ~GameObject();
 		virtual void draw();
 		virtual void update(double delta_t);
+	protected:
+		virtual void updateBox();
+		Box _box;
 };
 
 #endif
