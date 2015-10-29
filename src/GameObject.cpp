@@ -4,11 +4,14 @@
  * */
 
 #include "GameObject.hpp"
-#include "Entity.hpp"
+#include "debug.hpp"
+#include "Box.hpp"
 #include <iostream>
+
+
 using namespace std;
 
-GameObject::GameObject() : Entity(){
+GameObject::GameObject() : Entity() {
 
 }
 
@@ -21,10 +24,19 @@ GameObject::~GameObject(){
 }
 
 void GameObject::draw(){
-	cout << "GameObject::draw()" << endl;
+	cout << "GameObject::draw() | SHOULDN'T BE CALLED" << endl;
 }
 
 void GameObject::update(double delta_t){
-	cout << "GameObject::update()" << endl;
+	D_TRACE();
+	updateBox();
 }
+
+void GameObject::updateBox(){
+}
+
+void updateBox() {
+	cout << "GameObject::updateBox() | SHOULDN'T BE CALLED" << endl;
+}
+
 
