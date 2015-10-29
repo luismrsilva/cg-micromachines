@@ -21,10 +21,10 @@ GameObject::~GameObject(){
 }
 
 void GameObject::draw(){
-	cout << "GameObject::draw() | SHOULDN'T BEING CALLED" << endl;
+	cout << "GameObject::draw()" << endl;
 }
 
 void GameObject::update(double delta_t){
-	cout << "GameObject::update() | SHOULDN'T BEING CALLED" << endl;
+	cout << "GameObject::update()" << endl;
 }
 

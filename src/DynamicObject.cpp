@@ -24,7 +24,7 @@ void DynamicObject::update(double delta_t){
 	//v.println();
 
 	setPosition(v.getX(), v.getY(), v.getZ());
-	_speed->println();
+	//_speed->println();
 }
 
 void DynamicObject::setSpeed(const Vector3 &speed){
