@@ -5,10 +5,10 @@
 
 #ifndef __GAMEOBJECT_H
 #define __GAMEOBJECT_H
- 
+
 #include "Entity.hpp"
 #include "Box.hpp"
-#include <cstdlib>
+#include <stdbool.h>
 
 
 class GameObject : public Entity {
@@ -18,8 +18,9 @@ class GameObject : public Entity {
 		virtual ~GameObject();
 		virtual void draw();
 		virtual void update(double delta_t);
-	protected:
+		bool isColidingWith(const GameObject &obj);
 		virtual void updateBox();
+	protected:
 		Box _box;
 };
 

@@ -14,6 +14,7 @@ class Butter : public Obstacle {
 		Butter(double x, double y, double z);
 		~Butter();
 		void draw();
+		void updateBox();
 };
 
 #endif //__BUTTER_H

@@ -18,6 +18,7 @@ class Roadside : public StaticObject {
 		Roadside();
 		~Roadside();
 		void draw();
+		void updateBox();
 	private:
 		vector<Cheerio*> _cheerios;
 		void drawCheerio(GLfloat x, GLfloat y, GLfloat z);

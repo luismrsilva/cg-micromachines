@@ -12,6 +12,8 @@ using namespace std;
 #include <GL/glut.h>
 #include "myunits.hpp"
 
+#include "debug.hpp"
+
 Roadside::Roadside() : StaticObject(){
 	drawCheerioLineXY(-1.0,-0.7, -1.0, 0.7);	// left inner
 	drawCheerioLineXY(-1.4,-1.1, -1.4, 1.1);	// left outer
@@ -102,6 +104,13 @@ void Roadside::drawCheerioBezierXY(double x1, double y1, double x2, double y2,
 		double x = (1.-i)*((1.-i)*x1+i*x2) + i*((1.-i)*x2+i*x3);
 		double y = (1.-i)*((1.-i)*y1+i*y2) + i*((1.-i)*y2+i*y3);
 		drawCheerio(x, y, 0.);
+	}
+}
+
+void Roadside::updateBox(){
+	D_TRACE();
+	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
+		(*i)->updateBox();
 	}
 }
 

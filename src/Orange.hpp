@@ -16,6 +16,7 @@ class Orange : public Obstacle {
 		void draw();
 		void update(double delta_t);
 		void resetPosition();
+		void updateBox();
 	private:
 		float _angle;
 		bool _active;

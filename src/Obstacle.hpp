@@ -13,6 +13,7 @@ class Obstacle : public DynamicObject {
 		Obstacle();
 		Obstacle(double x, double y, double z);
 		~Obstacle();
+		void draw();
 };
 
 #endif //__OBSTACLE_H

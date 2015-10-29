@@ -12,6 +12,13 @@
 using namespace std;
 #include <GL/glut.h>
 
+#include "debug.hpp"
+
+
+#define BUTTER_SIZE_X	cm(10)
+#define BUTTER_SIZE_Y	cm(5)
+#define BUTTER_SIZE_Z	cm(6)
+
 Butter::Butter() : Obstacle(){
 
 }
@@ -24,6 +31,10 @@ Butter::~Butter(){
 
 }
 
+void Butter::updateBox(){
+	_box.changeTo(BUTTER_SIZE_X, BUTTER_SIZE_Y, *getPosition());
+}
+
 /* Draws a cube of butter on x, y, z position */
 void Butter::draw(){
 	//cout << "Butter::draw()" << endl;
@@ -31,9 +42,10 @@ void Butter::draw(){
 
 	glPushMatrix();
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
-		glScalef(1, 0.5, 0.6);
+		glScalef(BUTTER_SIZE_X, BUTTER_SIZE_Y, BUTTER_SIZE_Z);
 		glColor3f(0.8f, 0.8f, 0.5f);
-		glutSolidCube(cm(10));
+		glutSolidCube(1);
 	glPopMatrix();
 
+	Obstacle::draw();
 }

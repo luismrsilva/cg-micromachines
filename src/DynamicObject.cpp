@@ -39,3 +39,7 @@ void DynamicObject::setSpeed(double x, double y, double z){
 Vector3 DynamicObject::getSpeed() const{
 	return *_speed;
 }
+
+void DynamicObject::draw(){
+	GameObject::draw();
+}

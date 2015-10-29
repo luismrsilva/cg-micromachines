@@ -10,6 +10,7 @@
 #include <GL/glut.h>
 #include <stdbool.h>
 #include "Box.hpp"
+#include "debug.hpp"
 
 
 Box::Box() : Entity() {
@@ -36,7 +37,7 @@ void Box::changeTo(double left, double right, double top, double bottom) {
 }
 
 void Box::changeTo(double width, double height, const Vector3 &center) {
-//	setPosition(center);
+	setPosition(center.getX(), center.getY(), 0);
 	_left = center.getX() - (width / 2);
 	_right = center.getX() + (width / 2);
 	_top = center.getY() + (height / 2);
@@ -44,6 +45,7 @@ void Box::changeTo(double width, double height, const Vector3 &center) {
 }
 
 void Box::draw() const{
+	D_TRACE( << "box: " << _left << ", " << _right << ", " << _bottom << ", " << _top);
 	glColor3f(0.0, 0.0, 1.0);
 	glBegin(GL_LINE_LOOP);
 	glVertex3f(_left, _top, 0);
@@ -51,13 +53,20 @@ void Box::draw() const{
 	glVertex3f(_right, _bottom, 0);
 	glVertex3f(_right, _top, 0);
 	glEnd();
+
+	glBegin(GL_POINTS);
+	glColor3f(0, 1., 1.);
+	const Vector3 *pos = getPosition();
+	glVertex3f(pos->getX(), pos->getY(), pos->getZ());
+	glEnd();
+
 }
 
 bool Box::isIntersecting(const Box &box) const{
-	
+
 	Box *a = (Box*) this;
 	Box *b = (Box*) &box;
-	
+
 	if (a->_right < b->_right){
 		a = (Box*) &box;
 		b = (Box*) this;

@@ -12,6 +12,8 @@
 using namespace std;
 #include <GL/glut.h>
 
+#include "debug.hpp"
+
 float ORANGE_RADIUS = cm(6);
 
 Orange::Orange() : Obstacle(){
@@ -44,7 +46,7 @@ void Orange::update(double delta_t){
 	if (_active){
 		DynamicObject::update(delta_t);
 		_angle += (this->getSpeed().operator*(delta_t).getXYModulus()*360)/(2*M_PI*ORANGE_RADIUS);
-		if (abs(this->getPosition()->getX()) >= GAME_TABLE_LIMIT ||	
+		if (abs(this->getPosition()->getX()) >= GAME_TABLE_LIMIT ||
 			abs(this->getPosition()->getY()) >= GAME_TABLE_LIMIT){
 				_active = false;
 				_activate_time = glutGet(GLUT_ELAPSED_TIME) + ((4+(rand()%6))*1000);
@@ -53,6 +55,11 @@ void Orange::update(double delta_t){
 		resetPosition();
 	}
 
+}
+
+void Orange::updateBox(){
+	D_TRACE();
+	_box.changeTo(2*ORANGE_RADIUS, 2*ORANGE_RADIUS, *getPosition());
 }
 
 /* Draws an orange on x, y, z position */
@@ -72,4 +79,6 @@ void Orange::draw(){
 		glScalef(1, 1, 0.4);
 		glutSolidCube(ORANGE_RADIUS/2);
 	glPopMatrix();
+
+	Obstacle::draw();
 }

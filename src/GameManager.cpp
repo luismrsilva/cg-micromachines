@@ -221,6 +221,7 @@ void GameManager::update(double delta_t){
 
 	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
 		(*i)->update(delta_t);
+		(*i)->updateBox();
 	}
 
 }

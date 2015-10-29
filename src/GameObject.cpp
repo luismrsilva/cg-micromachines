@@ -23,20 +23,27 @@ GameObject::~GameObject(){
 
 }
 
+bool GameObject::isColidingWith(const GameObject &obj){
+	return _box.isIntersecting(obj._box);
+}
+
 void GameObject::draw(){
-	cout << "GameObject::draw() | SHOULDN'T BE CALLED" << endl;
+	D_TRACE();
+	#ifdef DEBUG
+		_box.draw();
+	#endif
 }
 
 void GameObject::update(double delta_t){
 	D_TRACE();
-	updateBox();
 }
 
 void GameObject::updateBox(){
+	D_TRACE(<<"SHOLDN'T BE CALLED");
 }
 
 void updateBox() {
-	cout << "GameObject::updateBox() | SHOULDN'T BE CALLED" << endl;
+	D_TRACE(<<"SHOLDN'T BE CALLED");
 }
 
 

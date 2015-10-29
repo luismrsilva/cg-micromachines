@@ -14,6 +14,7 @@ class Cheerio : public Obstacle {
 		Cheerio(double x, double y, double z);
 		~Cheerio();
 		void draw();
+		void updateBox();
 };
 
 #endif //__CHEERIO_H
