@@ -221,6 +221,12 @@ void GameManager::update(double delta_t){
 			-	speed_v * 0.5						// afasta-se com a velocidade
 			-	Vector3(0.5, _car->getXYAngle()		// mantem distancia minima ao carro
 			);
+
+		/* smooth camera movement */
+		new_pos =	new_pos * (1.-GAME_CAMERA_MOVEMENT_SMOTHENESS)
+					+ _movingCamera->getPosition()
+						->operator*(GAME_CAMERA_MOVEMENT_SMOTHENESS);
+
 		_movingCamera->setPosition(new_pos);
 		_movingCamera->setCenter(pos);				// olha para o carro
 	}
