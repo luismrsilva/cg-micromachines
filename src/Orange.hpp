@@ -17,7 +17,9 @@ class Orange : public Obstacle {
 		void update(double delta_t);
 		void resetPosition();
 	private:
-		int _angle;
+		float _angle;
+		bool _active;
+		int _activate_time;
 };
 
 #endif //__ORANGE_H

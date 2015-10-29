@@ -5,7 +5,6 @@
 
 #include "game_config.hpp"
 #include "Orange.hpp"
-#include <iostream>
 #include "Vector3.hpp"
 #include <cmath>
 
@@ -16,6 +15,7 @@ using namespace std;
 float ORANGE_RADIUS = cm(6);
 
 Orange::Orange() : Obstacle(){
+	_active = true;
 	moveToRandomPosition();
 	setSpeed(Vector3(	(double) (rand() % 8 + 20) / 100.0f,
 						(double) (rand() % 3600) / 10.0f
@@ -32,23 +32,32 @@ Orange::~Orange(){
 
 void Orange::resetPosition(){
 	_angle = 0;
+	_active = true;
 	moveToRandomPosition();
-	setSpeed(Vector3(this->getSpeed().getXYModulus(), (double) (rand() % 3600) / 10.0f));
+	setSpeed(
+				Vector3(this->getSpeed().getXYModulus() * (((rand() % 5)+100)/100.0), // 0% -> 4% faster
+				(double) (rand() % 3600) / 10.0f)
+			);
 }
 
 void Orange::update(double delta_t){
-	DynamicObject::update(delta_t);
-	float delta_ang = (this->getSpeed().operator*(delta_t).getXYModulus()*360)/(2*M_PI*ORANGE_RADIUS);
-	_angle += delta_ang;
-
-	if (abs(this->getPosition()->getX()) >= GAME_TABLE_LIMIT ||	
-		abs(this->getPosition()->getY()) >= GAME_TABLE_LIMIT){
+	if (_active){
+		DynamicObject::update(delta_t);
+		_angle += (this->getSpeed().operator*(delta_t).getXYModulus()*360)/(2*M_PI*ORANGE_RADIUS);
+		if (abs(this->getPosition()->getX()) >= GAME_TABLE_LIMIT ||	
+			abs(this->getPosition()->getY()) >= GAME_TABLE_LIMIT){
+				_active = false;
+				_activate_time = glutGet(GLUT_ELAPSED_TIME) + ((4+(rand()%6))*1000);
+			}
+	} else if (_activate_time <= glutGet(GLUT_ELAPSED_TIME)){
 		resetPosition();
 	}
+
 }
 
 /* Draws an orange on x, y, z position */
 void Orange::draw(){
+	if (!_active) return;
 	Vector3 *pos = this->getPosition();
 	Vector3 speed = this->getSpeed();
 

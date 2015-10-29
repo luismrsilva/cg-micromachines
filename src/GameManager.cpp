@@ -103,9 +103,9 @@ void drawTable(GLfloat x, GLfloat y, GLfloat z){
 
 void drawStartLine(GLfloat x, GLfloat y, GLfloat z){
 	glPushMatrix();
-		glColor3f(0.0f, 0.0f, 0.0f);
+		glColor3f(1.0f, 1.0f, 1.0f);
 		glTranslatef(x, y, z);
-		glScalef(0.1, 4, 0.1);
+		glScalef(0.2, 3.0, 0.02);
 		glutSolidCube(0.1);
 	glPopMatrix();
 }
@@ -131,7 +131,7 @@ void GameManager::display(){
 	glColor3f(1.0f, 1.0f, 1.0f);
 
 	drawTable(0, 0, -1.52f);
-	drawStartLine(0.28, -0.2, -0.1);
+	drawStartLine(0.3, -0.2, 0);
 
 	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
 		(*i)->draw();
