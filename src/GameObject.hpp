@@ -20,6 +20,7 @@ class GameObject : public Entity {
 		virtual void update(double delta_t);
 		bool isColidingWith(const GameObject &obj);
 		bool isOutOfBounds();
+		virtual bool processCollisionWith(GameObject &obj);
 		virtual void updateBox();
 	protected:
 		Box _box;

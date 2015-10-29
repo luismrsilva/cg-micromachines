@@ -78,10 +78,10 @@ bool Box::isIntersecting(const Box &box) const{
 			a = (Box*)&box;
 			b = (Box*) this;
 		}
-	//Verificar se ha intersecao vertical
-	if (b->_bottom <= a->_bottom && a->_bottom <= b->_top) {
-		return true;
-	}
+		//Verificar se ha intersecao vertical
+		if (b->_bottom <= a->_bottom && a->_bottom <= b->_top) {
+			return true;
+		}
 	}
 
 	return false;

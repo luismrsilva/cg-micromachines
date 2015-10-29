@@ -15,6 +15,7 @@ class Butter : public Obstacle {
 		~Butter();
 		void draw();
 		void updateBox();
+		virtual bool processCollisionWith(GameObject &obj);
 };
 
 #endif //__BUTTER_H

@@ -32,4 +32,6 @@ class Vector3 {
 		void println() const;
 };
 
+#define VECTOR3_STR(v)	"Vector3(" << v.getX() << ", " << v.getY() << ", " << v.getZ() << ")"
+
 #endif

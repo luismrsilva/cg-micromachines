@@ -46,3 +46,14 @@ void Butter::draw(){
 
 	Obstacle::draw();
 }
+
+bool Butter::processCollisionWith(GameObject &obj){
+	D_TRACE();
+	if(GameObject::processCollisionWith(obj)){
+		DynamicObject &dobj = ((DynamicObject&)obj);
+
+		dobj.setSpeed(dobj.getSpeed()*2);
+		return true;
+	}
+	return false;
+}

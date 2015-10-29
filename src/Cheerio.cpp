@@ -46,3 +46,15 @@ void Cheerio::draw(){
 
 	Obstacle::draw();
 }
+
+bool Cheerio::processCollisionWith(GameObject &obj){
+	D_TRACE();
+	if(GameObject::processCollisionWith(obj)){
+		DynamicObject &dobj = ((DynamicObject&)obj);
+
+		((DynamicObject*)this)->setSpeed(dobj.getSpeed());
+		dobj.setSpeed(dobj.getSpeed()*0);
+		return true;
+	}
+	return false;
+}

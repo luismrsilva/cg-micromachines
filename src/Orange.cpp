@@ -80,3 +80,16 @@ void Orange::draw(){
 
 	Obstacle::draw();
 }
+
+
+bool Orange::processCollisionWith(GameObject &obj){
+	D_TRACE();
+	if(GameObject::processCollisionWith(obj)){
+		DynamicObject &dobj = ((DynamicObject&)obj);
+
+		dobj.setSpeed(dobj.getSpeed()*0.5);
+		return true;
+	}
+	return false;
+}
+

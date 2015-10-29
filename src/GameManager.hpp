@@ -15,6 +15,10 @@ using namespace std;
 #include "Car.hpp"
 #include "Camera.hpp"
 #include "PerspectiveCamera.hpp"
+#include "Cheerio.hpp"
+#include "Butter.hpp"
+#include "Orange.hpp"
+#include "Roadside.hpp"
 
 class GameManager {
 	public:
@@ -30,6 +34,9 @@ class GameManager {
 		void setKeyPressed(int glut_key, bool status);
 	private:
 		Car *_car;
+		Roadside *_roadside;
+		vector<Butter*> _butters;
+		vector<Orange*> _oranges;
 		vector<GameObject*> _game_objects;
 		vector<Camera*> _cameras;
 		bool *_isKeyPressed;

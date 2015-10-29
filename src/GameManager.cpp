@@ -26,27 +26,43 @@ using namespace std;
 #include "OrthogonalCamera.hpp"
 #include "PerspectiveCamera.hpp"
 
+#include <typeinfo>
+
 
 GameManager::GameManager(){
 	D_TRACE();
 
+	/** Key State Array **/
 	_isKeyPressed = (bool*) malloc(4 * sizeof(bool));
 	memset(_isKeyPressed, false, 4);
 
-	_game_objects.push_back(new Roadside());
 
-	_game_objects.push_back(new Butter(-1.1, 0.7, BUTTER_SIZE_Z/2.));
-	_game_objects.push_back(new Butter(-1.3, 0.0, BUTTER_SIZE_Z/2.));
-	_game_objects.push_back(new Butter(-1.1,-0.8, BUTTER_SIZE_Z/2.));
-	_game_objects.push_back(new Butter(-0.4, 0.8, BUTTER_SIZE_Z/2.));
-	_game_objects.push_back(new Butter( 0.7,-1.1, BUTTER_SIZE_Z/2.));
+	/** Game Objects **/
+	_roadside = new Roadside();
+	_game_objects.push_back(_roadside);
 
-	for (int i=0; i<3; i++)
-		_game_objects.push_back(new Orange());
+	_butters.push_back(new Butter(-1.1, 0.7, BUTTER_SIZE_Z/2.));
+	_butters.push_back(new Butter(-1.3, 0.0, BUTTER_SIZE_Z/2.));
+	_butters.push_back(new Butter(-1.1,-0.8, BUTTER_SIZE_Z/2.));
+	_butters.push_back(new Butter(-0.4, 0.8, BUTTER_SIZE_Z/2.));
+	_butters.push_back(new Butter( 0.7,-1.1, BUTTER_SIZE_Z/2.));
+
+	/* Also put butters inside _game_objects */
+	for(vector<Butter*>::iterator i = _butters.begin(); i != _butters.end(); i++){
+		_game_objects.push_back(*i);
+	}
+
+	for (int i=0; i<3; i++){
+		Orange *o = new Orange();
+		_oranges.push_back(o);
+		_game_objects.push_back(o);
+	}
 
 	_car = new Car();
 	_car->setPosition(0.1, -0.2, 0.0);
 	_game_objects.push_back(_car);
+
+
 
 	/** Cameras **/
 
@@ -179,15 +195,15 @@ void GameManager::idle(){
 }
 
 void GameManager::update(double delta_t){
-	D_TRACE(<< "speed before");
-	_car->getSpeed().println();
+	Vector3 speed_v = _car->getSpeed();
+
+	D_TRACE(<< "speed before: " << VECTOR3_STR(speed_v));
 
 	double speed = _car->getSpeed().getXYModulus();
 
 	/* update moving camera so it follows the car */
 	if( _currentCamera == _movingCamera ){
 		Vector3 pos = *(_car->getPosition());
-		Vector3 speed_v = _car->getSpeed();
 
 		Vector3 new_pos =
 				pos									// pos do carro
@@ -220,11 +236,28 @@ void GameManager::update(double delta_t){
 	}
 
 	/* update all objects */
-
 	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
 		(*i)->update(delta_t);
 		(*i)->updateBox();
 	}
+
+
+	/* check for collisions */
+	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
+		if( (*i)->processCollisionWith(*_car) ){
+			D_TRACE( << "COLISION!! " << typeid(*i).name() << " " << glutGet(GLUT_ELAPSED_TIME));
+		};
+	}
+	for(vector<Butter*>::iterator i = _butters.begin(); i != _butters.end(); i++){
+		if( (*i)->processCollisionWith(*_car) ){
+			D_TRACE( << "COLISION!! " << typeid(*i).name() << " " << glutGet(GLUT_ELAPSED_TIME));
+		};
+	}
+	if( _roadside->processCollisionWith(*_car) ){
+		D_TRACE( << "COLISION!! " << typeid(_roadside).name() << " " << glutGet(GLUT_ELAPSED_TIME));
+	}
+
+
 
 }
 

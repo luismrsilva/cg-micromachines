@@ -30,8 +30,13 @@ bool GameObject::isColidingWith(const GameObject &obj){
 }
 
 bool GameObject::isOutOfBounds(){
-	return (abs(getPosition()->getX()) >= GAME_TABLE_LIMIT || 
+	return (abs(getPosition()->getX()) >= GAME_TABLE_LIMIT ||
 			abs(getPosition()->getY()) >= GAME_TABLE_LIMIT);
+}
+
+bool GameObject::processCollisionWith(GameObject &obj){
+	D_TRACE();
+	return isColidingWith(obj);
 }
 
 void GameObject::draw(){
