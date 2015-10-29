@@ -35,11 +35,11 @@ GameManager::GameManager(){
 
 	_game_objects.push_back(new Roadside());
 
-	_game_objects.push_back(new Butter(-1.1, 0.7, 0));
-	_game_objects.push_back(new Butter(-1.3, 0.0, 0));
-	_game_objects.push_back(new Butter(-1.1,-0.8, 0));
-	_game_objects.push_back(new Butter(-0.4, 0.8, 0));
-	_game_objects.push_back(new Butter( 0.7,-1.1, 0));
+	_game_objects.push_back(new Butter(-1.1, 0.7, BUTTER_SIZE_Z/2.));
+	_game_objects.push_back(new Butter(-1.3, 0.0, BUTTER_SIZE_Z/2.));
+	_game_objects.push_back(new Butter(-1.1,-0.8, BUTTER_SIZE_Z/2.));
+	_game_objects.push_back(new Butter(-0.4, 0.8, BUTTER_SIZE_Z/2.));
+	_game_objects.push_back(new Butter( 0.7,-1.1, BUTTER_SIZE_Z/2.));
 
 	for (int i=0; i<3; i++)
 		_game_objects.push_back(new Orange());

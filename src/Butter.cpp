@@ -13,11 +13,8 @@ using namespace std;
 #include <GL/glut.h>
 
 #include "debug.hpp"
+#include "game_config.hpp"
 
-
-#define BUTTER_SIZE_X	cm(10)
-#define BUTTER_SIZE_Y	cm(5)
-#define BUTTER_SIZE_Z	cm(6)
 
 Butter::Butter() : Obstacle(){
 

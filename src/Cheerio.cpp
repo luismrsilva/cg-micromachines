@@ -14,8 +14,8 @@ using namespace std;
 
 #include "debug.hpp"
 
-#define CHEERIO_INNER_RADIUS	cm(2)
-#define CHEERIO_OUTTER_RADIUS	cm(1)
+#define CHEERIO_INNER_RADIUS	cm(1)
+#define CHEERIO_OUTTER_RADIUS	cm(2)
 
 Cheerio::Cheerio() : Obstacle(){
 

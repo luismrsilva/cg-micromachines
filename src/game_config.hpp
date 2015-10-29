@@ -33,4 +33,15 @@
 #define GAME_TABLE_LIMIT 	1.5f
 
 
+
+
+// Object sizes
+#define BUTTER_SIZE_X	cm(10)
+#define BUTTER_SIZE_Y	cm(5)
+#define BUTTER_SIZE_Z	cm(6)
+
+#define ORANGE_RADIUS	cm(6)
+
+
+
 #endif //__GAME_CONFIG_INCLUDED

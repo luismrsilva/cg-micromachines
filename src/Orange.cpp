@@ -13,8 +13,7 @@ using namespace std;
 #include <GL/glut.h>
 
 #include "debug.hpp"
-
-float ORANGE_RADIUS = cm(6);
+#include "game_config.hpp"
 
 Orange::Orange() : Obstacle(){
 	_active = true;
