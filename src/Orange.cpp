@@ -13,6 +13,8 @@
 using namespace std;
 #include <GL/glut.h>
 
+float ORANGE_RADIUS = cm(6);
+
 Orange::Orange() : Obstacle(){
 	moveToRandomPosition();
 	setSpeed(Vector3(	(double) (rand() % 8 + 20) / 100.0f,
@@ -29,12 +31,16 @@ Orange::~Orange(){
 }
 
 void Orange::resetPosition(){
+	_angle = 0;
 	moveToRandomPosition();
 	setSpeed(Vector3(this->getSpeed().getXYModulus(), (double) (rand() % 3600) / 10.0f));
 }
 
 void Orange::update(double delta_t){
 	DynamicObject::update(delta_t);
+	float delta_ang = (this->getSpeed().operator*(delta_t).getXYModulus()*360)/(2*M_PI*ORANGE_RADIUS);
+	_angle += delta_ang;
+
 	if (abs(this->getPosition()->getX()) >= GAME_TABLE_LIMIT ||	
 		abs(this->getPosition()->getY()) >= GAME_TABLE_LIMIT){
 		resetPosition();
@@ -43,14 +49,18 @@ void Orange::update(double delta_t){
 
 /* Draws an orange on x, y, z position */
 void Orange::draw(){
-	Vector3 * pos = this->getPosition();
+	Vector3 *pos = this->getPosition();
+	Vector3 speed = this->getSpeed();
+
 	glPushMatrix();
-		//glRotatef(60.0, 0, 0, 1.0);
-		glTranslatef(pos->getX(), pos->getY(), pos->getZ()+0.03f);
+		glTranslatef(pos->getX(), pos->getY(), pos->getZ()+ORANGE_RADIUS-0.02f);
+
+		glRotatef(_angle, -speed.getY(), speed.getX(), 0.0);
 		glColor3f(1.0f, 0.6f, 0.0f);
-		glutSolidSphere(cm(5.5), 8, 8);
+		glutSolidSphere(ORANGE_RADIUS, 8, 16);
 		glColor3f(0.2f, 0.6f, 0.2f);
-		glTranslatef(0.0f ,0.0f, 0.05f);
-		glutSolidCube(cm(2));
+		glTranslatef(0.0f ,0.0f, ORANGE_RADIUS);
+		glScalef(1, 1, 0.4);
+		glutSolidCube(ORANGE_RADIUS/2);
 	glPopMatrix();
 }
