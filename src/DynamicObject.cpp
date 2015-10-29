@@ -20,6 +20,8 @@ DynamicObject::~DynamicObject(){
 
 void DynamicObject::update(double delta_t){
 	D_TRACE( << " " << delta_t);
+
+	setOldPosition(*getPosition());
 	Vector3 v = _speed->operator*(delta_t) + (*getPosition());
 	//v.println();
 

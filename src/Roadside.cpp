@@ -127,6 +127,12 @@ void Roadside::updateBox(){
 	}
 }
 
+void Roadside::update(double delta_t){
+	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
+		(*i)->update(delta_t);
+	}
+}
+
 void Roadside::draw(){
 	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
 		(*i)->draw();

@@ -59,7 +59,7 @@ GameManager::GameManager(){
 	}
 
 	_car = new Car();
-	_car->setPosition(0.1, -0.2, 0.0);
+	_car->reset();
 	_game_objects.push_back(_car);
 
 
@@ -170,9 +170,7 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 	switch(key){
 		case 'r':
 		case 'R':
-			_car->setPosition(0.1, -0.2, 0.0);
-			_car->setSpeed(Vector3(0,0,0));
-			_car->setXYAngle(0.0);
+			_car->reset();
 			break;
 		case '1':
 		case '2':
