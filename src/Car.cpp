@@ -103,3 +103,9 @@ void Car::draw(){
 
     DynamicObject::draw();
 }
+
+void Car::reset(){
+	setPosition(0.1, -0.2, 0.0);
+	setSpeed(Vector3(0,0,0));
+	setXYAngle(0.0);
+}

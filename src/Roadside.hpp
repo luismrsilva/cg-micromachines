@@ -17,6 +17,7 @@ class Roadside : public StaticObject {
 	public:
 		Roadside();
 		~Roadside();
+		void update(double delta_t);
 		void draw();
 		void updateBox();
 		virtual bool processCollisionWith(GameObject &obj);

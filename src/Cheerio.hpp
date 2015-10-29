@@ -13,6 +13,7 @@ class Cheerio : public Obstacle {
 		Cheerio();
 		Cheerio(double x, double y, double z);
 		~Cheerio();
+		void update(double delta_t);
 		void draw();
 		void updateBox();
 		virtual bool processCollisionWith(GameObject &obj);

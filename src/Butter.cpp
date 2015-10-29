@@ -47,12 +47,20 @@ void Butter::draw(){
 	Obstacle::draw();
 }
 
+void Butter::update(double delta_t){
+	double da = -GAME_OBJECTS_SPEED_DRAG(getSpeed().getXYModulus()) * delta_t;
+	setSpeed(getSpeed().increaseMod(da));
+	DynamicObject::update(delta_t);
+}
+
 bool Butter::processCollisionWith(GameObject &obj){
 	D_TRACE();
 	if(GameObject::processCollisionWith(obj)){
 		DynamicObject &dobj = ((DynamicObject&)obj);
 
-		dobj.setSpeed(dobj.getSpeed()*2);
+		((DynamicObject*)this)->setSpeed(dobj.getSpeed()*0.4);
+		dobj.setSpeed(dobj.getSpeed()*0);
+		dobj.moveToOldPosition();
 		return true;
 	}
 	return false;

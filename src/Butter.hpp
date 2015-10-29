@@ -13,6 +13,7 @@ class Butter : public Obstacle {
 		Butter();
 		Butter(double x, double y, double z);
 		~Butter();
+		void update(double delta_t);
 		void draw();
 		void updateBox();
 		virtual bool processCollisionWith(GameObject &obj);

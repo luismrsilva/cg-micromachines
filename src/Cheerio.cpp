@@ -12,6 +12,8 @@
 using namespace std;
 #include <GL/glut.h>
 
+#include "game_config.hpp"
+
 #include "debug.hpp"
 
 #define CHEERIO_INNER_RADIUS	cm(1)
@@ -47,13 +49,20 @@ void Cheerio::draw(){
 	Obstacle::draw();
 }
 
+void Cheerio::update(double delta_t){
+	double da = -GAME_OBJECTS_SPEED_DRAG(getSpeed().getXYModulus()) * delta_t;
+	setSpeed(getSpeed().increaseMod(da));
+	DynamicObject::update(delta_t);
+}
+
 bool Cheerio::processCollisionWith(GameObject &obj){
 	D_TRACE();
 	if(GameObject::processCollisionWith(obj)){
 		DynamicObject &dobj = ((DynamicObject&)obj);
 
-		((DynamicObject*)this)->setSpeed(dobj.getSpeed());
+		((DynamicObject*)this)->setSpeed(dobj.getSpeed()*0.15);
 		dobj.setSpeed(dobj.getSpeed()*0);
+		dobj.moveToOldPosition();
 		return true;
 	}
 	return false;

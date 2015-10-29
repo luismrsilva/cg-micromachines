@@ -12,6 +12,8 @@
 using namespace std;
 #include <GL/glut.h>
 
+#include "Car.hpp"
+
 #include "debug.hpp"
 #include "game_config.hpp"
 
@@ -86,9 +88,9 @@ void Orange::draw(){
 bool Orange::processCollisionWith(GameObject &obj){
 	D_TRACE();
 	if(GameObject::processCollisionWith(obj)){
-		DynamicObject &dobj = ((DynamicObject&)obj);
+		Car &dobj = ((Car&)obj);
 
-		dobj.setSpeed(dobj.getSpeed()*0.5);
+		dobj.reset();
 		return true;
 	}
 	return false;

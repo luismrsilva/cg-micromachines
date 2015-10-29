@@ -67,14 +67,14 @@ bool Box::isIntersecting(const Box &box) const{
 	Box *a = (Box*) this;
 	Box *b = (Box*) &box;
 
-	if (a->_right < b->_right){
+	if (a->_left < b->_left){
 		a = (Box*) &box;
 		b = (Box*) this;
 	}
 
 	//Verificar se ha intersecao horizontal
 	if (b->_left <= a->_left && a->_left <= b->_right) {
-		if (a->_top < b->_top) {
+		if (a->_bottom < b->_bottom) {
 			a = (Box*)&box;
 			b = (Box*) this;
 		}

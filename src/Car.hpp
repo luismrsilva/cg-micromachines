@@ -20,6 +20,7 @@ class Car : public DynamicObject {
 		bool isGoingForward();
 		void setXYAngle(double deg);
 		void updateBox();
+		void reset();
 	private:
 		double _angle_deg;
 		bool _isGoingForward;
