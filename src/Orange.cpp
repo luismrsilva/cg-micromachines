@@ -13,7 +13,7 @@
 using namespace std;
 #include <GL/glut.h>
 
-float ORANGE_RADIUS = cm(10.5);
+float ORANGE_RADIUS = cm(6);
 
 Orange::Orange() : Obstacle(){
 	moveToRandomPosition();
@@ -53,13 +53,14 @@ void Orange::draw(){
 	Vector3 speed = this->getSpeed();
 
 	glPushMatrix();
-		glTranslatef(pos->getX(), pos->getY(), pos->getZ()+0.03f);
+		glTranslatef(pos->getX(), pos->getY(), pos->getZ()+ORANGE_RADIUS-0.02f);
 
 		glRotatef(_angle, -speed.getY(), speed.getX(), 0.0);
 		glColor3f(1.0f, 0.6f, 0.0f);
 		glutSolidSphere(ORANGE_RADIUS, 8, 16);
 		glColor3f(0.2f, 0.6f, 0.2f);
 		glTranslatef(0.0f ,0.0f, ORANGE_RADIUS);
+		glScalef(1, 1, 0.4);
 		glutSolidCube(ORANGE_RADIUS/2);
 	glPopMatrix();
 }
