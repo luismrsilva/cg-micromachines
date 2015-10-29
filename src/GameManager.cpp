@@ -48,6 +48,9 @@ GameManager::GameManager(){
 	_car->setPosition(0.1, -0.2, 0.0);
 	_game_objects.push_back(_car);
 
+	/** Cameras **/
+
+	/* Orthogonal Camera */
 	_cameras.push_back(
 		new OrthogonalCamera(
 			-GAME_WORLD_MAX, GAME_WORLD_MAX,
@@ -56,16 +59,23 @@ GameManager::GameManager(){
 		)
 	);
 
+	/* Fixed perspective camera from table top */
 	PerspectiveCamera *fixedPerspCam = new PerspectiveCamera(60, 1, 0.1, 10.);
 	fixedPerspCam->setPosition(0, 0, 2.65);
 	fixedPerspCam->setCenter(Vector3(0, 0.0, -1));
 	fixedPerspCam->setUp(Vector3(0, 1.2, 0));
-
 	_cameras.push_back(fixedPerspCam);
 
-
+	/* Moving camera that follows the car */
 	_movingCamera = new PerspectiveCamera(60, 1, 0.1, 10.);
 	_cameras.push_back(_movingCamera);
+
+	/* (not required) Fixed perspective from table side */
+	PerspectiveCamera *fixedPerspCam2 = new PerspectiveCamera(60, 1, 0.1, 10.);
+	fixedPerspCam2->setPosition(0, -4, 0);
+	fixedPerspCam2->setCenter(Vector3(0, 1, 0));
+	fixedPerspCam2->setUp(Vector3(0, 0, 1));
+	_cameras.push_back(fixedPerspCam2);
 
 	_currentCamera = _cameras[0];
 
@@ -149,13 +159,10 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			_car->setXYAngle(0.0);
 			break;
 		case '1':
-			_currentCamera = _cameras[0];
-			break;
 		case '2':
-			_currentCamera = _cameras[1];
-			break;
 		case '3':
-			_currentCamera = _cameras[2];
+		case '4':
+			_currentCamera = _cameras[key-'1'];
 			break;
 		default:
 			break;
