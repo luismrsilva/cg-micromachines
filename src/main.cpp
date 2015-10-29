@@ -90,6 +90,13 @@ void onTimer(int val){
 	prev = now;
 }
 
+
+void orangeSpeedIncrease(int val){
+	float increment = 1 + ((10+(rand()%20))/100.0);	// 10% to 30%
+	glutTimerFunc(10+(rand()%10)*1000, orangeSpeedIncrease, 0);
+	gameManager->orangeSpeedInc(increment);
+}
+
 int main(int argc, char *argv[]){
 	srand(time(NULL));
 	glutInit(&argc, argv);
@@ -105,6 +112,7 @@ int main(int argc, char *argv[]){
 	glutSpecialUpFunc(myKeyUpSpecial);
 
 	glutTimerFunc(GAME_TIMER_PERIOD, onTimer, GAME_TIMER_PERIOD);
+	glutTimerFunc(10+(rand()%10)*1000, orangeSpeedIncrease, 0);
 
 	glutMainLoop();
 

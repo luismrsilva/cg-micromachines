@@ -29,6 +29,12 @@ using namespace std;
 #include <typeinfo>
 
 
+void GameManager::orangeSpeedInc(float inc){
+	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
+		(*i)->setSpeed((*i)->getSpeed() * inc);
+	}
+}
+
 GameManager::GameManager(){
 	D_TRACE();
 
@@ -52,6 +58,7 @@ GameManager::GameManager(){
 		_game_objects.push_back(*i);
 	}
 
+	/* Oranges */
 	for (int i=0; i<3; i++){
 		Orange *o = new Orange();
 		_oranges.push_back(o);
@@ -61,7 +68,6 @@ GameManager::GameManager(){
 	_car = new Car();
 	_car->reset();
 	_game_objects.push_back(_car);
-
 
 
 	/** Cameras **/

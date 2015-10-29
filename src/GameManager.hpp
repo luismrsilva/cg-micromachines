@@ -32,6 +32,7 @@ class GameManager {
 		void update(double delta_t);
 		void init();
 		void setKeyPressed(int glut_key, bool status);
+		void orangeSpeedInc(float inc);
 	private:
 		Car *_car;
 		Roadside *_roadside;
