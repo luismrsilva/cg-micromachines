@@ -19,6 +19,7 @@ class Orange : public Obstacle {
 		void updateBox();
 		virtual bool processCollisionWith(GameObject &obj);
 	private:
+		static float _speed_inc;
 		float _angle;
 		bool _active;
 		int _activate_time;

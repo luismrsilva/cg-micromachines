@@ -18,7 +18,7 @@ using namespace std;
 Orange::Orange() : Obstacle(){
 	_active = true;
 	moveToRandomPosition();
-	setSpeed(Vector3(	(double) (rand() % 8 + 20) / 100.0f,
+	setSpeed(Vector3(	(double) (rand() % 25 + 5) / 100.0f,
 						(double) (rand() % 3600) / 10.0f
 					)
 			);
@@ -35,10 +35,7 @@ void Orange::resetPosition(){
 	_angle = 0;
 	_active = true;
 	moveToRandomPosition();
-	setSpeed(
-				Vector3(getSpeed().getXYModulus() * (((rand() % 5)+100)/100.0), // 0% -> 4% faster
-				(double) (rand() % 3600) / 10.0f)
-			);
+	setSpeed(Vector3(getSpeed().getXYModulus(), (double) (rand() % 3600) / 10.0f));	// change angle
 }
 
 void Orange::update(double delta_t){
@@ -47,7 +44,7 @@ void Orange::update(double delta_t){
 		_angle += (getSpeed().operator*(delta_t).getXYModulus()*360)/(2*M_PI*ORANGE_RADIUS);
 		if (isOutOfBounds()){
 				_active = false;
-				_activate_time = glutGet(GLUT_ELAPSED_TIME) + ((4+(rand()%6))*1000);
+				_activate_time = glutGet(GLUT_ELAPSED_TIME) + ((2+(rand()%4))*1000);
 			}
 	} else if (_activate_time <= glutGet(GLUT_ELAPSED_TIME)){
 		resetPosition();
