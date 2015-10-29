@@ -19,6 +19,7 @@ class GameObject : public Entity {
 		virtual void draw();
 		virtual void update(double delta_t);
 		bool isColidingWith(const GameObject &obj);
+		bool isOutOfBounds();
 		virtual void updateBox();
 	protected:
 		Box _box;

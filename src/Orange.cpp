@@ -37,7 +37,7 @@ void Orange::resetPosition(){
 	_active = true;
 	moveToRandomPosition();
 	setSpeed(
-				Vector3(this->getSpeed().getXYModulus() * (((rand() % 5)+100)/100.0), // 0% -> 4% faster
+				Vector3(getSpeed().getXYModulus() * (((rand() % 5)+100)/100.0), // 0% -> 4% faster
 				(double) (rand() % 3600) / 10.0f)
 			);
 }
@@ -45,9 +45,8 @@ void Orange::resetPosition(){
 void Orange::update(double delta_t){
 	if (_active){
 		DynamicObject::update(delta_t);
-		_angle += (this->getSpeed().operator*(delta_t).getXYModulus()*360)/(2*M_PI*ORANGE_RADIUS);
-		if (abs(this->getPosition()->getX()) >= GAME_TABLE_LIMIT ||
-			abs(this->getPosition()->getY()) >= GAME_TABLE_LIMIT){
+		_angle += (getSpeed().operator*(delta_t).getXYModulus()*360)/(2*M_PI*ORANGE_RADIUS);
+		if (isOutOfBounds()){
 				_active = false;
 				_activate_time = glutGet(GLUT_ELAPSED_TIME) + ((4+(rand()%6))*1000);
 			}
@@ -65,8 +64,8 @@ void Orange::updateBox(){
 /* Draws an orange on x, y, z position */
 void Orange::draw(){
 	if (!_active) return;
-	Vector3 *pos = this->getPosition();
-	Vector3 speed = this->getSpeed();
+	Vector3 *pos = getPosition();
+	Vector3 speed = getSpeed();
 
 	glPushMatrix();
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ()+ORANGE_RADIUS-0.02f);

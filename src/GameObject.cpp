@@ -5,8 +5,10 @@
 
 #include "GameObject.hpp"
 #include "debug.hpp"
+#include "game_config.hpp"
 #include "Box.hpp"
 #include <iostream>
+#include <cmath>
 
 
 using namespace std;
@@ -25,6 +27,11 @@ GameObject::~GameObject(){
 
 bool GameObject::isColidingWith(const GameObject &obj){
 	return _box.isIntersecting(obj._box);
+}
+
+bool GameObject::isOutOfBounds(){
+	return (abs(getPosition()->getX()) >= GAME_TABLE_LIMIT || 
+			abs(getPosition()->getY()) >= GAME_TABLE_LIMIT);
 }
 
 void GameObject::draw(){

@@ -212,11 +212,6 @@ void GameManager::update(double delta_t){
 		}
 	}
 
-	double da = -GAME_CAR_SPEED_DRAG(speed) * delta_t;
-	_car->setSpeed(_car->getSpeed().increaseMod(da));
-	cout << "CAR speed: " << speed << "| " << "drag: " << (double)da/((double)delta_t) << endl;
-
-
 	/* update all objects */
 
 	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){

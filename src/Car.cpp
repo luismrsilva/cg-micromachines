@@ -8,6 +8,7 @@
 #include "Car.hpp"
 #include "Vector3.hpp"
 #include "myunits.hpp"
+#include "game_config.hpp"
 #include <iostream>
 using namespace std;
 #include <GL/glut.h>
@@ -43,6 +44,14 @@ void Car::setXYAngle(double deg){
 double Car::rotateZ(double deg){
 	_angle_deg = fmod(180 + _angle_deg + deg, 360)-180;
 	return _angle_deg;
+}
+
+void Car::update(double delta_t){
+	double da = -GAME_CAR_SPEED_DRAG(getSpeed().getXYModulus()) * delta_t;
+	setSpeed(getSpeed().increaseMod(da));
+	//cout << "CAR speed: " << speed << "| " << "drag: " << (double)da/((double)delta_t) << endl;
+
+	DynamicObject::update(delta_t);
 }
 
 void Car::draw(){

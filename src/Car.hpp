@@ -13,6 +13,7 @@ class Car : public DynamicObject {
 		Car();
 		~Car();
 		void draw();
+		void update(double delta_t);
 		double rotateZ(double deg);
 		double getXYAngle();
 		bool setGoingForward(bool forward);
