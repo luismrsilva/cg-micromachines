@@ -45,7 +45,7 @@
 
 
 // Camera stuff
-#define GAME_CAMERA_MOVEMENT_SMOTHENESS		0.75
+#define GAME_CAMERA_MOVEMENT_SMOTHENESS		0.85
 
 
 
