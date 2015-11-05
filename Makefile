@@ -10,6 +10,8 @@ OBJ_FILES := $(addprefix obj/,$(notdir $(CPP_FILES:.cpp=.o)))
 
 all: micromachines
 
+quiet-run: micromachines
+	./micromachines > /dev/null
 
 run: micromachines
 	./micromachines
