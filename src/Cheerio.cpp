@@ -60,7 +60,7 @@ bool Cheerio::processCollisionWith(GameObject &obj){
 	if(GameObject::processCollisionWith(obj)){
 		DynamicObject &dobj = ((DynamicObject&)obj);
 
-		((DynamicObject*)this)->setSpeed(dobj.getSpeed()*0.15);
+		((DynamicObject*)this)->setSpeed(dobj.getSpeed()*0.20);
 		dobj.setSpeed(dobj.getSpeed()*0);
 		dobj.moveToOldPosition();
 		return true;

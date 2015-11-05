@@ -20,14 +20,13 @@ using namespace std;
 Orange::Orange() : Obstacle(){
 	_active = true;
 	moveToRandomPosition();
-	setSpeed(Vector3(	(double) (rand() % 15 + 5) / 100.0f,
-						(double) (rand() % 3600) / 10.0f
-					)
-			);
+	setRandomSpeed();
 }
 
 Orange::Orange(double x, double y, double z) : Obstacle(x, y, z){
-	Orange();	// should always be random
+	_active = true;
+	moveToRandomPosition();
+	setRandomSpeed();
 }
 
 Orange::~Orange(){

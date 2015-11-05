@@ -42,6 +42,14 @@ Vector3 DynamicObject::getSpeed() const{
 	return *_speed;
 }
 
+void DynamicObject::setRandomSpeed(){
+	setSpeed(Vector3(	(double) (rand() % 15 + 5) / 100.0f,
+						(double) (rand() % 3600) / 10.0f
+					)
+			);
+}
+
+
 void DynamicObject::draw(){
 	GameObject::draw();
 }
