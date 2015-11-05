@@ -24,6 +24,8 @@ class Box : public Entity {
 		double _right;
 		double _top;
 		double _bottom;
+		double _halfWidth;
+		double _halfHeight;
 };
 
 #endif //_BOX_H

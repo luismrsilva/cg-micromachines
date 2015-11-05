@@ -17,6 +17,7 @@
 
 Box::Box() : Entity() {
 	_left = _right = _top = _bottom = 0;
+	_halfWidth = _halfHeight = 0;
 }
 
 Box::Box(double left, double right, double top, double bottom) :  Entity() {
@@ -36,14 +37,18 @@ void Box::changeTo(double left, double right, double top, double bottom) {
 	_right = right;
 	_top = top;
 	_bottom = bottom;
+	_halfWidth = fabs(right-left)/2.0;
+	_halfHeight = fabs(top-bottom)/2.0;
 }
 
 void Box::changeTo(double width, double height, const Vector3 &center) {
 	setPosition(center.getX(), center.getY(), 0);
-	_left = center.getX() - (width / 2);
-	_right = center.getX() + (width / 2);
-	_top = center.getY() + (height / 2);
-	_bottom = center.getY() - (height / 2);
+	_halfWidth = width/2.0;
+	_halfHeight = height/2.0;
+	_left = center.getX() - _halfWidth;
+	_right = center.getX() + _halfWidth;
+	_top = center.getY() + _halfHeight;
+	_bottom = center.getY() - _halfHeight;
 }
 
 void Box::draw() const{
@@ -65,48 +70,11 @@ void Box::draw() const{
 }
 
 bool Box::isIntersecting(const Box &box) const{
+	const double aX = this->getPosition()->getX();
+	const double aY = this->getPosition()->getY();
+	const double bX = box.getPosition()->getX();
+	const double bY = box.getPosition()->getY();
 
-	Box *a = (Box*) this;
-	Box *b = (Box*) &box;
-
-	if (a->_left < b->_left){
-		a = (Box*) &box;
-		b = (Box*) this;
-	}
-
-	//Verificar se ha intersecao horizontal
-	if (b->_left <= a->_left && a->_left <= b->_right) {
-		if (a->_bottom < b->_bottom) {
-			a = (Box*)&box;
-			b = (Box*) this;
-		}
-		//Verificar se ha intersecao vertical
-		if (b->_bottom <= a->_bottom && a->_bottom <= b->_top) {
-			return true;
-		}
-	}
-
-	#define dist(x,y)	sqrt(x*x+y*y)
-
-	double a_w = abs(a->_right - a->_left)/2;
-	double a_h = abs(a->_bottom - a->_top)/2;
-	double b_w = abs(b->_right - b->_left)/2;
-	double b_h = abs(b->_bottom - b->_top)/2;
-
-	double a_x = (a->_left + a->_right)/2;
-	double a_y = (a->_bottom + a->_top)/2;
-	double b_x = (b->_left + b->_right)/2;
-	double b_y = (a->_bottom + a->_top)/2;
-
-	double x_dist = a_w + b_w;
-	double y_dist = a_h + b_h;
-
-	if(dist(a_x, b_x) < x_dist){
-		return true;
-	}
-	if(dist(a_y, b_y) < y_dist){
-		return true;
-	}
-
-	return false;
+	return	( fabs(aX - bX) < (_halfWidth + box._halfWidth) ) &&
+			( fabs(aY - bY) < (_halfHeight + box._halfHeight) );
 }
