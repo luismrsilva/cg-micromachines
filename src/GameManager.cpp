@@ -92,6 +92,7 @@ GameManager::GameManager(){
 	fixedPerspCam->setPosition(0, 0, 2.65);
 	fixedPerspCam->setCenter(Vector3(0, 0.0, -1));
 	fixedPerspCam->setUp(Vector3(0, 1.2, 0));
+	_fixedCamera = fixedPerspCam;
 	_cameras.push_back(fixedPerspCam);
 
 	/* Moving camera that follows the car */
@@ -186,10 +187,24 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			break;
 		case '1':
 		case '2':
-		case '3':
 		case '4':
 			_currentCamera = _cameras[key-'1'];
 			break;
+		case '3':
+		{
+			PerspectiveCamera *nextCam = (PerspectiveCamera*)_cameras[key-'1'];
+			if(_currentCamera == _fixedCamera){
+				Vector3 *pos = ((PerspectiveCamera*)_currentCamera)->getPosition();
+				Vector3 *center = ((PerspectiveCamera*)_currentCamera)->getCenter();
+				Vector3 *up = ((PerspectiveCamera*)_currentCamera)->getUp();
+
+				nextCam->setPosition(pos->getX(), pos->getY(), pos->getZ());
+				nextCam->setCenter(Vector3(center->getX(), center->getY(), center->getZ()));
+				nextCam->setUp(Vector3(up->getX(), up->getY(), up->getZ()));
+			}
+			_currentCamera = nextCam;
+			break;
+		}
 		default:
 			break;
 	}
@@ -214,21 +229,31 @@ void GameManager::update(double delta_t){
 	/* update moving camera so it follows the car */
 	if( _currentCamera == _movingCamera ){
 		Vector3 pos = *(_car->getPosition());
+		Vector3 speed_v_f = speed_v * (_car->isGoingForward()?-0.3:0.3);
 
 		Vector3 new_pos =
 				pos												// pos do carro
 			+	Vector3(0, 0, 0.25 + speed*0.125)				// aumeta Z com a velocidade
-			+	speed_v * (_car->isGoingForward()?-0.3:0.3)		// afasta-se com a velocidade
+			+	speed_v_f										// afasta-se com a velocidade
 			-	Vector3(0.5, _car->getXYAngle()					// mantem distancia minima ao carro
 			);
 
-		/* smooth camera movement */
+		/** smooth camera movement **/
+		/* fade position */
 		new_pos =	new_pos * (1.-GAME_CAMERA_MOVEMENT_SMOTHENESS)
 					+ _movingCamera->getPosition()
 						->operator*(GAME_CAMERA_MOVEMENT_SMOTHENESS);
-
 		_movingCamera->setPosition(new_pos);
-		_movingCamera->setCenter(pos);		// olha para o carro
+
+		/* fade center */
+		Vector3 new_center = (pos-speed_v_f) * (1.-GAME_CAMERA_MOVEMENT_SMOTHENESS)
+					+ _movingCamera->getCenter()->operator*(GAME_CAMERA_MOVEMENT_SMOTHENESS);
+		_movingCamera->setCenter(new_center);		// olha para o carro
+
+		/* fade up */
+		Vector3 new_up = Vector3(0, 0, 1) * (1.-GAME_CAMERA_MOVEMENT_SMOTHENESS)
+					+ _movingCamera->getUp()->operator*(GAME_CAMERA_MOVEMENT_SMOTHENESS);
+		_movingCamera->setUp(new_up);
 	}
 
 	/* change car speed according to keys */

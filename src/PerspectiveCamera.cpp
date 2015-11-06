@@ -19,6 +19,14 @@ void PerspectiveCamera::setCenter(const Vector3 &center){
 	_center = center;
 }
 
+Vector3* PerspectiveCamera::getCenter() {
+	return &_center;
+}
+
+Vector3* PerspectiveCamera::getUp() {
+	return &_up;
+}
+
 void PerspectiveCamera::setUp(const Vector3 &up){
 	_up = up;
 }

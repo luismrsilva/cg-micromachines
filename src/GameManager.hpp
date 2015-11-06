@@ -47,6 +47,7 @@ class GameManager {
 			UP, LEFT, DOWN, RIGHT
 		};
 		Camera *_currentCamera;
+		PerspectiveCamera *_fixedCamera;
 		PerspectiveCamera *_movingCamera;
 
 };
