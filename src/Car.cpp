@@ -56,7 +56,9 @@ void Car::update(double delta_t){
 
 void Car::updateBox(){
 	D_TRACE();
-	_box.changeTo(cm(13), cm(13), *getPosition());
+	const double angle = _angle_deg * M_PI / 180.;
+	_box.changeTo(	cm(6.5 + fabs(6.5*cos(angle))),
+					cm(6.5 + fabs(6.5*sin(angle))), *getPosition());
 }
 
 void Car::draw(){
