@@ -3,6 +3,7 @@
  *
  * */
 
+#define _USE_MATH_DEFINES
 #include "game_config.hpp"
 #include "Orange.hpp"
 #include "Vector3.hpp"
