@@ -83,7 +83,7 @@ void LightSource::setDirection(float x, float y, float z){
 	_direction[0] = x;
 	_direction[1] = y;
 	_direction[2] = z;
-	_direction[3] = 1.;
+	_direction[3] = 0.;
 }
 
 void LightSource::setCutOff(float cut_off){
