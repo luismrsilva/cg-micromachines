@@ -6,6 +6,7 @@
 #ifndef __LIGHTSOURCE_H
 #define __LIGHTSOURCE_H
 
+#include <stdlib.h>
 #include <GL/glut.h>
 #include "Vector3.hpp"
 
