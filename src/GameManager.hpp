@@ -34,6 +34,7 @@ class GameManager {
 		void setKeyPressed(int glut_key, bool status);
 		void orangeSpeedInc(float inc);
 		void orangeRespawn();
+		bool toggleLighting();
 	private:
 		Car *_car;
 		Roadside *_roadside;

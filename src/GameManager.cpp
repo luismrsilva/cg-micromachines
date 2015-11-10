@@ -190,6 +190,10 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case '4':
 			_currentCamera = _cameras[key-'1'];
 			break;
+		case 'l':
+		case 'L':
+			toggleLighting();
+			break;
 		default:
 			break;
 	}
@@ -275,6 +279,17 @@ void GameManager::update(double delta_t){
 
 
 
+}
+
+bool GameManager::toggleLighting(){
+	/* returns new state */
+	if(glIsEnabled(GL_LIGHTING)){
+		glDisable(GL_LIGHTING);
+		return false;
+	}else{
+		glEnable(GL_LIGHTING);
+	}
+	return true;
 }
 
 void GameManager::setKeyPressed(int glut_key, bool status){
