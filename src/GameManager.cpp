@@ -17,6 +17,7 @@ using namespace std;
 #include "GameObject.hpp"
 //#include "LightSource.hpp"
 
+#include "Candle.hpp"
 #include "Roadside.hpp"
 #include "Butter.hpp"
 #include "Orange.hpp"
@@ -58,6 +59,8 @@ GameManager::GameManager(){
 	_butters.push_back(new Butter(-1.1,-0.8, BUTTER_SIZE_Z/2.));
 	_butters.push_back(new Butter(-0.4, 0.8, BUTTER_SIZE_Z/2.));
 	_butters.push_back(new Butter( 0.7,-1.1, BUTTER_SIZE_Z/2.));
+
+	_game_objects.push_back(new Candle(0.4, -0.2, 0));
 
 	/* Also put butters inside _game_objects */
 	for(vector<Butter*>::iterator i = _butters.begin(); i != _butters.end(); i++){

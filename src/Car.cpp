@@ -84,7 +84,7 @@ void Car::draw(){
 			glColor3f(0.7f, 0.6f, 1.0f);
 			glScalef(1, 1.2, 1.2); // longer and taller
 			glTranslatef(0.0f, -0.01f, 0.016f);
-			glutSolidSphere(cm(1.5), 16, 16);
+			glutSolidSphere(cm(1.5), 6, 6);
 		glPopMatrix();
 
 		glPushMatrix();	// car tires
