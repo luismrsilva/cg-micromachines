@@ -11,6 +11,7 @@
 class StaticObject : public GameObject {
 	public:
 		StaticObject();
+		StaticObject(double x, double y, double z);
 		~StaticObject();
 };
 

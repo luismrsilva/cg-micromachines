@@ -190,6 +190,10 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case '4':
 			_currentCamera = _cameras[key-'1'];
 			break;
+		case 'l':
+		case 'L':
+			toggleLighting();
+			break;
 		default:
 			break;
 	}
@@ -216,10 +220,10 @@ void GameManager::update(double delta_t){
 		Vector3 pos = *(_car->getPosition());
 
 		Vector3 new_pos =
-				pos									// pos do carro
-			+	Vector3(0, 0, 0.3 + speed*0.25)		// aumeta Z com a velocidade
-			-	speed_v * 0.5						// afasta-se com a velocidade
-			-	Vector3(0.5, _car->getXYAngle()		// mantem distancia minima ao carro
+				pos												// pos do carro
+			+	Vector3(0, 0, 0.25 + speed*0.125)				// aumeta Z com a velocidade
+			+	speed_v * (_car->isGoingForward()?-0.3:0.3)		// afasta-se com a velocidade
+			-	Vector3(0.5, _car->getXYAngle()					// mantem distancia minima ao carro
 			);
 
 		/* smooth camera movement */
@@ -228,7 +232,7 @@ void GameManager::update(double delta_t){
 						->operator*(GAME_CAMERA_MOVEMENT_SMOTHENESS);
 
 		_movingCamera->setPosition(new_pos);
-		_movingCamera->setCenter(pos);				// olha para o carro
+		_movingCamera->setCenter(pos);		// olha para o carro
 	}
 
 	/* change car speed according to keys */
@@ -275,6 +279,17 @@ void GameManager::update(double delta_t){
 
 
 
+}
+
+bool GameManager::toggleLighting(){
+	/* returns new state */
+	if(glIsEnabled(GL_LIGHTING)){
+		glDisable(GL_LIGHTING);
+		return false;
+	}else{
+		glEnable(GL_LIGHTING);
+	}
+	return true;
 }
 
 void GameManager::setKeyPressed(int glut_key, bool status){

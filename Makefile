@@ -6,10 +6,13 @@ HPP_FILES := $(wildcard src/*.hpp)
 CPP_FILES := $(wildcard src/*.cpp)
 OBJ_FILES := $(addprefix obj/,$(notdir $(CPP_FILES:.cpp=.o)))
 
+-include $(OBJ_FILES:.o=.d)
 
 
 all: micromachines
 
+quiet-run: micromachines
+	./micromachines > /dev/null
 
 run: micromachines
 	./micromachines
@@ -27,6 +30,6 @@ debug: all $(OBJ_FILES) $(HPP_FILES)
 
 
 clean:
-	rm -rf obj/*.o micromachines
+	rm -rf obj/*.o obj/*.d micromachines
 
 

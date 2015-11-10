@@ -19,6 +19,7 @@ class DynamicObject : public GameObject {
 		void setSpeed(double x, double y, double z);
 		Vector3 getSpeed() const;
 		void draw();
+		void setRandomSpeed();
 	private:
 		Vector3 *_speed;
 };
