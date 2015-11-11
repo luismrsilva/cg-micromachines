@@ -9,8 +9,8 @@
 #include <GL/glut.h>
 #include "myunits.hpp"
 
-Candle::Candle(double x, double y, double z) : StaticObject(x, y, z){
-	_lightsource = new LightSource(GL_LIGHT0);
+Candle::Candle(GLenum lightNum, double x, double y, double z) : StaticObject(x, y, z){
+	_lightsource = new LightSource(lightNum);
 	_lightsource->setPosition(x, (y+0.076), z);
 }
 
@@ -26,14 +26,18 @@ void Candle::draw(){
 	float height = 0.06f;
 
 	glPushMatrix();
+
+		/* body */
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 		glColor3f(0.8f, 0.7f, 0.6f);
-		gluCylinder(gluNewQuadric(), 0.01, 0.01, height, 12, 12);
+		gluCylinder(gluNewQuadric(), cm(1), cm(1), height, 12, 12);
 
+		/* wick */
 		glTranslatef(0, 0, height);
-		glColor3f(0.4f, 0.2f, 0.2f);
-		gluCylinder(gluNewQuadric(), 0.002, 0.002, 0.016, 8, 8);
+		glColor3f(0.8f, 0.8f, 0.8f);
+		gluCylinder(gluNewQuadric(), mm(2), mm(2), mm(16), 8, 8);
 
+		/* "flame" */
 		glTranslatef(0, 0, 0.018);
 		glColor3f(1.0f, 0.9f, 0.8f);
 		glutSolidSphere(mm(6), 8, 8);

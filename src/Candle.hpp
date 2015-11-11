@@ -12,7 +12,7 @@
 
 class Candle : public StaticObject {
 	public:
-		Candle(double x, double y, double z);
+		Candle(GLenum lightNum, double x, double y, double z);
 		~Candle();
 		void update(double delta_t);
 		void draw();

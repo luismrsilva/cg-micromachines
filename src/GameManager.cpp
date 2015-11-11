@@ -45,6 +45,9 @@ void GameManager::orangeRespawn(){
 GameManager::GameManager(){
 	D_TRACE();
 
+	/* Use (lightNum++) when creating a new light object */
+	GLenum lightNum = GL_LIGHT0;
+
 	/** Key State Array **/
 	_isKeyPressed = (bool*) malloc(4 * sizeof(bool));
 	memset(_isKeyPressed, false, 4);
@@ -60,12 +63,12 @@ GameManager::GameManager(){
 	_butters.push_back(new Butter(-0.4, 0.8, BUTTER_SIZE_Z/2.));
 	_butters.push_back(new Butter( 0.7,-1.1, BUTTER_SIZE_Z/2.));
 
-	_candles.push_back(new Candle( 0.9, -0.3, 0));
-	_candles.push_back(new Candle( 0.9,  0.9, 0));
-	_candles.push_back(new Candle(-0.8, -0.8, 0));
-	_candles.push_back(new Candle(-0.8,  0.8, 0));
-	_candles.push_back(new Candle( 0.0,  1.3, 0));
-	_candles.push_back(new Candle(-0.1, -1.3, 0));
+	_candles.push_back(new Candle(lightNum++, 0.9, -0.3, 0));
+	_candles.push_back(new Candle(lightNum++, 0.9,  0.9, 0));
+	_candles.push_back(new Candle(lightNum++,-0.8, -0.8, 0));
+	_candles.push_back(new Candle(lightNum++,-0.8,  0.8, 0));
+	_candles.push_back(new Candle(lightNum++, 0.0,  1.3, 0));
+	_candles.push_back(new Candle(lightNum++,-0.1, -1.3, 0));
 
 	/* Put candles inside _game_objects */
 	for(vector<Candle*>::iterator i = _candles.begin(); i != _candles.end(); i++){
