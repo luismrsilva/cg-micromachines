@@ -11,7 +11,7 @@
 
 Candle::Candle(GLenum lightNum, double x, double y, double z) : StaticObject(x, y, z){
 	_lightsource = new LightSource(lightNum);
-	_lightsource->setPosition(x, (y+0.076), z);
+	_lightsource->setPosition(x, y, z + mm(76));
 }
 
 Candle::~Candle(){
