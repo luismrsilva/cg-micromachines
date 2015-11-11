@@ -11,7 +11,7 @@
 
 Candle::Candle(double x, double y, double z) : StaticObject(x, y, z){
 	_lightsource = new LightSource(GL_LIGHT0);
-	_lightsource.setPosition(x, (y+0.076), z);
+	_lightsource->setPosition(x, (y+0.076), z);
 }
 
 Candle::~Candle(){
