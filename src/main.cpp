@@ -68,13 +68,6 @@ void myKeyboardFunc(unsigned char key, int x, int y){
 		case 'X':
 			exit(0);
 			break;
-		case 'c':
-		case 'C':
-		{	// only works for 700x700px window
-			double ratio = (GAME_WORLD_MAX)/350.;
-			cout << "Cursor: " << ratio*(x-350) << ", " << -ratio*(y-350) << endl;
-		}
-			break;
 		default:
 			gameManager->keyPressed(key, x, y);
 			break;

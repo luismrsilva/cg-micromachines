@@ -196,20 +196,25 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 'r':
 		case 'R':
 			_car->reset();
+			cout << "Car position resetted" << endl;
 			break;
 		case '1':
 		case '2':
 		case '3':
 		case '4':
 			_currentCamera = _cameras[key-'1'];
+			cout << "Changed to camera " << (key) << endl;
 			break;
 		case 'l':
 		case 'L':
+			cout << "Global lighting toggled" << endl;
 			toggleLighting();
 			break;
 		case 'c':
 		case 'C':
+			cout << "Candles lighting toggled" << endl;
 			toggleCandles();
+			break;
 		default:
 			break;
 	}
