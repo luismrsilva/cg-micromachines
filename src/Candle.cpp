@@ -38,6 +38,8 @@ void Candle::draw(){
 		glColor3f(1.0f, 0.9f, 0.8f);
 		glutSolidSphere(mm(6), 8, 8);
 	glPopMatrix();
+
+	_lightsource->draw();
 }
 
 void Candle::toggleLight(){
