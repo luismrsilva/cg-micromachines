@@ -16,6 +16,7 @@ class LightSource {
 		~LightSource();
 		bool getState();
 		void setState(bool state);
+		void toggleState();
 		GLenum getNum();
 		void setPosition(const Vector3 &pos);
 		void setDirection(const Vector3 &dir);

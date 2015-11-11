@@ -12,13 +12,12 @@
 
 class Candle : public StaticObject {
 	public:
-		Candle();
 		Candle(double x, double y, double z);
 		~Candle();
 		void update(double delta_t);
 		void draw();
 		void updateBox();
-		//virtual bool processCollisionWith(GameObject &obj);
+		void toggleLight();
 	private:
 		LightSource *_lightsource;
 

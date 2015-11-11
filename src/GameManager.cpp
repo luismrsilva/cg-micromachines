@@ -15,7 +15,7 @@ using namespace std;
 #include "GameManager.hpp"
 #include "Camera.hpp"
 #include "GameObject.hpp"
-//#include "LightSource.hpp"
+#include "LightSource.hpp"
 
 #include "Candle.hpp"
 #include "Roadside.hpp"
@@ -60,9 +60,19 @@ GameManager::GameManager(){
 	_butters.push_back(new Butter(-0.4, 0.8, BUTTER_SIZE_Z/2.));
 	_butters.push_back(new Butter( 0.7,-1.1, BUTTER_SIZE_Z/2.));
 
-	_game_objects.push_back(new Candle(0.4, -0.2, 0));
+	_candles.push_back(new Candle( 0.9, -0.3, 0));
+	_candles.push_back(new Candle( 0.9,  0.9, 0));
+	_candles.push_back(new Candle(-0.8, -0.8, 0));
+	_candles.push_back(new Candle(-0.8,  0.8, 0));
+	_candles.push_back(new Candle( 0.0,  1.3, 0));
+	_candles.push_back(new Candle(-0.1, -1.3, 0));
 
-	/* Also put butters inside _game_objects */
+	/* Put candles inside _game_objects */
+	for(vector<Candle*>::iterator i = _candles.begin(); i != _candles.end(); i++){
+		_game_objects.push_back(*i);
+	}
+
+	/* Put butters inside _game_objects */
 	for(vector<Butter*>::iterator i = _butters.begin(); i != _butters.end(); i++){
 		_game_objects.push_back(*i);
 	}
@@ -197,6 +207,9 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 'L':
 			toggleLighting();
 			break;
+		case 'c':
+		case 'C':
+			toggleCandles();
 		default:
 			break;
 	}
@@ -293,6 +306,12 @@ bool GameManager::toggleLighting(){
 		glEnable(GL_LIGHTING);
 	}
 	return true;
+}
+
+void GameManager::toggleCandles(){
+	for(vector<Candle*>::iterator i = _candles.begin(); i != _candles.end(); i++){
+		(*i)->toggleLight();
+	}
 }
 
 void GameManager::setKeyPressed(int glut_key, bool status){

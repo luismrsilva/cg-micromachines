@@ -9,12 +9,9 @@
 #include <GL/glut.h>
 #include "myunits.hpp"
 
-Candle::Candle(){
-	_lightsource = new LightSource(GL_LIGHT0);
-}
-
 Candle::Candle(double x, double y, double z) : StaticObject(x, y, z){
 	_lightsource = new LightSource(GL_LIGHT0);
+	_lightsource.setPosition(x, (y+0.076), z);
 }
 
 Candle::~Candle(){
@@ -41,6 +38,10 @@ void Candle::draw(){
 		glColor3f(1.0f, 0.9f, 0.8f);
 		glutSolidSphere(mm(6), 8, 8);
 	glPopMatrix();
+}
+
+void Candle::toggleLight(){
+	_lightsource->toggleState();
 }
 
 void Candle::updateBox(){

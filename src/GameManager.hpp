@@ -16,6 +16,7 @@ using namespace std;
 #include "Camera.hpp"
 #include "PerspectiveCamera.hpp"
 #include "Cheerio.hpp"
+#include "Candle.hpp"
 #include "Butter.hpp"
 #include "Orange.hpp"
 #include "Roadside.hpp"
@@ -35,9 +36,11 @@ class GameManager {
 		void orangeSpeedInc(float inc);
 		void orangeRespawn();
 		bool toggleLighting();
+		void toggleCandles();
 	private:
 		Car *_car;
 		Roadside *_roadside;
+		vector<Candle*> _candles;
 		vector<Butter*> _butters;
 		vector<Orange*> _oranges;
 		vector<GameObject*> _game_objects;

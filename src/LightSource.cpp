@@ -54,6 +54,10 @@ void LightSource::setState(bool state){
 	}
 }
 
+void LightSource::toggleState(){
+	setState(!getState());
+}
+
 GLenum LightSource::getNum(){
 	return _num;
 }
