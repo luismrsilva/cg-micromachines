@@ -105,11 +105,12 @@ void LightSource::setAmbient(float r, float g, float b, float a){
 	_ambient[3] = a;
 }
 
-void LightSource::setDiffuse(float r, float g, float b, float a){
+void LightSource::setDiffuse(float r, float g, float b, float a) {
 	_diffuse[0] = r;
 	_diffuse[1] = g;
 	_diffuse[2] = b;
 	_diffuse[3] = a;
+}
 
 void LightSource::setSpecular(float r, float g, float b, float a){
 	_specular[0] = r;
