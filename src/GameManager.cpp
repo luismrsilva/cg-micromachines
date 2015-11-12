@@ -149,6 +149,7 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 void drawSquareXY(GLfloat x, GLfloat y, GLfloat halfWidth) {
 	glPushMatrix();
 		glTranslatef(x, y, 0);
+		glNormal3f(0.0, 0.0, 1.0);
 		glVertex3f(x - halfWidth, y - halfWidth, 0);
 		glVertex3f(x + halfWidth, y - halfWidth, 0);
 		glVertex3f(x + halfWidth, y + halfWidth, 0);

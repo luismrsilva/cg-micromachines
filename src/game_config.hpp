@@ -35,7 +35,7 @@
 
 
 // Subdivision settings
-#define GAME_TABLE_TILE_DIVISION_COUNT	32
+#define GAME_TABLE_TILE_DIVISION_COUNT	128
 
 
 
