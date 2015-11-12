@@ -147,6 +147,8 @@ void GameManager::init(){
 	glutInitWindowPosition(-1, -1);
 	glutCreateWindow(GAME_WINDOW_TITLE);
 
+	/* Enable automatic normal normalization */
+	glEnable(GL_NORMALIZE);
 
 	/* global lighting stuff */
 	GLfloat ambient[4] = {0.04, 0.05, 0.06, 1.0};
