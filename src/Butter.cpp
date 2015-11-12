@@ -34,13 +34,13 @@ void Butter::updateBox(){
 
 /* Draws a cube of butter on x, y, z position */
 void Butter::draw(){
-	//cout << "Butter::draw()" << endl;
-	Vector3 *pos = this->getPosition();
+	Vector3 *pos = getPosition();
 
 	glPushMatrix();
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 		glScalef(BUTTER_SIZE_X, BUTTER_SIZE_Y, BUTTER_SIZE_Z);
 		glColor3f(0.8f, 0.8f, 0.5f);
+		initMaterial(0.8f, 0.8f, 0.5f);
 		glutSolidCube(1);
 	glPopMatrix();
 
