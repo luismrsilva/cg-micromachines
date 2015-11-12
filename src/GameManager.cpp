@@ -189,7 +189,7 @@ void GameManager::display(){
 
 	_globalLight->draw();
 
-	drawStartLine(0.3, -0.2, 0);
+	drawStartLine(0.3, -0.2, -0.02);
 
 	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
 		(*i)->draw();
