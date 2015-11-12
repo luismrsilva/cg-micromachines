@@ -267,6 +267,7 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 'P':
 			cout << "No-clip toggled" << endl;
 			_no_clip = !_no_clip;
+			_car->setGhost(_no_clip);
 			break;
 		default:
 			break;

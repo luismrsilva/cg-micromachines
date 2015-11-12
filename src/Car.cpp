@@ -18,6 +18,7 @@ using namespace std;
 Car::Car() : DynamicObject(){
 	_angle_deg = 0;
 	_isGoingForward = true;
+	_isGhost = false;
 }
 
 Car::~Car(){
@@ -61,6 +62,10 @@ void Car::updateBox(){
 					cm(6.5 + fabs(6.5*sin(angle))), *getPosition());
 }
 
+void Car::setGhost(bool status){
+	_isGhost = status;
+}
+
 void Car::draw(){
 	D_TRACE();
 
@@ -89,7 +94,8 @@ void Car::draw(){
 
 		glPushMatrix();	// car tires
 			glRotatef(-90, 0, 1, 0);
-			setColor(0.06, 0.06, 0.06);	// tire color
+			if (_isGhost) setColor(0.9, 0.9, 0.9);
+		    else setColor(0.06, 0.06, 0.06);
 
 			glTranslatef(0.0f, -0.024f, 0.024f);
 			glutSolidTorus(0.004f, 0.005f, 8, 16);

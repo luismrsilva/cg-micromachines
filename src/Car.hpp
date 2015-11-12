@@ -18,12 +18,14 @@ class Car : public DynamicObject {
 		double getXYAngle();
 		bool setGoingForward(bool forward);
 		bool isGoingForward();
+		void setGhost(bool status);
 		void setXYAngle(double deg);
 		void updateBox();
 		void reset();
 	private:
 		double _angle_deg;
 		bool _isGoingForward;
+		bool _isGhost;
 };
 
 #endif //_CAR_H
