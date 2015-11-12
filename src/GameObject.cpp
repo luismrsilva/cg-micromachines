@@ -50,6 +50,17 @@ void GameObject::update(double delta_t){
 	D_TRACE();
 }
 
+void GameObject::initMaterial(GLfloat r, GLfloat g, GLfloat b){
+	GLfloat amb[] = {r, g, b, 1.0};
+	GLfloat dif[] = {r, g, b, 1.0};
+	GLfloat spec[] = {1.0, 1.0, 1.0, 1.0};
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, amb);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, dif);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, spec);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 69.0);
+}
+
 void GameObject::updateBox(){
 	D_TRACE(<<"SHOLDN'T BE CALLED");
 }
