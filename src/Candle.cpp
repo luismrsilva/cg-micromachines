@@ -12,6 +12,13 @@
 Candle::Candle(GLenum lightNum, double x, double y, double z) : StaticObject(x, y, z){
 	_lightsource = new LightSource(lightNum);
 	_lightsource->setPosition(x, y, z + mm(76));
+	
+	_lightsource->setDirection(0.0, 0.0, -1.0);
+	_lightsource->setAmbient(0.0, 0.0, 0.0, 1.0);
+	_lightsource->setDiffuse(1.0, 1.0, 1.0, 1.0);
+	_lightsource->setSpecular(1.0, 1.0, 1.0, 1.0);
+	_lightsource->setCutOff(90.0);		// [0, 90] or 180 (deg)
+	_lightsource->setExponent(0.5);		// [0, 128]
 }
 
 Candle::~Candle(){
