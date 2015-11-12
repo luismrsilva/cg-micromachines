@@ -218,6 +218,11 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			cout << "Candles lighting toggled" << endl;
 			toggleCandles();
 			break;
+		case 'g':
+		case 'G':
+			cout << "Shading" << endl;
+			toggleShading();
+			break;
 		default:
 			break;
 	}
@@ -319,6 +324,17 @@ bool GameManager::toggleLighting(){
 void GameManager::toggleCandles(){
 	for(vector<Candle*>::iterator i = _candles.begin(); i != _candles.end(); i++){
 		(*i)->toggleLight();
+	}
+}
+
+void GameManager::toggleShading() {
+	GLint param;
+	glGetIntegerv(GL_SHADE_MODEL, &param);
+	if (param == GL_SMOOTH){
+		glShadeModel(GL_FLAT);
+	}
+	else {
+		glShadeModel(GL_SMOOTH);
 	}
 }
 

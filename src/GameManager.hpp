@@ -37,6 +37,7 @@ class GameManager {
 		void orangeRespawn();
 		bool toggleLighting();
 		void toggleCandles();
+		void toggleShading();
 	private:
 		Car *_car;
 		Roadside *_roadside;
