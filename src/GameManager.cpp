@@ -44,6 +44,7 @@ void GameManager::orangeRespawn(){
 
 GameManager::GameManager(){
 	D_TRACE();
+	_enableTeaPot = false;
 
 	/* Use (lightNum++) when creating a new light object */
 	GLenum lightNum = GL_LIGHT0;
@@ -240,6 +241,18 @@ void GameManager::display(){
 		(*i)->draw();
 	}
 
+	/* Teapot for light debugging */
+	if(_enableTeaPot){
+		glPushMatrix();
+			glLoadIdentity();
+			glTranslatef(	GAME_TABLE_LIMIT/7,
+							GAME_TABLE_LIMIT/5,
+							GAME_TABLE_LIMIT/15);
+			glRotatef(90.0, 1, 0, 0);
+			glutSolidTeapot(GAME_TABLE_LIMIT/10.);
+		glPopMatrix();
+	}
+
 	glFlush();
 }
 
@@ -282,6 +295,10 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			cout << "No-clip toggled" << endl;
 			_no_clip = !_no_clip;
 			_car->setGhost(_no_clip);
+			break;
+		case 'T':	// Only Uppercase T
+			// Teapot for debugging.
+			_enableTeaPot = !_enableTeaPot;
 			break;
 		default:
 			break;

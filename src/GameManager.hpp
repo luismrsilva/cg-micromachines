@@ -55,6 +55,7 @@ class GameManager {
 		Camera *_currentCamera;
 		PerspectiveCamera *_movingCamera;
 		LightSource *_globalLight;
+		bool _enableTeaPot;
 
 };
 
