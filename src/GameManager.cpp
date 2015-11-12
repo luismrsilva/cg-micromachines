@@ -29,7 +29,6 @@ using namespace std;
 
 #include <typeinfo>
 
-
 void GameManager::orangeSpeedInc(float inc){
 	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
 		(*i)->setSpeed((*i)->getSpeed() * inc);
@@ -260,6 +259,15 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			cout << "Shading" << endl;
 			toggleShading();
 			break;
+		case 'n':
+		case 'N':
+			cout << "Main lighting toggled" << endl;
+			break;
+		case 'p':
+		case 'P':
+			cout << "No-clip toggled" << endl;
+			_no_clip = !_no_clip;
+			break;
 		default:
 			break;
 	}
@@ -327,6 +335,7 @@ void GameManager::update(double delta_t){
 		(*i)->updateBox();
 	}
 
+	if (_no_clip) return;
 
 	/* check for collisions */
 	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){

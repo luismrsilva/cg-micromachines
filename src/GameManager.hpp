@@ -47,6 +47,7 @@ class GameManager {
 		vector<GameObject*> _game_objects;
 		vector<Camera*> _cameras;
 		bool *_isKeyPressed;
+		bool _no_clip = false;
 
 		enum KEYS{
 			UP, LEFT, DOWN, RIGHT
