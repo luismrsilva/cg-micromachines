@@ -26,6 +26,7 @@ using namespace std;
 #include "debug.hpp"
 #include "OrthogonalCamera.hpp"
 #include "PerspectiveCamera.hpp"
+#include "LightSource.hpp"
 
 #include <typeinfo>
 
@@ -46,6 +47,16 @@ GameManager::GameManager(){
 
 	/* Use (lightNum++) when creating a new light object */
 	GLenum lightNum = GL_LIGHT0;
+
+	/* Global Directional Light */
+	_globalLight = new LightSource(lightNum++);
+	_globalLight->setAmbient(0.05, 0.05, 0.05, 1.0);
+	_globalLight->setDiffuse(1.0, 1.0, 1.0, 1.0);
+	_globalLight->setSpecular(0.1, 0.1, 0.1, 1.0);
+	_globalLight->setPosition(0, 0, GAME_TABLE_LIMIT/4);
+	_globalLight->setDirection(0, 0, -1);
+	_globalLight->setCutOff(180);
+	_globalLight->setExponent(1);
 
 	/** Key State Array **/
 	_isKeyPressed = (bool*) malloc(4 * sizeof(bool));
@@ -141,7 +152,7 @@ void GameManager::init(){
 
 
 	/* global lighting stuff */
-	GLfloat ambient[4] = {0.01, 0.02, 0.1, 1.0};
+	GLfloat ambient[4] = {0.04, 0.05, 0.06, 1.0};
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 }
 
@@ -220,6 +231,8 @@ void GameManager::display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(1.0f, 1.0f, 1.0f);
 
+	_globalLight->draw();
+
 	drawTable(0, 0, -1.52f);
 	drawStartLine(0.3, -0.2, 0);
 
@@ -262,6 +275,7 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 'n':
 		case 'N':
 			cout << "Main lighting toggled" << endl;
+			_globalLight->toggleState();
 			break;
 		case 'p':
 		case 'P':
