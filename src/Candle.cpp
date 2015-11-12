@@ -31,10 +31,6 @@ Candle::Candle(GLenum lightNum, double x, double y, double z) : StaticObject(x, 
 Candle::~Candle(){
 }
 
-void Candle::update(double delta_t){
-
-}
-
 void Candle::draw(){
 	Vector3 *pos = getPosition();
 
@@ -67,8 +63,4 @@ void Candle::draw(){
 
 void Candle::toggleLight(){
 	_lightsource->toggleState();
-}
-
-void Candle::updateBox(){
-
 }

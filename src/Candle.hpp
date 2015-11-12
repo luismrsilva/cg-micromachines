@@ -14,9 +14,7 @@ class Candle : public StaticObject {
 	public:
 		Candle(GLenum lightNum, double x, double y, double z);
 		~Candle();
-		void update(double delta_t);
 		void draw();
-		void updateBox();
 		void toggleLight();
 	private:
 		LightSource *_lightsource;

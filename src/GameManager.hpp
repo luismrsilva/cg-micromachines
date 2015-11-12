@@ -11,6 +11,7 @@
 #include <vector>
 using namespace std;
 
+#include "Table.hpp"
 #include "GameObject.hpp"
 #include "Car.hpp"
 #include "Camera.hpp"
@@ -40,6 +41,7 @@ class GameManager {
 		void toggleShading();
 	private:
 		Car *_car;
+		Table *_table;
 		Roadside *_roadside;
 		vector<Candle*> _candles;
 		vector<Butter*> _butters;
