@@ -24,7 +24,7 @@ GameObject::GameObject(double x, double y, double z) : Entity(x, y, z){
 }
 
 GameObject::~GameObject(){
-
+	delete _material;
 }
 
 bool GameObject::isColidingWith(const GameObject &obj){

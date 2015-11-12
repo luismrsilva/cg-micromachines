@@ -15,16 +15,18 @@ using namespace std;
 #include "myunits.hpp"
 #include "game_config.hpp"
 
+#define	DEFAULT_SPECULAR	setSpecular(1.0, 1.0, 1.0, 1.0);
+
 Material::Material(){
 	setAmbient(0.1, 0.1, 0.1, 1.0);
 	setDiffuse(0.4, 0.4, 0.4, 1.0);
-	setSpecular(1.0, 1.0, 1.0, 1.0);
+	DEFAULT_SPECULAR
 }
 
 Material::Material(GLfloat r, GLfloat g, GLfloat b){
 	setAmbient(r, g, b, 1.0);
 	setDiffuse(r, g, b, 1.0);
-	setSpecular(1.0, 1.0, 1.0, 1.0);
+	DEFAULT_SPECULAR
 	setShininess(69.0);
 }
 
@@ -34,7 +36,7 @@ Material::~Material(){
 void Material::setMaterial(GLfloat r, GLfloat g, GLfloat b){
 	setAmbient(r, g, b, 1.0);
 	setDiffuse(r, g, b, 1.0);
-	setSpecular(1.0, 1.0, 1.0, 1.0);
+	DEFAULT_SPECULAR
 	setShininess(69.0);
 }
 
@@ -68,4 +70,5 @@ void Material::draw(){
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, _diffuse);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, _specular);
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, _shine);
+	glColor4fv(_diffuse);
 }

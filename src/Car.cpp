@@ -15,14 +15,20 @@ using namespace std;
 
 #include "debug.hpp"
 
+Material *_tireMaterial = new Material();
+
 Car::Car() : DynamicObject(){
 	_angle_deg = 0;
 	_isGoingForward = true;
 	_isGhost = false;
+
+	setColor(0.6, 0, 0);
+	_tireMaterial->setMaterial(0.1, 0.1, 0.1);
+
 }
 
 Car::~Car(){
-
+	delete _tireMaterial;
 }
 
 bool Car::isGoingForward(){
@@ -66,6 +72,19 @@ void Car::setGhost(bool status){
 	_isGhost = status;
 }
 
+void drawTireAt(float xc, float yc, float zc, float x, float y, float angle){
+	glPushMatrix();
+		glLoadIdentity();
+		glTranslatef(xc, yc, zc);
+		glRotatef(angle, 0, 0, 1.);
+		glTranslatef(x, y, 0);
+	    glScalef(cm(13), cm(13), cm(13));
+
+		#include "one_tire_calls.hpp"
+
+	glPopMatrix();
+}
+
 void Car::draw(){
 	D_TRACE();
 
@@ -75,37 +94,17 @@ void Car::draw(){
 
 	glPushMatrix();
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
-		glRotatef(this->_angle_deg-90., 0, 0, 1.);
-	    glScalef(1.4f, 1.4f, 1.4f);
+		glRotatef(this->_angle_deg, 0, 0, 1.);
+	    glScalef(cm(13), cm(13), cm(13));
 
-		glPushMatrix();	// car body
-		    setColor(0.7, 0.0, 0.1);
-			glScalef(1, 2, 0.6);
-			glTranslatef(0.0f, 0.0f, 0.01f);
-			glutSolidCube(cm(4));
-		glPopMatrix();
+		_material->draw();
+		#include "car_calls.h"
 
-		glPushMatrix();	// car window
-			setColor(0.7, 0.6, 1.0);
-			glScalef(1, 1.2, 1.2); // longer and taller
-			glTranslatef(0.0f, -0.01f, 0.016f);
-			glutSolidSphere(cm(1.5), 6, 6);
-		glPopMatrix();
-
-		glPushMatrix();	// car tires
-			glRotatef(-90, 0, 1, 0);
-			if (_isGhost) setColor(0.9, 0.9, 0.9);
-		    else setColor(0.06, 0.06, 0.06);
-
-			glTranslatef(0.0f, -0.024f, 0.024f);
-			glutSolidTorus(0.004f, 0.005f, 8, 16);
-			glTranslatef(0.0f, 0.045f, 0.0f);
-			glutSolidTorus(0.004f, 0.005f, 8, 16);
-			glTranslatef(0.0f, 0.0f, -0.048f);
-			glutSolidTorus(0.004f, 0.005f, 8, 16);
-			glTranslatef(0.0f, -0.045f, 0.0f);
-			glutSolidTorus(0.004f, 0.005f, 8, 16);
-		glPopMatrix();
+		_tireMaterial->draw();
+		drawTireAt(pos->getX(), pos->getY(), pos->getZ(), -0.03, -0.038, this->_angle_deg);
+		drawTireAt(pos->getX(), pos->getY(), pos->getZ(),  0.03, -0.038, this->_angle_deg);
+		drawTireAt(pos->getX(), pos->getY(), pos->getZ(), -0.03,  0.038, this->_angle_deg);
+		drawTireAt(pos->getX(), pos->getY(), pos->getZ(),  0.03,  0.038, this->_angle_deg);
 
     glPopMatrix();
 
