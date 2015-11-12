@@ -34,6 +34,11 @@
 #define GAME_TABLE_LIMIT 	1.5f
 
 
+// Subdivision settings
+#define GAME_TABLE_TILE_DIVISION_COUNT	32
+
+
+
 
 
 // Object sizes

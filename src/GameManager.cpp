@@ -147,11 +147,35 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 	/* Cameras take care of aspect ratio too */
 }
 
+void drawSquareXY(GLfloat x, GLfloat y, GLfloat halfWidth) {
+	glPushMatrix();
+		glTranslatef(x, y, 0);
+		glVertex3f(x - halfWidth, y - halfWidth, 0);
+		glVertex3f(x + halfWidth, y - halfWidth, 0);
+		glVertex3f(x + halfWidth, y + halfWidth, 0);
+		glVertex3f(x - halfWidth, y + halfWidth, 0);
+	glPopMatrix();
+}
+
 void drawTable(GLfloat x, GLfloat y, GLfloat z){
+	const float halfWidth = GAME_TABLE_LIMIT / GAME_TABLE_TILE_DIVISION_COUNT;
+	const float width = 2 * halfWidth;
+	const float start = - GAME_TABLE_LIMIT + halfWidth;
 	glPushMatrix();
 		glColor3f(0.1f, 0.24f, 0.1f);
-		glTranslatef(x, y, z);
-		glutSolidCube(GAME_TABLE_LIMIT*2);
+		glTranslatef(x, y, z + GAME_TABLE_LIMIT);
+		//glutSolidCube(GAME_TABLE_LIMIT*2);
+		/* draw table surface in -GAME_TABLE_LIMIT < x, y < GAME_TABLE_LIMIT */
+		glBegin(GL_QUADS);
+		//percorrer linhas
+		for (float i = start; i < GAME_TABLE_LIMIT; i += width) {
+			//percorrer colunas
+			for (float j = start; j < GAME_TABLE_LIMIT; j += width) {
+				drawSquareXY(i, j, halfWidth);
+			}
+		}
+		glEnd();
+
 	glPopMatrix();
 }
 
