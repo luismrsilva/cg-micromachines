@@ -267,9 +267,15 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			cout << "Candles lighting toggled" << endl;
 			toggleCandles();
 			break;
+		case 'b':
+		case 'B':
+			cout << "Box drawing toggled" << endl;
+			for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++)
+				(*i)->toggleBox();
+			break;
 		case 'g':
 		case 'G':
-			cout << "Shading" << endl;
+			cout << "Shading toggled" << endl;
 			toggleShading();
 			break;
 		case 'n':

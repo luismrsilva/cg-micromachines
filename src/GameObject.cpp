@@ -14,10 +14,12 @@
 using namespace std;
 
 GameObject::GameObject() : Entity() {
+	_isBoxMode = false;
 	_material = new Material();
 }
 
 GameObject::GameObject(double x, double y, double z) : Entity(x, y, z){
+	_isBoxMode = false;
 	_material = new Material();
 }
 
@@ -41,13 +43,16 @@ bool GameObject::processCollisionWith(GameObject &obj){
 
 void GameObject::draw(){
 	D_TRACE();
-	#ifdef DEBUG
+	if (_isBoxMode)
 		_box.draw();
-	#endif
 }
 
 void GameObject::update(double delta_t){
 	D_TRACE();
+}
+
+void GameObject::toggleBox(){
+	_isBoxMode = !_isBoxMode;
 }
 
 void GameObject::setColor(GLfloat r, GLfloat g, GLfloat b){

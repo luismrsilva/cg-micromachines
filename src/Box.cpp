@@ -55,16 +55,16 @@ void Box::draw() const{
 	D_TRACE( << "box: " << _left << ", " << _right << ", " << _bottom << ", " << _top);
 	glColor3f(0.0, 0.0, 1.0);
 	glBegin(GL_LINE_LOOP);
-	glVertex3f(_left, _top, 0);
-	glVertex3f(_left, _bottom, 0);
-	glVertex3f(_right, _bottom, 0);
-	glVertex3f(_right, _top, 0);
+		glVertex3f(_left, _top, 0);
+		glVertex3f(_left, _bottom, 0);
+		glVertex3f(_right, _bottom, 0);
+		glVertex3f(_right, _top, 0);
 	glEnd();
 
 	glBegin(GL_POINTS);
-	glColor3f(0, 1., 1.);
-	const Vector3 *pos = getPosition();
-	glVertex3f(pos->getX(), pos->getY(), pos->getZ());
+		glColor3f(0, 1., 1.);
+		const Vector3 *pos = getPosition();
+		glVertex3f(pos->getX(), pos->getY(), pos->getZ());
 	glEnd();
 
 }
