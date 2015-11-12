@@ -18,18 +18,26 @@
 Box::Box() : Entity() {
 	_left = _right = _top = _bottom = 0;
 	_halfWidth = _halfHeight = 0;
+	initMaterial();
 }
 
 Box::Box(double left, double right, double top, double bottom) :  Entity() {
 	changeTo(left, right, top, bottom);
+	initMaterial();
 }
 
 Box::Box(double width, double height, const Vector3 &center) : Entity() {
 	changeTo(width, height, center);
+	initMaterial();
 }
 
 Box::~Box(){
+	delete _material;
+}
 
+void Box::initMaterial(){
+	_material = new Material();
+	_material->setMaterial(0.1, 0.1, 1.0);
 }
 
 void Box::changeTo(double left, double right, double top, double bottom) {
@@ -54,6 +62,7 @@ void Box::changeTo(double width, double height, const Vector3 &center) {
 void Box::draw() const{
 	D_TRACE( << "box: " << _left << ", " << _right << ", " << _bottom << ", " << _top);
 	glColor3f(0.0, 0.0, 1.0);
+	_material->draw();
 	glBegin(GL_LINE_LOOP);
 		glVertex3f(_left, _top, 0);
 		glVertex3f(_left, _bottom, 0);

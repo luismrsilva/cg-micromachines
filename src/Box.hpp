@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include "Entity.hpp"
 #include "Vector3.hpp"
+#include "Material.hpp"
 
 class Box : public Entity {
 	public:
@@ -19,6 +20,7 @@ class Box : public Entity {
 		void changeTo(double width, double height, const Vector3 &center);
 		void draw() const;
 		bool isIntersecting(const Box &box) const;
+		void initMaterial();
 	private:
 		double _left;
 		double _right;
@@ -26,6 +28,7 @@ class Box : public Entity {
 		double _bottom;
 		double _halfWidth;
 		double _halfHeight;
+		Material *_material;
 };
 
 #endif //_BOX_H
