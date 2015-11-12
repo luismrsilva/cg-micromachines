@@ -52,7 +52,6 @@ GameManager::GameManager(){
 	_isKeyPressed = (bool*) malloc(4 * sizeof(bool));
 	memset(_isKeyPressed, false, 4);
 
-
 	/** Game Objects **/
 	_roadside = new Roadside();
 	_game_objects.push_back(_roadside);
@@ -63,12 +62,12 @@ GameManager::GameManager(){
 	_butters.push_back(new Butter(-0.4, 0.8, BUTTER_SIZE_Z/2.));
 	_butters.push_back(new Butter( 0.7,-1.1, BUTTER_SIZE_Z/2.));
 
-	_candles.push_back(new Candle(lightNum++, 0.9, -0.3, 0));
-	_candles.push_back(new Candle(lightNum++, 0.9,  0.9, 0));
+	_candles.push_back(new Candle(lightNum++, 1.0, -0.4, 0));
+	_candles.push_back(new Candle(lightNum++, 1.0,  1.0, 0));
 	_candles.push_back(new Candle(lightNum++,-0.8, -0.8, 0));
 	_candles.push_back(new Candle(lightNum++,-0.8,  0.8, 0));
-	_candles.push_back(new Candle(lightNum++, 0.0,  1.3, 0));
-	_candles.push_back(new Candle(lightNum++,-0.1, -1.3, 0));
+	_candles.push_back(new Candle(lightNum++, 0.0,  1.4, 0));
+	_candles.push_back(new Candle(lightNum++,-0.2, -1.4, 0));
 
 	/* Put candles inside _game_objects */
 	for(vector<Candle*>::iterator i = _candles.begin(); i != _candles.end(); i++){
@@ -162,6 +161,14 @@ void drawTable(GLfloat x, GLfloat y, GLfloat z){
 	const float width = 2 * halfWidth;
 	const float start = - GAME_TABLE_LIMIT + halfWidth;
 	glPushMatrix();
+		GLfloat amb[] = {0.2, 0.8, 0.2, 1.0};
+		GLfloat dif[] = {0.2, 0.8, 0.2, 1.0};
+		GLfloat spec[] = {1.0, 1.0, 1.0, 1.0};
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, amb);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, dif);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, spec);
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 69.0);
+
 		glColor3f(0.1f, 0.24f, 0.1f);
 		glTranslatef(x, y, z + GAME_TABLE_LIMIT);
 		//glutSolidCube(GAME_TABLE_LIMIT*2);

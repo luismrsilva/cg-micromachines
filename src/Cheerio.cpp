@@ -42,7 +42,7 @@ void Cheerio::draw(){
 
     glPushMatrix();
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
-        glColor3f(0.9f, 0.7f, 0.2f);
+        setColor(0.9, 0.7, 0.2);
         glutSolidTorus(CHEERIO_INNER_RADIUS, CHEERIO_OUTTER_RADIUS, 6, 12);
     glPopMatrix();
 

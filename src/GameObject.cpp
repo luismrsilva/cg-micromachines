@@ -50,7 +50,8 @@ void GameObject::update(double delta_t){
 	D_TRACE();
 }
 
-void GameObject::initMaterial(GLfloat r, GLfloat g, GLfloat b){
+void GameObject::setColor(GLfloat r, GLfloat g, GLfloat b){
+	glColor3f(r, g, b);
 	GLfloat amb[] = {r, g, b, 1.0};
 	GLfloat dif[] = {r, g, b, 1.0};
 	GLfloat spec[] = {1.0, 1.0, 1.0, 1.0};
