@@ -9,10 +9,10 @@
 #include <GL/glut.h>
 #include "myunits.hpp"
 
-#define CANDLE_BODY_HEIGHT		cm(6)
+#define CANDLE_BODY_HEIGHT		cm(15)
 #define CANDLE_WICK_WIDTH		mm(1)
-#define CANDLE_WICK_HEIGHT		mm(4)
-#define CANDLE_FLAME_HEIGHT		mm(4)
+#define CANDLE_WICK_HEIGHT		mm(3)
+#define CANDLE_FLAME_HEIGHT		mm(6)
 
 Candle::Candle(GLenum lightNum, double x, double y, double z) : StaticObject(x, y, z){
 	_lightsource = new LightSource(lightNum);
