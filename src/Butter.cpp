@@ -37,7 +37,7 @@ void Butter::draw(){
 	Vector3 *pos = getPosition();
 
 	glPushMatrix();
-		setColor(0.7, 0.7, 0.5);
+		setColor(0.8, 0.8, 0.45);
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 		glScalef(BUTTER_SIZE_X, BUTTER_SIZE_Y, BUTTER_SIZE_Z);
 		glutSolidCube(1);
