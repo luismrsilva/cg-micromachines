@@ -8,6 +8,7 @@
 
 #include "Entity.hpp"
 #include "Box.hpp"
+#include "Material.hpp"
 #include <GL/glut.h>
 #include <stdbool.h>
 
@@ -19,6 +20,7 @@ class GameObject : public Entity {
 		virtual ~GameObject();
 		virtual void draw();
 		virtual void update(double delta_t);
+		void toggleBox();
 		void setColor(GLfloat r, GLfloat g, GLfloat b);
 		bool isColidingWith(const GameObject &obj);
 		bool isOutOfBounds();
@@ -26,6 +28,8 @@ class GameObject : public Entity {
 		virtual void updateBox();
 	protected:
 		Box _box;
+		Material *_material;
+		bool _isBoxMode;
 };
 
 #endif
