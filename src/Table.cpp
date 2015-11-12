@@ -35,7 +35,7 @@ void Table::draw(){
 	const float width = 2 * halfWidth;
 	const float start = - GAME_TABLE_LIMIT + halfWidth;
 	glPushMatrix();
-		setColor(0.1, 0.4, 0.1);
+		setColor(0.1, 0.2, 0.1);
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ() + GAME_TABLE_LIMIT);
 		//glutSolidCube(GAME_TABLE_LIMIT*2);
 		/* draws table surface in -GAME_TABLE_LIMIT < x, y < GAME_TABLE_LIMIT */
