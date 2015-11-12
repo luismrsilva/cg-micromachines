@@ -139,6 +139,11 @@ void GameManager::init(){
 	glutInitWindowSize(700, 700);
 	glutInitWindowPosition(-1, -1);
 	glutCreateWindow(GAME_WINDOW_TITLE);
+
+
+	/* global lighting stuff */
+	GLfloat ambient[4] = {0.01, 0.02, 0.1, 1.0};
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 }
 
 void GameManager::reshape(GLsizei w, GLsizei h){
