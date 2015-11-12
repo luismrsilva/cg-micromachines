@@ -8,6 +8,7 @@
 
 #include "Entity.hpp"
 #include "Box.hpp"
+#include "Material.hpp"
 #include <GL/glut.h>
 #include <stdbool.h>
 
@@ -26,6 +27,7 @@ class GameObject : public Entity {
 		virtual void updateBox();
 	protected:
 		Box _box;
+		Material *_material;
 };
 
 #endif

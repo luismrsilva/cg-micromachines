@@ -83,36 +83,36 @@ void LightSource::setDirection(const Vector3 &dir){
 	_direction[3] = 0.;
 }
 
-void LightSource::setDirection(float x, float y, float z){
+void LightSource::setDirection(GLfloat x, GLfloat y, GLfloat z){
 	_direction[0] = x;
 	_direction[1] = y;
 	_direction[2] = z;
 	_direction[3] = 0.;
 }
 
-void LightSource::setCutOff(float cut_off){
+void LightSource::setCutOff(GLfloat cut_off){
 	_cut_off = cut_off;
 }
 
-void LightSource::setExponent(float exp){
+void LightSource::setExponent(GLfloat exp){
 	_exponent = exp;
 }
 
-void LightSource::setAmbient(float r, float g, float b, float a){
+void LightSource::setAmbient(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
 	_ambient[0] = r;
 	_ambient[1] = g;
 	_ambient[2] = b;
 	_ambient[3] = a;
 }
 
-void LightSource::setDiffuse(float r, float g, float b, float a) {
+void LightSource::setDiffuse(GLfloat r, GLfloat g, GLfloat b, GLfloat a) {
 	_diffuse[0] = r;
 	_diffuse[1] = g;
 	_diffuse[2] = b;
 	_diffuse[3] = a;
 }
 
-void LightSource::setSpecular(float r, float g, float b, float a){
+void LightSource::setSpecular(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
 	_specular[0] = r;
 	_specular[1] = g;
 	_specular[2] = b;
