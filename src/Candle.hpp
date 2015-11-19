@@ -16,6 +16,7 @@ class Candle : public StaticObject {
 		~Candle();
 		void draw();
 		void toggleLight();
+		void setLightColor(GLfloat r, GLfloat g, GLfloat b);
 	private:
 		LightSource *_lightsource;
 
