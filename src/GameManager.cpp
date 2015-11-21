@@ -222,11 +222,17 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case '3':
 		case '4':
 			_currentCamera = _cameras[key-'1'];
+			glutPostRedisplay();	// force draw
 			cout << "Changed to camera " << (key) << endl;
 			break;
 		case 'r':
 		case 'R':
 			resetGame();
+			cout << "Game resetted" << endl;
+			break;
+		case 's':
+		case 'S':
+			_isPaused = !_isPaused;
 			cout << "Game resetted" << endl;
 			break;
 		case 'l':
