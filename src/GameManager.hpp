@@ -30,9 +30,11 @@ class GameManager {
 		void reshape(GLsizei w, GLsizei h);
 		void keyPressed(unsigned char key, int x, int y);
 		void onTimer(int val);
-		void idle();
-		void update(double delta_t);
 		void init();
+		void idle();
+		void endGame();
+		void resetGame();
+		void update(double delta_t);
 		void setKeyPressed(int glut_key, bool status);
 		void orangeSpeedInc(float inc);
 		void orangeRespawn();
@@ -50,6 +52,8 @@ class GameManager {
 		vector<Camera*> _cameras;
 		bool *_isKeyPressed;
 		bool _no_clip = false;
+		bool _isPaused = false;
+		int _lives = 5;
 
 		enum KEYS{
 			UP, LEFT, DOWN, RIGHT

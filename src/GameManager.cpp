@@ -214,17 +214,17 @@ void GameManager::display(){
 
 void GameManager::keyPressed(unsigned char key, int x, int y){
 	switch(key){
-		case 'r':
-		case 'R':
-			_car->reset();
-			cout << "Car position resetted" << endl;
-			break;
 		case '1':
 		case '2':
 		case '3':
 		case '4':
 			_currentCamera = _cameras[key-'1'];
 			cout << "Changed to camera " << (key) << endl;
+			break;
+		case 'r':
+		case 'R':
+			resetGame();
+			cout << "Game resetted" << endl;
 			break;
 		case 'l':
 		case 'L':
@@ -268,12 +268,29 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 }
 
 void GameManager::onTimer(int val){
-	update(((double) val)/1000.);
-	glutPostRedisplay();
+	if (!_isPaused){
+		update(((double) val)/1000.);
+		glutPostRedisplay();
+	} else{
+		idle();
+	}
 }
 
 void GameManager::idle(){
+	// stuff to do while paused
+}
 
+void GameManager::endGame(){
+	/*
+		Stop car
+		Display losing message
+		Put everything grey ?
+	*/
+}
+
+void GameManager::resetGame(){
+	_lives = 5;
+	_car->reset();
 }
 
 void GameManager::update(double delta_t){
@@ -335,6 +352,7 @@ void GameManager::update(double delta_t){
 	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
 		if( (*i)->processCollisionWith(*_car) ){
 			D_TRACE( << "COLISION!! " << typeid(*i).name() << " " << glutGet(GLUT_ELAPSED_TIME));
+			if (--_lives == 0) resetGame();
 		};
 	}
 	for(vector<Butter*>::iterator i = _butters.begin(); i != _butters.end(); i++){
@@ -345,8 +363,6 @@ void GameManager::update(double delta_t){
 	if( _roadside->processCollisionWith(*_car) ){
 		D_TRACE( << "COLISION!! " << typeid(_roadside).name() << " " << glutGet(GLUT_ELAPSED_TIME));
 	}
-
-
 
 }
 
