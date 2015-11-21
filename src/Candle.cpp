@@ -24,11 +24,20 @@ Candle::Candle(GLenum lightNum, double x, double y, double z) : StaticObject(x, 
 	_lightsource->setAmbient(0.0, 0.0, 0.0, 1.0);
 	_lightsource->setDiffuse(1.0, 0.8, 0.4, 1.0);
 	_lightsource->setSpecular(1.0, 0.8, 0.6, 1.0);
-	_lightsource->setCutOff(85.0);		// [0, 90] or 180 (deg)
-	_lightsource->setExponent(1);		// [0, 128]
+	_lightsource->setCutOff(72.0);		// [0, 90] or 180 (deg)
+	_lightsource->setExponent(0.5);		// [0, 128]
 }
 
 Candle::~Candle(){
+}
+
+
+void Candle::setLightColor(GLfloat r, GLfloat g, GLfloat b){
+	_lightsource->setAmbient(r*0.01, g*0.01, b*0.01, 1.0);
+	_lightsource->setDiffuse(r, g, b, 1.0);
+	_lightsource->setSpecular(	r*0.6 + 0.4,
+								g*0.6 + 0.4,
+								b*0.6 + 0.4, 1.0);
 }
 
 void Candle::draw(){

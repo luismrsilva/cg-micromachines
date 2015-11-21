@@ -69,12 +69,15 @@ GameManager::GameManager(){
 	_butters.push_back(new Butter(-0.4, 0.8, BUTTER_SIZE_Z/2.));
 	_butters.push_back(new Butter( 0.7,-1.1, BUTTER_SIZE_Z/2.));
 
-	_candles.push_back(new Candle(lightNum++, 1.0, -0.4, 0));
+	Candle *_redCandle;
+	_candles.push_back(_redCandle = new Candle(lightNum++, 1.0, -0.4, 0));
 	_candles.push_back(new Candle(lightNum++, 1.0,  1.0, 0));
 	_candles.push_back(new Candle(lightNum++,-0.8, -0.8, 0));
 	_candles.push_back(new Candle(lightNum++,-0.8,  0.8, 0));
 	_candles.push_back(new Candle(lightNum++, 0.0,  1.4, 0));
 	_candles.push_back(new Candle(lightNum++,-0.2, -1.4, 0));
+
+	_redCandle->setLightColor(1, 0, 0);
 
 	/* Put candles inside _game_objects */
 	for(vector<Candle*>::iterator i = _candles.begin(); i != _candles.end(); i++){
@@ -151,7 +154,7 @@ void GameManager::init(){
 	glEnable(GL_NORMALIZE);
 
 	/* global lighting stuff */
-	GLfloat ambient[4] = {0.04, 0.05, 0.06, 1.0};
+	GLfloat ambient[4] = {0.13, 0.15, 0.15, 1.0};
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 }
 
