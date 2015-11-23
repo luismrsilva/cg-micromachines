@@ -21,6 +21,7 @@ using namespace std;
 #include "Butter.hpp"
 #include "Orange.hpp"
 #include "Roadside.hpp"
+#include "SpotLightSource.hpp"
 
 class GameManager {
 	public:
@@ -60,7 +61,7 @@ class GameManager {
 		};
 		Camera *_currentCamera;
 		PerspectiveCamera *_movingCamera;
-		LightSource *_globalLight;
+		SpotLightSource *_globalLight;
 		bool _enableTeaPot;
 		void checkCollisions();
 };

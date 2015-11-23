@@ -19,6 +19,7 @@ using namespace std;
 #include "debug.hpp"
 #include "OrthogonalCamera.hpp"
 #include "PerspectiveCamera.hpp"
+#include "SpotLightSource.hpp"
 #include "LightSource.hpp"
 
 #include <typeinfo>
@@ -43,7 +44,7 @@ GameManager::GameManager(){
 	GLenum lightNum = GL_LIGHT0;
 
 	/* Global Directional Light */
-	_globalLight = new LightSource(lightNum++);
+	_globalLight = new SpotLightSource(lightNum++);
 	_globalLight->setAmbient(0.05, 0.05, 0.05, 1.0);
 	_globalLight->setDiffuse(1.0, 1.0, 1.0, 1.0);
 	_globalLight->setSpecular(0.1, 0.1, 0.1, 1.0);

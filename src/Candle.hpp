@@ -7,7 +7,7 @@
 #define __CANDLE_H
 
 #include "StaticObject.hpp"
-#include "LightSource.hpp"
+#include "PointLightSource.hpp"
 #include <GL/glut.h>
 
 class Candle : public StaticObject {
@@ -18,7 +18,7 @@ class Candle : public StaticObject {
 		void toggleLight();
 		void setLightColor(GLfloat r, GLfloat g, GLfloat b);
 	private:
-		LightSource *_lightsource;
+		PointLightSource *_lightsource;
 
 };
 

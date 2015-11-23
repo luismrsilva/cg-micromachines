@@ -24,7 +24,6 @@ LightSource::LightSource(GLenum num){
 
 	/* Set inital values to GL defaults */
 	setPosition(0.0, 0.0, 0.0);
-	setDirection(0.0, 0.0,-1.0);
 	setAmbient(0.0, 0.0, 0.0, 1.0);
 	if(_num == GL_LIGHT0){
 		setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -33,8 +32,6 @@ LightSource::LightSource(GLenum num){
 		setDiffuse(0.0, 0.0, 0.0, 0.0);
 		setSpecular(0.0, 0.0, 0.0, 0.0);
 	}
-	setCutOff(180.0);
-	setExponent(0.0);
 }
 
 LightSource::~LightSource(){
@@ -76,28 +73,6 @@ void LightSource::setPosition(float x, float y, float z){
 	_position[3] = 1.;
 }
 
-void LightSource::setDirection(const Vector3 &dir){
-	_direction[0] = dir.getX();
-	_direction[1] = dir.getY();
-	_direction[2] = dir.getZ();
-	_direction[3] = 0.;
-}
-
-void LightSource::setDirection(GLfloat x, GLfloat y, GLfloat z){
-	_direction[0] = x;
-	_direction[1] = y;
-	_direction[2] = z;
-	_direction[3] = 0.;
-}
-
-void LightSource::setCutOff(GLfloat cut_off){
-	_cut_off = cut_off;
-}
-
-void LightSource::setExponent(GLfloat exp){
-	_exponent = exp;
-}
-
 void LightSource::setAmbient(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
 	_ambient[0] = r;
 	_ambient[1] = g;
@@ -125,9 +100,5 @@ void LightSource::draw(){
 		glLightfv(_num, GL_DIFFUSE, _diffuse);
 		glLightfv(_num, GL_SPECULAR, _specular);
 		glLightfv(_num, GL_POSITION, _position);
-
-		glLightf(_num, GL_SPOT_CUTOFF, _cut_off);
-		glLightfv(_num, GL_SPOT_DIRECTION, _direction);
-		glLightf(_num, GL_SPOT_EXPONENT, _exponent);
 	}
 }
