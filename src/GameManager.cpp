@@ -153,6 +153,10 @@ void GameManager::init(){
 	/* Enable automatic normal normalization */
 	glEnable(GL_NORMALIZE);
 
+	/* Transparency */
+	glEnable (GL_BLEND);
+	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	/* global lighting stuff */
 	GLfloat ambient[4] = {0.13, 0.15, 0.15, 1.0};
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);

@@ -61,6 +61,12 @@ void GameObject::setColor(GLfloat r, GLfloat g, GLfloat b){
 	_material->draw();
 }
 
+void GameObject::setColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
+	glColor4f(r, g, b, a);
+	_material->setMaterial(r, g, b, a);
+	_material->draw();
+}
+
 void GameObject::updateBox(){
 	D_TRACE(<<"SHOLDN'T BE CALLED");
 }

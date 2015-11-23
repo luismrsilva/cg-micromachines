@@ -17,12 +17,14 @@ using namespace std;
 
 Material *_tireMaterial = new Material();
 
+#define CAR_BODY_COLOR	0.6,0,0
+
 Car::Car() : DynamicObject(){
 	_angle_deg = 0;
 	_isGoingForward = true;
 	_isGhost = false;
 
-	setColor(0.6, 0, 0);
+	setColor(CAR_BODY_COLOR);
 	_tireMaterial->setMaterial(0.1, 0.1, 0.1);
 
 }
@@ -70,6 +72,13 @@ void Car::updateBox(){
 
 void Car::setGhost(bool status){
 	_isGhost = status;
+	if(_isGhost){
+		_tireMaterial->setAlpha(0.4);
+		_material->setAlpha(0.4);
+	}else{
+		_tireMaterial->setAlpha(1.0);
+		_material->setAlpha(1.0);
+	}
 }
 
 void drawTireAt(float xc, float yc, float zc, float x, float y, float angle){

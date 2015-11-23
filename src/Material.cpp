@@ -40,6 +40,17 @@ void Material::setMaterial(GLfloat r, GLfloat g, GLfloat b){
 	setShininess(69.0);
 }
 
+void Material::setMaterial(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
+	setAmbient(r, g, b, 1.0);
+	setDiffuse(r, g, b, a);
+	DEFAULT_SPECULAR
+	setShininess(69.0);
+}
+
+void Material::setAlpha(GLfloat a){
+	_diffuse[3] = a;
+}
+
 void Material::setAmbient(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
 	_ambient[0] = r;
 	_ambient[1] = g;

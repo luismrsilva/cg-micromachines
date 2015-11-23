@@ -22,6 +22,7 @@ class GameObject : public Entity {
 		virtual void update(double delta_t);
 		void toggleBox();
 		void setColor(GLfloat r, GLfloat g, GLfloat b);
+		void setColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		bool isColidingWith(const GameObject &obj);
 		bool isOutOfBounds();
 		virtual bool processCollisionWith(GameObject &obj);

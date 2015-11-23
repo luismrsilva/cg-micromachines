@@ -15,10 +15,12 @@ class Material {
 		Material(GLfloat r, GLfloat g, GLfloat b);
 		~Material();
 		void setMaterial(GLfloat r, GLfloat g, GLfloat b);
+		void setMaterial(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setAmbient(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setDiffuse(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setSpecular(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setShininess(GLfloat shine);
+		void setAlpha(GLfloat a);
 		void draw();
 	private:
 		GLfloat _ambient[4];
