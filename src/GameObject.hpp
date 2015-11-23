@@ -20,7 +20,7 @@ class GameObject : public Entity {
 		virtual ~GameObject();
 		virtual void draw();
 		virtual void update(double delta_t);
-		void toggleBox();
+		virtual void toggleBox();
 		void setColor(GLfloat r, GLfloat g, GLfloat b);
 		void setColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		bool isColidingWith(const GameObject &obj);

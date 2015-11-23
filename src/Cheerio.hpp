@@ -17,6 +17,8 @@ class Cheerio : public Obstacle {
 		void draw();
 		void updateBox();
 		virtual bool processCollisionWith(GameObject &obj);
+	private:
+		void init();
 };
 
 #endif //__CHEERIO_H

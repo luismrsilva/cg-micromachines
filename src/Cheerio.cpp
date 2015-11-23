@@ -19,16 +19,20 @@ using namespace std;
 #define CHEERIO_INNER_RADIUS	cm(1)
 #define CHEERIO_OUTTER_RADIUS	cm(2)
 
-Cheerio::Cheerio() : Obstacle(){
-
+Cheerio::Cheerio() : Obstacle(0, 0, CHEERIO_OUTTER_RADIUS){
+	init();
 }
 
-Cheerio::Cheerio(double x, double y, double z) : Obstacle(x, y, z){
-
+Cheerio::Cheerio(double x, double y, double z) : Obstacle(x, y, z + CHEERIO_OUTTER_RADIUS){
+	init();
 }
 
 Cheerio::~Cheerio(){
 
+}
+
+void Cheerio::init(){
+	_material->setMaterial(0.9, 0.7, 0.2);
 }
 
 void Cheerio::updateBox(){
@@ -40,11 +44,11 @@ void Cheerio::updateBox(){
 void Cheerio::draw(){
 	Vector3 *pos = this->getPosition();
 
+	_material->draw();
     glPushMatrix();
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
-        setColor(0.9, 0.7, 0.2);
-        glutSolidTorus(CHEERIO_INNER_RADIUS, CHEERIO_OUTTER_RADIUS, 6, 12);
-    glPopMatrix();
+		glutSolidTorus(CHEERIO_INNER_RADIUS, CHEERIO_OUTTER_RADIUS, 6, 12);
+	glPopMatrix();
 
 	Obstacle::draw();
 }

@@ -2,7 +2,6 @@
  * Obstacle.cpp
  *
  * */
-
 #include "Obstacle.hpp"
 
 Obstacle::Obstacle() : DynamicObject(){

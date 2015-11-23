@@ -21,6 +21,7 @@ class Roadside : public StaticObject {
 		void draw();
 		void updateBox();
 		virtual bool processCollisionWith(GameObject &obj);
+		void toggleBox();
 	private:
 		vector<Cheerio*> _cheerios;
 		void drawCheerio(GLfloat x, GLfloat y, GLfloat z);

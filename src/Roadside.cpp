@@ -15,7 +15,7 @@ using namespace std;
 #include "debug.hpp"
 #include <typeinfo>
 
-Roadside::Roadside() : StaticObject(){
+Roadside::Roadside() : StaticObject(0,0,0){
 	drawCheerioLineXY(-1.0,-0.7, -1.0, 0.7);	// left inner
 	drawCheerioLineXY(-1.4,-1.1, -1.4, 1.1);	// left outer
 	drawCheerioLineXY(-1.1, 1.4, 1.15, 1.4);	// top outer
@@ -65,6 +65,7 @@ void Roadside::drawCheerio(GLfloat x, GLfloat y, GLfloat z){
 }
 
 void Roadside::drawCheerioLineXY(double sX, double sY, double eX, double eY){
+	double z = getPosition()->getZ();
 	double m, b;
 	m = (eY-sY)/(eX-sX);
 	b = sY - m*sX;
@@ -81,18 +82,18 @@ void Roadside::drawCheerioLineXY(double sX, double sY, double eX, double eY){
 		sX = t;
 	}else if(sX == eX){
 		for(double y = sY; y <= eY; y+=0.1f){
-			drawCheerio(sX, y, 0);
+			drawCheerio(sX, y, z);
 		}
 		return;
 	}
 
 	if(m > 1){
 		for(double y = sY; y <= eY; y+=0.1f){
-			drawCheerio((y-b)/m, y, 0);
+			drawCheerio((y-b)/m, y, z);
 		}
 	}else{
 		for(double x = sX; x <= eX; x+=0.1f){
-			drawCheerio(x, m*x+b, 0);
+			drawCheerio(x, m*x+b, z);
 		}
 	}
 
@@ -100,11 +101,13 @@ void Roadside::drawCheerioLineXY(double sX, double sY, double eX, double eY){
 
 void Roadside::drawCheerioBezierXY(double x1, double y1, double x2, double y2,
 						double x3, double y3, double n_points){
+
+	double z = getPosition()->getZ();
 	double inc = 1.0 / (n_points < 1.0 ? 1.0 : n_points);
 	for(double i = 0.; i < 1.0f; i+=inc){
 		double x = (1.-i)*((1.-i)*x1+i*x2) + i*((1.-i)*x2+i*x3);
 		double y = (1.-i)*((1.-i)*y1+i*y2) + i*((1.-i)*y2+i*y3);
-		drawCheerio(x, y, 0.);
+		drawCheerio(x, y, z);
 	}
 }
 
@@ -124,6 +127,12 @@ void Roadside::updateBox(){
 	D_TRACE();
 	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
 		(*i)->updateBox();
+	}
+}
+
+void Roadside::toggleBox(){
+	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
+		(*i)->toggleBox();
 	}
 }
 
