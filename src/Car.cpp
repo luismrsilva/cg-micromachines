@@ -89,7 +89,7 @@ void drawTireAt(float xc, float yc, float zc, float x, float y, float angle){
 		glTranslatef(x, y, 0);
 	    glScalef(cm(13), cm(13), cm(13));
 
-		#include "one_tire_calls.hpp"
+		#include "one_tire_calls.h"
 
 	glPopMatrix();
 }
