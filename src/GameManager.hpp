@@ -62,7 +62,7 @@ class GameManager {
 		PerspectiveCamera *_movingCamera;
 		LightSource *_globalLight;
 		bool _enableTeaPot;
-
+		void checkCollisions();
 };
 
  #endif // __GAMEMANAGER_H

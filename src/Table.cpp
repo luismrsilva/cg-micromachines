@@ -12,6 +12,8 @@
 
 Table::Table(GLfloat x, GLfloat y, GLfloat z){
 	setPosition(x, y, z);
+	_box.changeTo(	-GAME_TABLE_LIMIT, GAME_TABLE_LIMIT,
+					-GAME_TABLE_LIMIT, GAME_TABLE_LIMIT);
 }
 
 Table::~Table(){
@@ -45,4 +47,6 @@ void Table::draw(){
 					drawSquareXY(i, j, halfWidth);
 		glEnd();
 	glPopMatrix();
+
+	StaticObject::draw();
 }

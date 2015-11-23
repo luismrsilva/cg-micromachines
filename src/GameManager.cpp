@@ -360,6 +360,12 @@ void GameManager::update(double delta_t){
 		(*i)->updateBox();
 	}
 
+	checkCollisions();
+
+}
+
+void GameManager::checkCollisions(){
+
 	if (_no_clip) return;
 
 	/* check for collisions */
