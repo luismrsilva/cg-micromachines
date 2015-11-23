@@ -61,7 +61,7 @@ GameManager::GameManager(){
 	_roadside = new Roadside();
 	_game_objects.push_back(_roadside);
 
-	_table = new Table(0, 0, -1.52);
+	_table = new Table(0, 0, -GAME_TABLE_LIMIT*1.001);
 	_game_objects.push_back(_table);
 
 	_butters.push_back(new Butter(-1.1, 0.7, BUTTER_SIZE_Z/2.));
@@ -126,7 +126,7 @@ GameManager::GameManager(){
 
 	/* (not required) Fixed perspective from table side */
 	PerspectiveCamera *fixedPerspCam2 = new PerspectiveCamera(60, 1, 0.1, 10.);
-	fixedPerspCam2->setPosition(0, -4, 0);
+	fixedPerspCam2->setPosition(0, -3, 0);
 	fixedPerspCam2->setCenter(Vector3(0, 1, 0));
 	fixedPerspCam2->setUp(Vector3(0, 0, 1));
 	_cameras.push_back(fixedPerspCam2);

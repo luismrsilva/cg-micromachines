@@ -18,13 +18,13 @@ using namespace std;
 #include "debug.hpp"
 #include "game_config.hpp"
 
-Orange::Orange() : Obstacle(){
+Orange::Orange() : Obstacle(0, 0, ORANGE_RADIUS){
 	_active = true;
 	moveToRandomPosition();
 	setRandomSpeed();
 }
 
-Orange::Orange(double x, double y, double z) : Obstacle(x, y, z){
+Orange::Orange(double x, double y, double z) : Obstacle(x, y, z+ORANGE_RADIUS){
 	_active = true;
 	moveToRandomPosition();
 	setRandomSpeed();
@@ -66,8 +66,10 @@ void Orange::draw(){
 	Vector3 *pos = getPosition();
 	Vector3 speed = getSpeed();
 
+
+	D_TRACE(<< pos->getZ());
 	glPushMatrix();
-		glTranslatef(pos->getX(), pos->getY(), pos->getZ()+ORANGE_RADIUS-0.02f);
+		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 		glRotatef(_angle, -speed.getY(), speed.getX(), 0.0);
 
 		setColor(0.8, 0.4, 0.0);
