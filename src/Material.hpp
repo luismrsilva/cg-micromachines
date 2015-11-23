@@ -19,6 +19,7 @@ class Material {
 		void setAmbient(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setDiffuse(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setSpecular(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
+		void setEmission(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setShininess(GLfloat shine);
 		void setAlpha(GLfloat a);
 		void draw();
@@ -26,6 +27,7 @@ class Material {
 		GLfloat _ambient[4];
 		GLfloat _diffuse[4];
 		GLfloat _specular[4];
+		GLfloat _emission[4];
 		GLfloat _shine;
 };
 

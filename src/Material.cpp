@@ -72,6 +72,13 @@ void Material::setSpecular(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
 	_specular[3] = a;
 }
 
+void Material::setEmission(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
+	_emission[0] = r;
+	_emission[1] = g;
+	_emission[2] = b;
+	_emission[3] = a;
+}
+
 void Material::setShininess(GLfloat shine){
 	_shine = shine;
 }
@@ -79,6 +86,7 @@ void Material::setShininess(GLfloat shine){
 void Material::draw(){
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, _ambient);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, _diffuse);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, _emission);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, _specular);
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, _shine);
 	glColor4fv(_diffuse);
