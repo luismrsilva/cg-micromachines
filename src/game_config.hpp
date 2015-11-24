@@ -52,6 +52,10 @@
 // Camera stuff
 #define GAME_CAMERA_MOVEMENT_SMOTHENESS		0.85
 
+// Car stuff
+
+#define GAME_CAR_SCALE	cm(13)
+
 
 
 #endif //__GAME_CONFIG_INCLUDED

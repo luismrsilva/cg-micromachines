@@ -7,10 +7,11 @@
 #define __CAR_H
 
 #include "DynamicObject.hpp"
+#include "SpotLightSource.hpp"
 
 class Car : public DynamicObject {
 	public:
-		Car();
+		Car(GLenum lightNum);
 		~Car();
 		void draw();
 		void update(double delta_t);
@@ -26,6 +27,8 @@ class Car : public DynamicObject {
 		double _angle_deg;
 		bool _isGoingForward;
 		bool _isGhost;
+		SpotLightSource *_headLightL;
+		//SpotLightSource *_headLightR;
 };
 
 #endif //_CAR_H

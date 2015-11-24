@@ -19,7 +19,7 @@ Material *_tireMaterial = new Material();
 
 #define CAR_BODY_COLOR	0.6,0,0
 
-Car::Car() : DynamicObject(){
+Car::Car(GLenum lightNum) : DynamicObject(){
 	_angle_deg = 0;
 	_isGoingForward = true;
 	_isGhost = false;
@@ -27,10 +27,23 @@ Car::Car() : DynamicObject(){
 	setColor(CAR_BODY_COLOR);
 	_tireMaterial->setMaterial(0.1, 0.1, 0.1);
 
+	_headLightL = new SpotLightSource(lightNum);
+	_headLightL->setPosition(0,0, GAME_CAR_SCALE/8);
+	_headLightL->setAmbient(0.8, 0.6, 0.4, 1.0);
+	_headLightL->setDiffuse(1.0, 0.8, 0.4, 1.0);
+	_headLightL->setSpecular(1.0, 0.8, 0.6, 1.0);
+
+	_headLightL->setCutOff(10);
+	_headLightL->setExponent(0);
+	//_headLightR = new SpotLightSource(lightNum);
+	
+	
+	_headLightL->setState(true);
 }
 
 Car::~Car(){
 	delete _tireMaterial;
+	delete _headLightL;
 }
 
 bool Car::isGoingForward(){
@@ -58,7 +71,18 @@ double Car::rotateZ(double deg){
 void Car::update(double delta_t){
 	double da = -GAME_CAR_SPEED_DRAG(getSpeed().getXYModulus()) * delta_t;
 	setSpeed(getSpeed().increaseMod(da));
+	const double angle = _angle_deg * M_PI / 180.;
 	//cout << "CAR speed: " << speed << "| " << "drag: " << (double)da/((double)delta_t) << endl;
+
+	//lights go with the car (headLights)
+	Vector3 pos = *(getPosition());  //get car position
+	Vector3 direct = Vector3(cos(angle), sin(angle), 0);
+
+	Vector3 new_pos = pos + Vector3(0,0, GAME_CAR_SCALE / 8);	  			// pos do carro
+	Vector3 new_direct = direct + Vector3(0, 0, -0.125);
+
+	_headLightL->setPosition(new_pos);
+	_headLightL->setDirection(new_direct);
 
 	DynamicObject::update(delta_t);
 }
@@ -96,7 +120,8 @@ void drawTireAt(float xc, float yc, float zc, float x, float y, float angle){
 
 void Car::draw(){
 	D_TRACE();
-
+	_headLightL->draw();
+	_headLightL->setState(true);	// TODO: do this when disabling global light
 	Vector3 *pos = this->getPosition();
 
 	D_PRINT("car_pos: " << pos->getX() << ", " << pos->getY() << ", " << pos->getZ());
@@ -117,6 +142,7 @@ void Car::draw(){
 
     glPopMatrix();
 
+	
     DynamicObject::draw();
 }
 

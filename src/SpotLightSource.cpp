@@ -7,8 +7,9 @@
 
 
 SpotLightSource::SpotLightSource(GLenum num) : LightSource(num){
-	setCutOff(180.0);
+	setCutOff(30.0);
 	setExponent(0.0);
+	setDirection(0, 0, -1);
 }
 
 SpotLightSource::~SpotLightSource(){

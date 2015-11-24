@@ -97,7 +97,7 @@ GameManager::GameManager(){
 		_game_objects.push_back(o);
 	}
 
-	_car = new Car();
+	_car = new Car(lightNum++);
 	_car->reset();
 	_game_objects.push_back(_car);
 
