@@ -9,15 +9,13 @@
 #include <GL/glut.h>
 #include "Vector3.hpp"
 
-class Texture {
+class Texture{
 	public:
-		Texture();
-		Texture(GLfloat r, GLfloat g, GLfloat b);
+		Texture(char *path, int width, int height);
 		~Texture();
-		void setTexture(GLfloat r, GLfloat g, GLfloat b);
-		void setTexture(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
-		void draw();
+		void apply();
 	private:
+		GLuint _texture;
 };
 
 #endif //__TEXTURE_H
