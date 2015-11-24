@@ -29,6 +29,11 @@ Vector3* Entity::setPosition(double x, double y, double z){
 	return _position;
 }
 
+Vector3* Entity::setXYPosition(double x, double y){
+	_position->set(x, y, _position->getZ());
+	return _position;
+}
+
 Vector3* Entity::setPosition(const Vector3 &p){
 	// copia as coordenadas
 	*_position = p;
@@ -37,9 +42,8 @@ Vector3* Entity::setPosition(const Vector3 &p){
 
 
 void Entity::moveToRandomPosition() {
-	setPosition((double) (rand() % 28 - 14.0) / 10.0f,
-				(double) (rand() % 28 - 14.0) / 10.0f,
-				(double) 0);
+	setXYPosition((double) (rand() % 28 - 14.0) / 10.0f,
+				(double) (rand() % 28 - 14.0) / 10.0f);
 }
 
 Vector3* Entity::setOldPosition(const Vector3 &p){

@@ -56,13 +56,11 @@ void GameObject::toggleBox(){
 }
 
 void GameObject::setColor(GLfloat r, GLfloat g, GLfloat b){
-	glColor3f(r, g, b);
 	_material->setMaterial(r, g, b);
 	_material->draw();
 }
 
 void GameObject::setColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
-	glColor4f(r, g, b, a);
 	_material->setMaterial(r, g, b, a);
 	_material->draw();
 }

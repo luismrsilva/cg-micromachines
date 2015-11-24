@@ -19,6 +19,7 @@ class Entity {
 		~Entity();
 		Vector3* getPosition() const;
 		Vector3* setPosition(double x, double y, double z);
+		Vector3* setXYPosition(double x, double y);
 		Vector3* setPosition(const Vector3 &pos);
 		Vector3* setOldPosition(const Vector3 &pos);
 		void moveToOldPosition();

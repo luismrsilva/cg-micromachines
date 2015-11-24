@@ -12,6 +12,7 @@
 
 Table::Table(GLfloat x, GLfloat y, GLfloat z){
 	setPosition(x, y, z);
+	_material->setMaterial(0.15, 0.15, 0.15);
 	_box.changeTo(	-GAME_TABLE_LIMIT, GAME_TABLE_LIMIT,
 					-GAME_TABLE_LIMIT, GAME_TABLE_LIMIT);
 }
@@ -37,7 +38,10 @@ void Table::draw(){
 	const float width = 2 * halfWidth;
 	const float start = - GAME_TABLE_LIMIT + halfWidth;
 	glPushMatrix();
+
 		setColor(0.15, 0.20, 0.30);
+
+		_material->draw();
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ() + GAME_TABLE_LIMIT);
 		//glutSolidCube(GAME_TABLE_LIMIT*2);
 		/* draws table surface in -GAME_TABLE_LIMIT < x, y < GAME_TABLE_LIMIT */
