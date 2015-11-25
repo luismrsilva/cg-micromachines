@@ -100,7 +100,6 @@ int main(int argc, char *argv[]){
 	glutInit(&argc, argv);
 
 	gameManager = new GameManager();
-	gameManager->init();
 
 	glutDisplayFunc(myDisplay);
 	glutReshapeFunc(myReshape);

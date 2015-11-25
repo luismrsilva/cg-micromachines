@@ -31,7 +31,6 @@ class GameManager {
 		void reshape(GLsizei w, GLsizei h);
 		void keyPressed(unsigned char key, int x, int y);
 		void onTimer(int val);
-		void init();
 		void idle();
 		void endGame();
 		void resetGame();
@@ -43,6 +42,7 @@ class GameManager {
 		void toggleCandles();
 		void toggleShading();
 	private:
+		void initGL();
 		Car *_car;
 		Table *_table;
 		Roadside *_roadside;

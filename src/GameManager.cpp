@@ -24,6 +24,8 @@ using namespace std;
 #include <typeinfo>
 
 GameManager::GameManager(){
+	initGL();
+
 	D_TRACE();
 	_enableTeaPot = false;
 
@@ -138,7 +140,7 @@ GameManager::~GameManager(){
 	}
 }
 
-void GameManager::init(){
+void GameManager::initGL(){
 #ifdef SINGLEBUF
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 #else
