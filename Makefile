@@ -6,10 +6,11 @@ HPP_FILES := $(wildcard src/*.hpp)
 CPP_FILES := $(wildcard src/*.cpp)
 OBJ_FILES := $(addprefix obj/,$(notdir $(CPP_FILES:.cpp=.o)))
 
--include $(OBJ_FILES:.o=.d)
-
 
 all: micromachines
+
+-include $(OBJ_FILES:.o=.d)
+
 
 quiet-run: micromachines
 	./micromachines > /dev/null
