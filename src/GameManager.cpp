@@ -86,13 +86,13 @@ GameManager::GameManager(){
 		_game_objects.push_back(o);
 	}
 
-	_car = new Car(lightNum++);
+	_car = new Car(lightNum++, lightNum);
 	_car->reset();
 	_game_objects.push_back(_car);
 
 
 	for (int i=0; i<5; i++){
-		Car *o = new Car(lightNum);
+		Car *o = new Car(lightNum, lightNum);
 		o->setPosition(-1.5f+(i*0.1f), 1.5f, 0);
 		o->rotateZ(90);
 		_car_lives.push_back(o);
@@ -218,7 +218,7 @@ void GameManager::display(){
 	int lives = _lives;
 	glDisable(GL_LIGHTING);
 	for( auto l : _car_lives ) {
-		l->draw();
+		//l->draw();
 		if (--lives == 0) break;
 	}
 	if (lighting_on)
@@ -297,7 +297,10 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 'n':
 		case 'N':
 			cout << "Main lighting toggled" << endl;
-			_car->setHeadLightState(!_globalLight->toggleState());
+			_globalLight->toggleState();
+			_car->setHeadLightStateL(!_globalLight->getState());
+			_car->setHeadLightStateR(!_globalLight->getState());
+
 			if (!_globalLight->getState()) {
 				_car->toggleLight();
 			}

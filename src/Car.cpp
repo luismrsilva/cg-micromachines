@@ -19,7 +19,7 @@ Material *_tireMaterial = new Material();
 
 #define CAR_BODY_COLOR	0.6,0,0
 
-Car::Car(GLenum lightNum) : DynamicObject(){
+Car::Car(GLenum lightNumL, GLenum lightNumR) : DynamicObject(){
 	_angle_deg = 0;
 	_isGoingForward = true;
 	_isGhost = false;
@@ -27,25 +27,37 @@ Car::Car(GLenum lightNum) : DynamicObject(){
 	setColor(CAR_BODY_COLOR);
 	_tireMaterial->setMaterial(0.1, 0.1, 0.1);
 
-	_headLightL = new SpotLightSource(lightNum);
-	_headLightL->setPosition(0,0, GAME_CAR_SCALE/8);
+	// Left headLight
+	_headLightL = new SpotLightSource(lightNumL);
+	_headLightL->setPosition(0, 0, GAME_CAR_SCALE/3);
 	_headLightL->setAmbient(0.8, 0.6, 0.4, 1.0);
-	_headLightL->setDiffuse(1.0, 0.8, 0.4, 1.0);
+	_headLightL->setDiffuse(1.0, 10.8, 0.4, 1.0);
 	_headLightL->setSpecular(1.0, 0.8, 0.6, 1.0);
 
 	_headLightL->setAttenuation(0.5, 1, 4);
 
 	_headLightL->setCutOff(12);
 	_headLightL->setExponent(64);
-	//_headLightR = new SpotLightSource(lightNum);
+	_headLightL->setState(false);
 
+	//Right headLight
+	_headLightR = new SpotLightSource(lightNumR);
+	_headLightR->setPosition(0, 0, GAME_CAR_SCALE / 3);
+	_headLightR->setAmbient(0.8, 0.6, 0.4, 1.0);
+	_headLightR->setDiffuse(10.0, 0.8, 0.4, 1.0);
+	_headLightR->setSpecular(1.0, 0.8, 0.6, 1.0);
 
-	_headLightL->setState(true);
+	_headLightR->setAttenuation(0.5, 1, 4);
+
+	_headLightR->setCutOff(12);
+	_headLightR->setExponent(64);
+	_headLightR->setState(false);
 }
 
 Car::~Car(){
 	delete _tireMaterial;
 	delete _headLightL;
+	delete _headLightR;
 }
 
 bool Car::isGoingForward(){
@@ -72,23 +84,31 @@ double Car::rotateZ(double deg){
 
 void Car::toggleLight() {
 	_headLightL->toggleState();
+	_headLightR->toggleState();
 }
 
 void Car::update(double delta_t){
 	double da = -GAME_CAR_SPEED_DRAG(getSpeed().getXYModulus()) * delta_t;
 	setSpeed(getSpeed().increaseMod(da));
 	const double angle = _angle_deg * M_PI / 180.;
+
 	//cout << "CAR speed: " << speed << "| " << "drag: " << (double)da/((double)delta_t) << endl;
 
 	//lights go with the car (headLights)
 	Vector3 pos = *(getPosition());  //get car position
 	Vector3 direct = Vector3(cos(angle), sin(angle), 0);
 
-	Vector3 new_pos = pos + Vector3(0,0, GAME_CAR_SCALE / 8);	  			// pos do carro
-	Vector3 new_direct = direct + Vector3(0, 0, -0.125);
+	Vector3 new_posL = pos + Vector3(0,0, GAME_CAR_SCALE / 8) + direct.rotateZ(90)*((2*CAR_FRONT)/3);	  			// pos do carro luz esquerda
+	Vector3 new_directL = direct*(-1) + Vector3(0, 0, -0.129); //esta a multiplicar por -1 para ver se aparece luz na direcao oposta
 
-	_headLightL->setPosition(new_pos);
-	_headLightL->setDirection(new_direct);
+	Vector3 new_posR = pos + Vector3(0, 0, GAME_CAR_SCALE / 8) + direct.rotateZ(-90)*((2 * CAR_FRONT) /3);	  			// pos do carro luz direita
+	Vector3 new_directR = direct + Vector3(0, 0, -0.129);
+
+	_headLightL->setPosition(new_posL);
+	_headLightL->setDirection(new_directL);
+
+	_headLightR->setPosition(new_posR);
+	_headLightR->setDirection(new_directR);
 
 	DynamicObject::update(delta_t);
 }
@@ -126,7 +146,10 @@ void drawTireAt(float xc, float yc, float zc, float x, float y, float angle){
 
 void Car::draw(){
 	D_TRACE();
+	
 	_headLightL->draw();
+
+	_headLightR->draw();
 	Vector3 *pos = getPosition();
 
 	D_PRINT("car_pos: " << pos->getX() << ", " << pos->getY() << ", " << pos->getZ());
@@ -157,6 +180,10 @@ void Car::reset(){
 	setXYAngle(0.0);
 }
 
-bool Car::setHeadLightState(bool state) {
+bool Car::setHeadLightStateL(bool state) {
 	return _headLightL->setState(state);
+}
+
+bool Car::setHeadLightStateR(bool state) {
+	return _headLightR->setState(state);
 }

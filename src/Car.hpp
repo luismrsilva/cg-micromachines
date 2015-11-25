@@ -12,7 +12,7 @@
 
 class Car : public DynamicObject {
 	public:
-		Car(GLenum lightNum);
+		Car(GLenum lightNumL, GLenum LightNumR);
 		~Car();
 		void draw();
 		void update(double delta_t);
@@ -25,13 +25,14 @@ class Car : public DynamicObject {
 		void setXYAngle(double deg);
 		void updateBox();
 		void reset();
-		bool setHeadLightState(bool state);
+		bool setHeadLightStateL(bool state);
+		bool setHeadLightStateR(bool state);
 	private:
 		double _angle_deg;
 		bool _isGoingForward;
 		bool _isGhost;
 		SpotLightSource *_headLightL;
-		//SpotLightSource *_headLightR;
+		SpotLightSource *_headLightR;
 };
 
 #endif //_CAR_H

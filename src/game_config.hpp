@@ -55,7 +55,7 @@
 // Car stuff
 
 #define GAME_CAR_SCALE	cm(13)
-
+#define CAR_FRONT		cm(3.25)
 
 
 #endif //__GAME_CONFIG_INCLUDED
