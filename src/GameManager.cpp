@@ -24,18 +24,6 @@ using namespace std;
 
 #include <typeinfo>
 
-void GameManager::orangeSpeedInc(float inc){
-	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
-		(*i)->setSpeed((*i)->getSpeed() * inc);
-	}
-}
-
-void GameManager::orangeRespawn(){
-	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
-		if (!(*i)->isActive()) (*i)->resetPosition();
-	}
-}
-
 GameManager::GameManager(){
 	D_TRACE();
 	_enableTeaPot = false;
@@ -101,6 +89,13 @@ GameManager::GameManager(){
 	_car->reset();
 	_game_objects.push_back(_car);
 
+
+	for (int i=0; i<5; i++){
+		Car *o = new Car(lightNum);
+		o->setPosition(-1.5f+(i*0.1f), 1.5f, 0);
+		o->rotateZ(90);
+		_car_lives.push_back(o);
+	}
 
 	/** Cameras **/
 
@@ -209,6 +204,32 @@ void GameManager::display(){
 	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
 		(*i)->draw();
 	}
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	_cameras[0]->update();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	bool lighting_on = glIsEnabled(GL_LIGHTING);
+	int lives = _lives;
+	glDisable(GL_LIGHTING);
+	for(vector<Car*>::iterator i = _car_lives.begin(); i != _car_lives.end(); i++){
+		(*i)->draw();
+		if (--lives == 0) break;
+	}
+	if (lighting_on)
+		glEnable(GL_LIGHTING);
+	else
+		glDisable(GL_LIGHTING);
+
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	_currentCamera->update();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
 
 	/* Teapot for light debugging */
 	if(_enableTeaPot){
@@ -430,5 +451,17 @@ void GameManager::setKeyPressed(int glut_key, bool status){
 		case GLUT_KEY_DOWN:		_isKeyPressed[DOWN] = status; break;
 		case GLUT_KEY_RIGHT:	_isKeyPressed[RIGHT] = status; break;
 		default: break;
+	}
+}
+
+void GameManager::orangeSpeedInc(float inc){
+	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
+		(*i)->setSpeed((*i)->getSpeed() * inc);
+	}
+}
+
+void GameManager::orangeRespawn(){
+	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
+		if (!(*i)->isActive()) (*i)->resetPosition();
 	}
 }

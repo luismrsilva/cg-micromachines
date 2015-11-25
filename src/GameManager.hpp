@@ -46,6 +46,7 @@ class GameManager {
 		Car *_car;
 		Table *_table;
 		Roadside *_roadside;
+		vector<Car*> _car_lives;
 		vector<Candle*> _candles;
 		vector<Butter*> _butters;
 		vector<Orange*> _oranges;
