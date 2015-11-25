@@ -3,8 +3,6 @@
  *
  * */
 
-#include "game_config.hpp"
-
 
 #define _USE_MATH_DEFINES
 #include <cmath>
@@ -17,6 +15,7 @@ using namespace std;
 
 #include <GL/glut.h>
 #include "debug.hpp"
+#include "game_config.hpp"
 #include "OrthogonalCamera.hpp"
 #include "PerspectiveCamera.hpp"
 #include "SpotLightSource.hpp"
@@ -396,21 +395,24 @@ void GameManager::checkCollisions(){
 	if (_no_clip) return;
 
 	/* check for collisions */
-	for( auto orange : _oranges ) {
-		if( orange->processCollisionWith(*_car) ){
-			D_TRACE( << "COLISION!! " << typeid(orange).name() << " " << glutGet(GLUT_ELAPSED_TIME));
+	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
+		if ((*i)->processCollisionWith(*_car)){
+			D_TRACE( << "COLISION!! " << typeid(*i).name() << " " << glutGet(GLUT_ELAPSED_TIME));
 			if (--_lives == 0) resetGame();
 		};
 	}
-	for( auto butter : _butters ) { 
-		if( butter->processCollisionWith(*_car) ){
-			D_TRACE( << "COLISION!! " << typeid(butter).name() << " " << glutGet(GLUT_ELAPSED_TIME));
+	for(vector<Butter*>::iterator i = _butters.begin(); i != _butters.end(); i++){
+		if( (*i)->processCollisionWith(*_car)){
+			D_TRACE( << "COLISION!! " << typeid(*i).name() << " " << glutGet(GLUT_ELAPSED_TIME));
 		};
 	}
-	if( _roadside->processCollisionWith(*_car) ){
+	if (_roadside->processCollisionWith(*_car)){
 		D_TRACE( << "COLISION!! " << typeid(_roadside).name() << " " << glutGet(GLUT_ELAPSED_TIME));
 	}
-
+	if (_car->isOutOfBounds()){	// Car fell off the table
+		_car->reset();
+		if (--_lives == 0) resetGame();
+	}
 }
 
 bool GameManager::toggleLighting(){
