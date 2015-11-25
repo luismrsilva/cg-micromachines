@@ -8,6 +8,7 @@
 
 #include "DynamicObject.hpp"
 #include "SpotLightSource.hpp"
+#include "LightSource.hpp"
 
 class Car : public DynamicObject {
 	public:
@@ -24,6 +25,7 @@ class Car : public DynamicObject {
 		void setXYAngle(double deg);
 		void updateBox();
 		void reset();
+		bool setHeadLightState(bool state);
 	private:
 		double _angle_deg;
 		bool _isGoingForward;

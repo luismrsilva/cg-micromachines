@@ -297,13 +297,17 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 'n':
 		case 'N':
 			cout << "Main lighting toggled" << endl;
-			_globalLight->toggleState();
-			_car->toggleLight();
+			_car->setHeadLightState(!_globalLight->toggleState());
+			if (!_globalLight->getState()) {
+				_car->toggleLight();
+			}
 			break;
 		case 'h':
 		case 'H':
 			cout << "Car light toggled" << endl;
-			_car->toggleLight();
+			if (!_globalLight->getState()) {
+				_car->toggleLight();
+			}
 			break;
 		case 'p':
 		case 'P':

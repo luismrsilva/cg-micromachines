@@ -15,8 +15,8 @@ class LightSource {
 		LightSource(GLenum num);
 		virtual ~LightSource();
 		bool getState();
-		void setState(bool state);
-		void toggleState();
+		bool setState(bool state);
+		bool toggleState();
 		GLenum getNum();
 		void setPosition(const Vector3 &pos);
 		void setAmbient(GLfloat r, GLfloat g, GLfloat b, GLfloat a);

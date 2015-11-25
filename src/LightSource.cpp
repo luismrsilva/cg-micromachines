@@ -44,17 +44,18 @@ bool LightSource::getState(){
 	return _state;
 }
 
-void LightSource::setState(bool state){
+bool LightSource::setState(bool state){
 	_state = state;
 	if(_state){
 		glEnable(_num);
 	}else{
 		glDisable(_num);
 	}
+	return _state;
 }
 
-void LightSource::toggleState(){
-	setState(!getState());
+bool LightSource::toggleState(){
+	return setState(!getState());
 }
 
 GLenum LightSource::getNum(){
