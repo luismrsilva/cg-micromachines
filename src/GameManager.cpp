@@ -146,7 +146,11 @@ GameManager::~GameManager(){
 }
 
 void GameManager::init(){
+#ifdef SINGLEBUF
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+#else
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+#endif
 	glutInitWindowSize(700, 700);
 	glutInitWindowPosition(-1, -1);
 	glutCreateWindow(GAME_WINDOW_TITLE);
@@ -218,7 +222,11 @@ void GameManager::display(){
 		glPopMatrix();
 	}
 
+#ifdef SINGLEBUF
 	glFlush();
+#else
+	glutSwapBuffers();
+#endif
 }
 
 void GameManager::keyPressed(unsigned char key, int x, int y){
