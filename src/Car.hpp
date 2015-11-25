@@ -17,6 +17,7 @@ class Car : public DynamicObject {
 		void update(double delta_t);
 		double rotateZ(double deg);
 		double getXYAngle();
+		void toggleLight();
 		bool setGoingForward(bool forward);
 		bool isGoingForward();
 		void setGhost(bool status);
