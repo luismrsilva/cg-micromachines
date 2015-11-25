@@ -218,7 +218,7 @@ void GameManager::display(){
 	int lives = _lives;
 	glDisable(GL_LIGHTING);
 	for( auto l : _car_lives ) {
-		//l->draw();
+		l->draw();
 		if (--lives == 0) break;
 	}
 	if (lighting_on)
