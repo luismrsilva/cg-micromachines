@@ -11,11 +11,11 @@
 
 class Texture{
 	public:
-		Texture(char *path, int width, int height);
+		Texture(char *path, int width, int height, int channels);
 		~Texture();
 		void apply();
 	private:
-		GLuint _texture;
+		GLuint _textureId;
 };
 
 #endif //__TEXTURE_H
