@@ -269,7 +269,7 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 's':
 		case 'S':
 			_isPaused = !_isPaused;
-			cout << "Game resetted" << endl;
+			cout << "Game pause toggled" << endl;
 			break;
 		case 'l':
 		case 'L':
@@ -289,13 +289,18 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			break;
 		case 'g':
 		case 'G':
-			cout << "Shading toggled" << endl;
+			cout << "Gouraud shading toggled" << endl;
 			toggleShading();
 			break;
 		case 'n':
 		case 'N':
 			cout << "Main lighting toggled" << endl;
 			_globalLight->toggleState();
+			break;
+		case 'h':
+		case 'H':
+			cout << "Car light toggled" << endl;
+			_car->toggleLight();
 			break;
 		case 'p':
 		case 'P':

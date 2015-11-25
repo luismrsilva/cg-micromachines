@@ -70,6 +70,10 @@ double Car::rotateZ(double deg){
 	return _angle_deg;
 }
 
+void Car::toggleLight(){
+	_headLightL->toggleState();
+}
+
 void Car::update(double delta_t){
 	double da = -GAME_CAR_SPEED_DRAG(getSpeed().getXYModulus()) * delta_t;
 	setSpeed(getSpeed().increaseMod(da));
@@ -123,8 +127,7 @@ void drawTireAt(float xc, float yc, float zc, float x, float y, float angle){
 void Car::draw(){
 	D_TRACE();
 	_headLightL->draw();
-	_headLightL->setState(true);	// TODO: do this when disabling global light
-	Vector3 *pos = this->getPosition();
+	Vector3 *pos = getPosition();
 
 	D_PRINT("car_pos: " << pos->getX() << ", " << pos->getY() << ", " << pos->getZ());
 
