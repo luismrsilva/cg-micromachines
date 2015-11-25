@@ -41,7 +41,7 @@ Car::Car(GLenum lightNumL, GLenum lightNumR) : DynamicObject(){
 	_headLightR = new SpotLightSource(lightNumR);
 	_headLightR->setPosition(0, 0, GAME_CAR_SCALE / 3);
 	_headLightR->setAmbient(0.8, 0.6, 0.4, 1.0);
-	_headLightR->setDiffuse(10.0, 0.8, 0.4, 1.0);
+	_headLightR->setDiffuse(1.0, 0.8, 0.4, 1.0);
 	_headLightR->setSpecular(1.0, 0.8, 0.6, 1.0);
 
 	_headLightR->setAttenuation(0.5, 1, 4);
