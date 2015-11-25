@@ -31,6 +31,7 @@ void Material::setDefaultMaterial(GLfloat r, GLfloat g, GLfloat b){
 	setAmbient(r, g, b, 1.0);
 	setDiffuse(r, g, b, 1.0);
 	setSpecular(1.0, 1.0, 1.0, 1.0);
+	setEmission(0, 0, 0, 1);
 	setShininess(69.0);
 }
 
