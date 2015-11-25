@@ -70,7 +70,7 @@ double Car::rotateZ(double deg){
 	return _angle_deg;
 }
 
-void Car::toggleLight(){
+void Car::toggleLight() {
 	_headLightL->toggleState();
 }
 
@@ -155,4 +155,8 @@ void Car::reset(){
 	setPosition(0.1, -0.2, 0.0);
 	setSpeed(Vector3(0,0,0));
 	setXYAngle(0.0);
+}
+
+bool Car::setHeadLightState(bool state) {
+	return _headLightL->setState(state);
 }
