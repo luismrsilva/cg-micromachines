@@ -15,36 +15,28 @@ using namespace std;
 #include "myunits.hpp"
 #include "game_config.hpp"
 
-#define	DEFAULT_SPECULAR	setSpecular(1.0, 1.0, 1.0, 1.0);
-
-Material::Material(){
-	setAmbient(0.1, 0.1, 0.1, 1.0);
-	setDiffuse(0.4, 0.4, 0.4, 1.0);
-	DEFAULT_SPECULAR
-}
 
 Material::Material(GLfloat r, GLfloat g, GLfloat b){
-	setAmbient(r, g, b, 1.0);
-	setDiffuse(r, g, b, 1.0);
-	DEFAULT_SPECULAR
-	setShininess(69.0);
+	setDefaultMaterial(r, g, b);
+}
+
+Material::Material(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
+	setDefaultMaterial(r, g, b, a);
 }
 
 Material::~Material(){
 }
 
-void Material::setMaterial(GLfloat r, GLfloat g, GLfloat b){
+void Material::setDefaultMaterial(GLfloat r, GLfloat g, GLfloat b){
 	setAmbient(r, g, b, 1.0);
 	setDiffuse(r, g, b, 1.0);
-	DEFAULT_SPECULAR
+	setSpecular(1.0, 1.0, 1.0, 1.0);
 	setShininess(69.0);
 }
 
-void Material::setMaterial(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
-	setAmbient(r, g, b, 1.0);
-	setDiffuse(r, g, b, a);
-	DEFAULT_SPECULAR
-	setShininess(69.0);
+void Material::setDefaultMaterial(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
+	setDefaultMaterial(r, g, b);
+	setAlpha(a);
 }
 
 void Material::setAlpha(GLfloat a){
@@ -83,7 +75,7 @@ void Material::setShininess(GLfloat shine){
 	_shine = shine;
 }
 
-void Material::draw(){
+void Material::apply(){
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, _ambient);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, _diffuse);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, _emission);

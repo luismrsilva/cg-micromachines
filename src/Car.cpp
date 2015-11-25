@@ -15,8 +15,6 @@ using namespace std;
 
 #include "debug.hpp"
 
-Material *_tireMaterial = new Material();
-
 #define CAR_BODY_COLOR	0.6,0,0
 
 Car::Car(GLenum lightNumL, GLenum lightNumR) : DynamicObject(){
@@ -24,8 +22,8 @@ Car::Car(GLenum lightNumL, GLenum lightNumR) : DynamicObject(){
 	_isGoingForward = true;
 	_isGhost = false;
 
-	setColor(CAR_BODY_COLOR);
-	_tireMaterial->setMaterial(0.1, 0.1, 0.1);
+	setMaterialColor(CAR_BODY_COLOR);
+	_tireMaterial = new Material(0.1, 0.1, 0.1);
 
 	// Left headLight
 	_headLightL = new SpotLightSource(lightNumL);
@@ -33,7 +31,6 @@ Car::Car(GLenum lightNumL, GLenum lightNumR) : DynamicObject(){
 	_headLightL->setAmbient(0.8, 0.6, 0.4, 1.0);
 	_headLightL->setDiffuse(1.0, 10.8, 0.4, 1.0);
 	_headLightL->setSpecular(1.0, 0.8, 0.6, 1.0);
-
 	_headLightL->setAttenuation(0.5, 1, 4);
 
 	_headLightL->setCutOff(12);
@@ -158,16 +155,13 @@ void Car::draw(){
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 		glRotatef(this->_angle_deg, 0, 0, 1.);
 	    glScalef(cm(13), cm(13), cm(13));
-
-		_material->draw();
+		_material->apply();
 		#include "car_calls.h"
-
-		_tireMaterial->draw();
+		_tireMaterial->apply();
 		drawTireAt(pos->getX(), pos->getY(), pos->getZ(), -0.03, -0.038, this->_angle_deg);
 		drawTireAt(pos->getX(), pos->getY(), pos->getZ(),  0.03, -0.038, this->_angle_deg);
 		drawTireAt(pos->getX(), pos->getY(), pos->getZ(), -0.03,  0.038, this->_angle_deg);
 		drawTireAt(pos->getX(), pos->getY(), pos->getZ(),  0.03,  0.038, this->_angle_deg);
-
     glPopMatrix();
 
 

@@ -31,6 +31,7 @@ class Car : public DynamicObject {
 		double _angle_deg;
 		bool _isGoingForward;
 		bool _isGhost;
+		Material *_tireMaterial;
 		SpotLightSource *_headLightL;
 		SpotLightSource *_headLightR;
 };
