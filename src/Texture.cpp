@@ -3,6 +3,10 @@
  *
  * */
 
+#if defined(_WIN32)
+	#define _CRT_SECURE_NO_WARNINGS
+	#define GL_CLAMP_TO_BORDER 0x812D
+#endif
 #include "Texture.hpp"
 #include <iostream>
 #include <cmath>
@@ -68,7 +72,7 @@ Texture::Texture(char *path, int width, int height, int channels){
 	fclose(f);
 
 	float border_color[] = { 1.0f, 1.0f, 0.0f, 1.0f };
-
+	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
