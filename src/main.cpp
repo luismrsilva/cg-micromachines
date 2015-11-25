@@ -85,7 +85,7 @@ void onTimer(int val){
 
 
 void orangeSpeedIncrease(int val){
-	float increment = 1 + ((10+(rand()%10))/100.0);	// 10% to 20%
+	float increment = 1 + ((5+(rand()%5))/100.0);	// 5% to 10%
 	gameManager->orangeSpeedInc(increment);
 	glutTimerFunc(10+(rand()%10)*1000, orangeSpeedIncrease, 0);
 }
