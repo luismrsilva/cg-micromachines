@@ -66,11 +66,11 @@ void GameObject::setColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
 }
 
 void GameObject::updateBox(){
-	D_TRACE(<<"SHOLDN'T BE CALLED");
+	D_TRACE(<<"SHOULDN'T BE CALLED");
 }
 
 void updateBox() {
-	D_TRACE(<<"SHOLDN'T BE CALLED");
+	D_TRACE(<<"SHOULDN'T BE CALLED");
 }
 
 

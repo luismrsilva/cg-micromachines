@@ -3,8 +3,6 @@
  *
  * */
 
-#include "game_config.hpp"
-
 
 #define _USE_MATH_DEFINES
 #include <cmath>
@@ -17,6 +15,7 @@ using namespace std;
 
 #include <GL/glut.h>
 #include "debug.hpp"
+#include "game_config.hpp"
 #include "OrthogonalCamera.hpp"
 #include "PerspectiveCamera.hpp"
 #include "SpotLightSource.hpp"
@@ -400,20 +399,23 @@ void GameManager::checkCollisions(){
 
 	/* check for collisions */
 	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
-		if( (*i)->processCollisionWith(*_car) ){
+		if ((*i)->processCollisionWith(*_car)){
 			D_TRACE( << "COLISION!! " << typeid(*i).name() << " " << glutGet(GLUT_ELAPSED_TIME));
 			if (--_lives == 0) resetGame();
 		};
 	}
 	for(vector<Butter*>::iterator i = _butters.begin(); i != _butters.end(); i++){
-		if( (*i)->processCollisionWith(*_car) ){
+		if( (*i)->processCollisionWith(*_car)){
 			D_TRACE( << "COLISION!! " << typeid(*i).name() << " " << glutGet(GLUT_ELAPSED_TIME));
 		};
 	}
-	if( _roadside->processCollisionWith(*_car) ){
+	if (_roadside->processCollisionWith(*_car)){
 		D_TRACE( << "COLISION!! " << typeid(_roadside).name() << " " << glutGet(GLUT_ELAPSED_TIME));
 	}
-
+	if (_car->isOutOfBounds()){	// Car fell off the table
+		_car->reset();
+		if (--_lives == 0) resetGame();
+	}
 }
 
 bool GameManager::toggleLighting(){
