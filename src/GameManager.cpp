@@ -210,9 +210,11 @@ void GameManager::display(){
 	glLoadIdentity();
 
 	bool lighting_on = glIsEnabled(GL_LIGHTING);
+	int lives = _lives;
 	glDisable(GL_LIGHTING);
 	for( auto l : _car_lives ) {
 		l->draw();
+		if (--lives == 0) break;
 	}
 	if (lighting_on)
 		glEnable(GL_LIGHTING);
