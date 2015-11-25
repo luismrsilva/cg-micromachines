@@ -32,6 +32,8 @@ LightSource::LightSource(GLenum num){
 		setDiffuse(0.0, 0.0, 0.0, 0.0);
 		setSpecular(0.0, 0.0, 0.0, 0.0);
 	}
+
+	setAttenuation(1, 0, 0);
 }
 
 LightSource::~LightSource(){
@@ -94,11 +96,21 @@ void LightSource::setSpecular(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
 	_specular[3] = a;
 }
 
+void LightSource::setAttenuation(GLfloat c, GLfloat l, GLfloat q){
+	_constantAttenuation = c;
+	_linearAttenuation = l;
+	_quadraticAttenuation = q;
+}
+
 void LightSource::draw(){
 	if(_state){
 		glLightfv(_num, GL_AMBIENT, _ambient);
 		glLightfv(_num, GL_DIFFUSE, _diffuse);
 		glLightfv(_num, GL_SPECULAR, _specular);
 		glLightfv(_num, GL_POSITION, _position);
+
+		glLightf(_num, GL_CONSTANT_ATTENUATION, _constantAttenuation);
+		glLightf(_num, GL_LINEAR_ATTENUATION, _linearAttenuation);
+		glLightf(_num, GL_QUADRATIC_ATTENUATION, _quadraticAttenuation);
 	}
 }
