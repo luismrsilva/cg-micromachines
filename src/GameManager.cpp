@@ -296,6 +296,7 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 'N':
 			cout << "Main lighting toggled" << endl;
 			_globalLight->toggleState();
+			_car->toggleLight();
 			break;
 		case 'h':
 		case 'H':

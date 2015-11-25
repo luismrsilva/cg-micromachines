@@ -36,7 +36,7 @@ Car::Car(GLenum lightNum) : DynamicObject(){
 	_headLightL->setAttenuation(0.5, 1, 4);
 
 	_headLightL->setCutOff(12);
-	_headLightL->setExponent(0);
+	_headLightL->setExponent(64);
 	//_headLightR = new SpotLightSource(lightNum);
 
 
