@@ -69,13 +69,13 @@ GameManager::GameManager(){
 	_redCandle->setLightColor(1, 0, 0);
 
 	/* Put candles inside _game_objects */
-	for(vector<Candle*>::iterator i = _candles.begin(); i != _candles.end(); i++){
-		_game_objects.push_back(*i);
+	for( auto c : _candles ){
+		_game_objects.push_back( c );
 	}
 
 	/* Put butters inside _game_objects */
-	for(vector<Butter*>::iterator i = _butters.begin(); i != _butters.end(); i++){
-		_game_objects.push_back(*i);
+	for( auto b : _butters ){
+		_game_objects.push_back( b );
 	}
 
 	/* Oranges */
@@ -134,9 +134,8 @@ GameManager::~GameManager(){
 	D_TRACE();
 	free(_isKeyPressed);
 
-	for(vector<GameObject*>::iterator i = _game_objects.begin();
-		i != _game_objects.end(); i++){
-		delete (*i);
+	for( auto o : _game_objects ) {
+		delete ( o );
 	}
 }
 
@@ -201,8 +200,8 @@ void GameManager::display(){
 
 	drawStartLine(0.3, -0.2, -0.02);
 
-	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
-		(*i)->draw();
+	for( auto o : _game_objects ) {
+		o->draw();
 	}
 
 	glMatrixMode(GL_PROJECTION);
@@ -212,11 +211,9 @@ void GameManager::display(){
 	glLoadIdentity();
 
 	bool lighting_on = glIsEnabled(GL_LIGHTING);
-	int lives = _lives;
 	glDisable(GL_LIGHTING);
-	for(vector<Car*>::iterator i = _car_lives.begin(); i != _car_lives.end(); i++){
-		(*i)->draw();
-		if (--lives == 0) break;
+	for( auto l : _car_lives ) {
+		l->draw();
 	}
 	if (lighting_on)
 		glEnable(GL_LIGHTING);
@@ -283,8 +280,8 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 'b':
 		case 'B':
 			cout << "Box drawing toggled" << endl;
-			for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++)
-				(*i)->toggleBox();
+			for( auto o : _game_objects )
+				o->toggleBox();
 			break;
 		case 'g':
 		case 'G':
@@ -385,9 +382,9 @@ void GameManager::update(double delta_t){
 	}
 
 	/* update all objects */
-	for(vector<GameObject*>::iterator i = _game_objects.begin(); i != _game_objects.end(); i++){
-		(*i)->update(delta_t);
-		(*i)->updateBox();
+	for( auto o: _game_objects ) {
+		o->update( delta_t );
+		o->updateBox();
 	}
 
 	checkCollisions();
@@ -399,15 +396,15 @@ void GameManager::checkCollisions(){
 	if (_no_clip) return;
 
 	/* check for collisions */
-	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
-		if( (*i)->processCollisionWith(*_car) ){
-			D_TRACE( << "COLISION!! " << typeid(*i).name() << " " << glutGet(GLUT_ELAPSED_TIME));
+	for( auto orange : _oranges ) {
+		if( orange->processCollisionWith(*_car) ){
+			D_TRACE( << "COLISION!! " << typeid(orange).name() << " " << glutGet(GLUT_ELAPSED_TIME));
 			if (--_lives == 0) resetGame();
 		};
 	}
-	for(vector<Butter*>::iterator i = _butters.begin(); i != _butters.end(); i++){
-		if( (*i)->processCollisionWith(*_car) ){
-			D_TRACE( << "COLISION!! " << typeid(*i).name() << " " << glutGet(GLUT_ELAPSED_TIME));
+	for( auto butter : _butters ) { 
+		if( butter->processCollisionWith(*_car) ){
+			D_TRACE( << "COLISION!! " << typeid(butter).name() << " " << glutGet(GLUT_ELAPSED_TIME));
 		};
 	}
 	if( _roadside->processCollisionWith(*_car) ){
@@ -428,8 +425,8 @@ bool GameManager::toggleLighting(){
 }
 
 void GameManager::toggleCandles(){
-	for(vector<Candle*>::iterator i = _candles.begin(); i != _candles.end(); i++){
-		(*i)->toggleLight();
+	for( auto candle : _candles ) {
+		candle->toggleLight();
 	}
 }
 
@@ -455,13 +452,13 @@ void GameManager::setKeyPressed(int glut_key, bool status){
 }
 
 void GameManager::orangeSpeedInc(float inc){
-	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
-		(*i)->setSpeed((*i)->getSpeed() * inc);
+	for( auto orange : _oranges ) {
+		orange->setSpeed(orange->getSpeed() * inc);
 	}
 }
 
 void GameManager::orangeRespawn(){
-	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
-		if (!(*i)->isActive()) (*i)->resetPosition();
+	for( auto orange : _oranges ) {
+		if (!orange->isActive()) orange->resetPosition();
 	}
 }

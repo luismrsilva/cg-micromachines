@@ -54,8 +54,8 @@ Roadside::Roadside() : StaticObject(0,0,0){
 }
 
 Roadside::~Roadside(){
-	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
-		delete (*i);
+	for( auto c : _cheerios ) {
+		delete c;
 	}
 }
 
@@ -114,9 +114,9 @@ void Roadside::drawCheerioBezierXY(double x1, double y1, double x2, double y2,
 bool Roadside::processCollisionWith(GameObject &obj){
 	bool result = false;
 	D_TRACE();
-	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
-		if(((*i)->processCollisionWith(obj))){
-			D_TRACE( << " COLISION!! " << typeid(*i).name() << " " << glutGet(GLUT_ELAPSED_TIME));
+	for( auto cheerio : _cheerios ) {
+		if((cheerio->processCollisionWith(obj))){
+			D_TRACE( << " COLISION!! " << typeid(cheerio).name() << " " << glutGet(GLUT_ELAPSED_TIME));
 			result = true;
 		}
 	}
@@ -125,25 +125,25 @@ bool Roadside::processCollisionWith(GameObject &obj){
 
 void Roadside::updateBox(){
 	D_TRACE();
-	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
-		(*i)->updateBox();
+	for( auto cheerio : _cheerios ) {
+		cheerio->updateBox();
 	}
 }
 
 void Roadside::toggleBox(){
-	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
-		(*i)->toggleBox();
+	for( auto cheerio : _cheerios ) {
+		cheerio->toggleBox();
 	}
 }
 
 void Roadside::update(double delta_t){
-	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
-		(*i)->update(delta_t);
+	for( auto cheerio : _cheerios ) {
+		cheerio->update(delta_t);
 	}
 }
 
 void Roadside::draw(){
-	for(vector<Cheerio*>::iterator i = _cheerios.begin(); i != _cheerios.end(); i++){
-		(*i)->draw();
+	for( auto cheerio : _cheerios ) {
+		cheerio->draw();
 	}
 }
