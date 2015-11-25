@@ -13,6 +13,7 @@ class Orange : public Obstacle {
 		Orange();
 		Orange(double x, double y, double z);
 		~Orange();
+		void init();
 		void draw();
 		void update(double delta_t);
 		void resetPosition();

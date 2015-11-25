@@ -17,15 +17,18 @@ using namespace std;
 
 
 Butter::Butter() : Obstacle(){
-	setMaterialColor(0.8, 0.8, 0.45);
+	init();
 }
 
 Butter::Butter(double x, double y, double z) : Obstacle(x, y, z){
-	setMaterialColor(0.8, 0.8, 0.45);
+	init();
 }
 
 Butter::~Butter(){
+}
 
+void Butter::init(){
+	setMaterialColor(0.8, 0.8, 0.45);
 }
 
 void Butter::updateBox(){

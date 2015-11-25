@@ -19,9 +19,6 @@ using namespace std;
 #define CHEERIO_INNER_RADIUS	cm(1)
 #define CHEERIO_OUTTER_RADIUS	cm(2)
 
-Cheerio::Cheerio() : Obstacle(0, 0, CHEERIO_INNER_RADIUS){
-	setMaterialColor(0.9, 0.7, 0.2);
-}
 
 Cheerio::Cheerio(double x, double y, double z) : Obstacle(x, y, z + CHEERIO_INNER_RADIUS){
 	setMaterialColor(0.9, 0.7, 0.2);

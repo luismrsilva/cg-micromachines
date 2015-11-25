@@ -19,18 +19,20 @@ using namespace std;
 #include "game_config.hpp"
 
 Orange::Orange() : Obstacle(0, 0, ORANGE_RADIUS){
-	_active = true;
-	moveToRandomPosition();
-	setRandomSpeed();
+	init();
 }
 
 Orange::Orange(double x, double y, double z) : Obstacle(x, y, z+ORANGE_RADIUS){
-	_active = true;
-	moveToRandomPosition();
-	setRandomSpeed();
+	init();
 }
 
 Orange::~Orange(){
+}
+
+void Orange::init(){
+	_active = true;
+	setRandomSpeed();
+	moveToRandomPosition();
 }
 
 bool Orange::isActive(){
