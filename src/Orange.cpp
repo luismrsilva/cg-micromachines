@@ -72,10 +72,10 @@ void Orange::draw(){
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 		glRotatef(_angle, -speed.getY(), speed.getX(), 0.0);
 
-		setColor(0.8, 0.4, 0.0);
+		applyMaterialColor(0.8, 0.4, 0.0);
 		glutSolidSphere(ORANGE_RADIUS, 8, 16);
 
-		setColor(0.2, 0.6, 0.2);
+		applyMaterialColor(0.2, 0.6, 0.2);
 		glTranslatef(0.0f ,0.0f, ORANGE_RADIUS);
 		glScalef(1, 1, 0.4);
 		glutSolidCube(ORANGE_RADIUS/2);

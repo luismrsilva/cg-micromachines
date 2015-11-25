@@ -171,9 +171,9 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 }
 
 void drawStartLine(GLfloat x, GLfloat y, GLfloat z){
-	static Material m = Material();
+	static Material *m = new Material(1.0, 1.0, 1.0);
 	glPushMatrix();
-		m.draw();
+		m->apply();
 		glTranslatef(x, y, z);
 		glScalef(0.2, 3.0, 0.02);
 		glutSolidCube(0.1);

@@ -11,18 +11,18 @@
 
 class Material {
 	public:
-		Material();
 		Material(GLfloat r, GLfloat g, GLfloat b);
+		Material(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		~Material();
-		void setMaterial(GLfloat r, GLfloat g, GLfloat b);
-		void setMaterial(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
+		void setDefaultMaterial(GLfloat r, GLfloat g, GLfloat b);
+		void setDefaultMaterial(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setAmbient(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setDiffuse(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setSpecular(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setEmission(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setShininess(GLfloat shine);
 		void setAlpha(GLfloat a);
-		void draw();
+		void apply();
 	private:
 		GLfloat _ambient[4];
 		GLfloat _diffuse[4];

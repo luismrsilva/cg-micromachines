@@ -15,12 +15,12 @@ using namespace std;
 
 GameObject::GameObject() : Entity() {
 	_isBoxMode = false;
-	_material = new Material();
+	_material = new Material(0.0, 0.0, 0.0);
 }
 
 GameObject::GameObject(double x, double y, double z) : Entity(x, y, z){
 	_isBoxMode = false;
-	_material = new Material();
+	_material = new Material(0.0, 0.0, 0.0);
 }
 
 GameObject::~GameObject(){
@@ -55,14 +55,13 @@ void GameObject::toggleBox(){
 	_isBoxMode = !_isBoxMode;
 }
 
-void GameObject::setColor(GLfloat r, GLfloat g, GLfloat b){
-	_material->setMaterial(r, g, b);
-	_material->draw();
+void GameObject::setMaterialColor(GLfloat r, GLfloat g, GLfloat b){
+	_material->setDefaultMaterial(r, g, b);
 }
 
-void GameObject::setColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
-	_material->setMaterial(r, g, b, a);
-	_material->draw();
+void GameObject::applyMaterialColor(GLfloat r, GLfloat g, GLfloat b){
+	_material->setDefaultMaterial(r, g, b);
+	_material->apply();
 }
 
 void GameObject::updateBox(){

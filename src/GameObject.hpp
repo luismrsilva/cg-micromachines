@@ -21,16 +21,16 @@ class GameObject : public Entity {
 		virtual void draw();
 		virtual void update(double delta_t);
 		virtual void toggleBox();
-		void setColor(GLfloat r, GLfloat g, GLfloat b);
-		void setColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
+		void setMaterialColor(GLfloat r, GLfloat g, GLfloat b);
+		void applyMaterialColor(GLfloat r, GLfloat g, GLfloat b);
 		bool isColidingWith(const GameObject &obj);
 		bool isOutOfBounds();
 		virtual bool processCollisionWith(GameObject &obj);
 		virtual void updateBox();
 	protected:
+		bool _isBoxMode;
 		Box _box;
 		Material *_material;
-		bool _isBoxMode;
 };
 
 #endif

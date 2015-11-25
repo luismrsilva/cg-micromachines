@@ -46,20 +46,20 @@ void Candle::draw(){
 
 		/* body */
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
-		setColor(0.8f, 0.7f, 0.6f);
+		applyMaterialColor(0.8f, 0.7f, 0.6f);
 		gluCylinder(gluNewQuadric(), cm(1), cm(1),
 					CANDLE_BODY_HEIGHT, 12, 12);
 
 		/* wick */
 		glTranslatef(0, 0, CANDLE_BODY_HEIGHT);
-		setColor(0.8f, 0.8f, 0.8f);
+		applyMaterialColor(0.8f, 0.8f, 0.8f);
 		gluCylinder(gluNewQuadric(),	CANDLE_WICK_WIDTH,
 										CANDLE_WICK_WIDTH,
 										CANDLE_WICK_HEIGHT, 8, 8);
 
 		/* "flame" */
 		glTranslatef(0, 0, CANDLE_WICK_HEIGHT);
-		setColor(1.0f, 0.7f, 0.3f);
+		applyMaterialColor(1.0f, 0.7f, 0.3f);
 		glPushMatrix();
 			glScalef(0.125, 0.125, 1);
 			glutSolidSphere(CANDLE_FLAME_HEIGHT, 8, 8);

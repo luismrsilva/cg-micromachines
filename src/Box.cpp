@@ -36,8 +36,7 @@ Box::~Box(){
 }
 
 void Box::initMaterial(){
-	_material = new Material();
-	_material->setMaterial(0.1, 0.1, 1.0);
+	_material = new Material(0.1, 0.1, 1.0);
 	_material->setEmission(0, 0, 0.3, 1);
 }
 
@@ -62,7 +61,7 @@ void Box::changeTo(double width, double height, const Vector3 &center) {
 
 void Box::draw() const{
 	D_TRACE( << "box: " << _left << ", " << _right << ", " << _bottom << ", " << _top);
-	_material->draw();
+	_material->apply();
 	glBegin(GL_LINE_LOOP);
 		glVertex3f(_left, _top, 0);
 		glVertex3f(_left, _bottom, 0);

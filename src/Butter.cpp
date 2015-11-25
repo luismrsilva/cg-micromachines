@@ -17,11 +17,11 @@ using namespace std;
 
 
 Butter::Butter() : Obstacle(){
-
+	setMaterialColor(0.8, 0.8, 0.45);
 }
 
 Butter::Butter(double x, double y, double z) : Obstacle(x, y, z){
-
+	setMaterialColor(0.8, 0.8, 0.45);
 }
 
 Butter::~Butter(){
@@ -37,7 +37,7 @@ void Butter::draw(){
 	Vector3 *pos = getPosition();
 
 	glPushMatrix();
-		setColor(0.8, 0.8, 0.45);
+		_material->apply();
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
 		glScalef(BUTTER_SIZE_X, BUTTER_SIZE_Y, BUTTER_SIZE_Z);
 		glutSolidCube(1);
