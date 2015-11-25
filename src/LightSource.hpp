@@ -13,7 +13,7 @@
 class LightSource {
 	public:
 		LightSource(GLenum num);
-		~LightSource();
+		virtual ~LightSource();
 		bool getState();
 		void setState(bool state);
 		void toggleState();
@@ -23,6 +23,7 @@ class LightSource {
 		void setDiffuse(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setSpecular(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 		void setPosition(float x, float y, float z);
+		void setAttenuation(GLfloat c, GLfloat l, GLfloat q);
 		virtual void draw();
 	protected:
 		GLenum _num;
@@ -32,6 +33,9 @@ class LightSource {
 		GLfloat _ambient[4];
 		GLfloat _diffuse[4];
 		GLfloat _specular[4];
+		GLfloat _constantAttenuation;
+		GLfloat _linearAttenuation;
+		GLfloat _quadraticAttenuation;
 
 };
 

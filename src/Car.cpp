@@ -33,11 +33,13 @@ Car::Car(GLenum lightNum) : DynamicObject(){
 	_headLightL->setDiffuse(1.0, 0.8, 0.4, 1.0);
 	_headLightL->setSpecular(1.0, 0.8, 0.6, 1.0);
 
-	_headLightL->setCutOff(10);
+	_headLightL->setAttenuation(0.5, 1, 4);
+
+	_headLightL->setCutOff(12);
 	_headLightL->setExponent(0);
 	//_headLightR = new SpotLightSource(lightNum);
-	
-	
+
+
 	_headLightL->setState(true);
 }
 
@@ -142,7 +144,7 @@ void Car::draw(){
 
     glPopMatrix();
 
-	
+
     DynamicObject::draw();
 }
 
