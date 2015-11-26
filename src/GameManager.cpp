@@ -343,14 +343,10 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			_globalLight->toggleState();
 			_car->setHeadLightStateL(!_globalLight->getState());
 			_car->setHeadLightStateR(!_globalLight->getState());
-
-			if (!_globalLight->getState()) {
-				_car->toggleLight();
-			}
 			break;
 		case 'H':
 			cout << "Car light toggled" << endl;
-			if (!_globalLight->getState()) {
+			if (!_globalLight->getState()){
 				_car->toggleLight();
 			}
 			break;
