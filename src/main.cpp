@@ -43,7 +43,12 @@ void myDisplay(void){
 		#endif
 		(title, "%s (%d fps)", GAME_WINDOW_TITLE, 2*frames);
 		if(gameManager->isPaused()){
-			strcat(title, " (paused)");
+				#ifdef _MSC_VER
+							strcat_s
+				#else
+							strcat
+				#endif
+				(title, " (paused)");
 		}
 		glutSetWindowTitle(title);
 		frames = 0;
