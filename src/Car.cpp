@@ -15,7 +15,7 @@ using namespace std;
 
 #include "debug.hpp"
 
-#define CAR_BODY_COLOR	0.6,0,0
+#include "NullSpotLightSource.hpp"
 
 Car::Car(GLenum lightNumL, GLenum lightNumR) : DynamicObject(){
 	_angle_deg = 0;
@@ -26,26 +26,25 @@ Car::Car(GLenum lightNumL, GLenum lightNumR) : DynamicObject(){
 	_tireMaterial = new Material(0.1, 0.1, 0.1);
 
 	// Left headLight
-	_headLightL = new SpotLightSource(lightNumL);
-	_headLightL->setAmbient(0.8, 0.6, 0.4, 1.0);
-	_headLightL->setDiffuse(1.0, 0.8, 0.4, 1.0);
-	_headLightL->setSpecular(1.0, 0.8, 0.6, 1.0);
-	_headLightL->setAttenuation(0.1, 1, 8);
-
-	_headLightL->setCutOff(10);
-	_headLightL->setExponent(0);
-	_headLightL->setState(false);
+	_headLightL = createSpotLight(lightNumL);
 
 	//Right headLight
-	_headLightR = new SpotLightSource(lightNumR);
-	_headLightR->setAmbient(0.8, 0.6, 0.4, 1.0);
-	_headLightR->setDiffuse(0.0, 0.8, 0.4, 1.0);
-	_headLightR->setSpecular(1.0, 0.8, 0.6, 1.0);
-	_headLightR->setAttenuation(0.1, 1, 8);
+	_headLightR = createSpotLight(lightNumR);
+}
 
-	_headLightR->setCutOff(10);
-	_headLightR->setExponent(0);
-	_headLightR->setState(false);
+SpotLightSource* Car::createSpotLight(GLenum lightNum){
+	if(!lightNum)
+		return new NullSpotLightSource();
+	SpotLightSource *light = new SpotLightSource(lightNum);
+	light->setAmbient(CAR_HEADLIGHTS_AMBIENT);
+	light->setDiffuse(CAR_HEADLIGHTS_DIFFUSE);
+	light->setSpecular(CAR_HEADLIGHTS_SPECULAR);
+	light->setAttenuation(CAR_HEADLIGHTS_ATTENUATION);
+
+	light->setCutOff(CAR_HEADLIGHTS_CUTOFF);
+	light->setExponent(CAR_HEADLIGHTS_EXPONENT);
+	light->setState(false);
+	return light;
 }
 
 Car::~Car(){

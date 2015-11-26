@@ -28,6 +28,7 @@ class Car : public DynamicObject {
 		bool setHeadLightStateL(bool state);
 		bool setHeadLightStateR(bool state);
 	private:
+		SpotLightSource *createSpotLight(GLenum lightNum);
 		double _angle_deg;
 		bool _isGoingForward;
 		bool _isGhost;
