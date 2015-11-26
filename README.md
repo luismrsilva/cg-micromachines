@@ -34,3 +34,27 @@ or, if it's already compiled:
 ## Compiling without SOIL
 If you wish, it is possible to compile the project without libSOIL (and no textures).
 To do this, simply define `NOSOIL` when compiling.
+
+# Controls
+Use the arrow keys to move the car.
+## Cameras
+* 1 - Ortogonal Top View
+* 2 - Perspective Top View
+* 3 - Perspective Car View
+* 4 - Ortogonal side view
+
+## Game
+* S - Pause
+* R - Restart
+
+## Lights
+* L - Enable Lighting
+* N - Toggle Night/Day
+* C - Toggle Candle lights
+* H - Toggle Car Lights
+* G - Toggle Smooth Lighting Model
+
+## Debug
+* P - Toggle Car Ghost Mode (no collisions)
+* B - Show Collision (AABB) Boxes
+* T - Toggle (weird) Teapot
