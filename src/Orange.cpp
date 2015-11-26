@@ -31,8 +31,8 @@ Orange::~Orange(){
 
 void Orange::init(){
 	_active = true;
-	setRandomSpeed();
 	moveToRandomPosition();
+	setRandomSpeed();
 }
 
 bool Orange::isActive(){
@@ -89,9 +89,6 @@ void Orange::draw(){
 
 bool Orange::processCollisionWith(GameObject &obj){
 	D_TRACE();
-	if(GameObject::processCollisionWith(obj)){
-		return true;
-	}
-	return false;
+	return GameObject::processCollisionWith(obj);
 }
 

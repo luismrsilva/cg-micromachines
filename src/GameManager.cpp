@@ -176,7 +176,7 @@ void GameManager::reshape(GLsizei w, GLsizei h){
 }
 
 void drawStartLine(GLfloat x, GLfloat y, GLfloat z){
-	static Material *m = new Material(1.0, 1.0, 1.0);
+	static Material *m = new Material(0.0, 0.0, 0.0);
 	glPushMatrix();
 		m->apply();
 		glTranslatef(x, y, z);
@@ -242,7 +242,7 @@ void GameManager::display(){
 
 	_globalLight->draw();
 
-	drawStartLine(0.3, -0.2, -0.02);
+	drawStartLine(0.3, -0.2, 0.0);
 
 	for( auto o : _game_objects ) {
 		o->draw();
