@@ -13,20 +13,49 @@
 
 using namespace std;
 #include <GL/glut.h>
-//#include "lib/SOIL.h"
-
 #include "debug.hpp"
 #include "myunits.hpp"
 #include "game_config.hpp"
 
+#include <cstring>
 
-Texture::Texture(char *path, int width, int height, int channels){
+/* test if str ends with suffix */
+bool my_endsWith(char *str, char *suffix){
+	int lenS = strlen(str);
+	int lenSu = strlen(suffix);
+
+	if(lenS < lenSu)
+		return false;
+
+	/* Compare from end to begining */
+	for(int i = 1; i <= lenSu; i++){
+		if( str[lenS-i] != suffix[lenSu-i] )
+			return false;
+	}
+	return true;
+}
+
+
+Texture::Texture(char *path){
 	/* Get an id for this texture*/
 	glGenTextures(1, &_textureId);
 
-	if(channels != 3 && channels != 4){
+	/* Decide which function to call based on file extension */
+	if(my_endsWith(path, (char*)".data")){
+		loadRawFile(path, 64, 64, 3);
+	}else if(my_endsWith(path, (char*)".png")){
+		loadPngFile(path);
+	}else{
+		D_TRACE();
+		cout << "Texture: unsupported extension: \"" << path << "\".\n";
+	}
+}
+
+void Texture::loadRawFile(char *path, int width, int height, int nChannels){
+
+	if(nChannels != 3 && nChannels != 4){
 		cout	<< "WARNING: texture file \"" << path
-				<< "\" unsupported channel count: " << channels
+				<< "\" unsupported channel count: " << nChannels
 				<< ".\n" << endl;
 		return;
 	}
@@ -34,7 +63,7 @@ Texture::Texture(char *path, int width, int height, int channels){
 	/** Load texture from file **/
 	unsigned char *data;
 	int nBytes, nImgBytes;
-	nImgBytes = width*height*channels;
+	nImgBytes = width*height*nChannels;
 	data = new unsigned char[ nImgBytes ];
 
 	FILE *f = fopen(path, "rb");
@@ -59,24 +88,40 @@ Texture::Texture(char *path, int width, int height, int channels){
 	cout << "INFO: texture file \"" << path << "\": loaded " << nBytes << " bytes OK.\n" << endl;
 	/** **/
 
+	loadData(width, height, nChannels, data);
+
+	delete data;
+	fclose(f);
+}
+
+void Texture::loadPngFile(char *path){
+	D_TRACE();
+	cout << "loadPngFile(): not implemented." << endl;
+}
+
+void Texture::loadData(int width, int height, int nChannels, unsigned char *data){
+
+	if(nChannels != 3 && nChannels != 4){
+		D_TRACE(<< "WARNING: texture file \"" << path
+				<< "\" unsupported channel count: " << channels);
+		return;
+	}
+
 	/* Start playing with it */
 	glBindTexture(GL_TEXTURE_2D, _textureId);
-
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-
 	/* Load it */
-	if(channels == 3)
+	if(nChannels == 3)
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	else if(channels == 4)
+	else if(nChannels == 4)
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-
-	delete data;
-	fclose(f);
+	else
+		D_TRACE(<<"unsupported channel count: " << nChannels);
 
 }
 

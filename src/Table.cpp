@@ -15,7 +15,7 @@ Table::Table(GLfloat x, GLfloat y, GLfloat z){
 	_box.changeTo(	-GAME_TABLE_LIMIT, GAME_TABLE_LIMIT,
 					-GAME_TABLE_LIMIT, GAME_TABLE_LIMIT);
 
-	_texture = new Texture("table_64x64x3.data", 64, 64, 3);
+	_texture = new Texture("table_64x64x3.data");
 }
 
 Table::~Table(){
