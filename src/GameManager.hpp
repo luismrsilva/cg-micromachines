@@ -42,6 +42,7 @@ class GameManager {
 		bool toggleLighting();
 		void toggleCandles();
 		void toggleShading();
+		bool isPaused();
 	private:
 		void initGL();
 		void drawGameState(Texture *t);

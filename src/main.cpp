@@ -11,6 +11,14 @@ using namespace std;
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <time.h>
+#include <cstring>
+
+#ifdef _MSC_VER
+	#define	my_spritf	sprintf_s
+#else
+	#define	my_spritf	sprintf
+#endif
+
 
 GameManager *gameManager;
 
@@ -26,15 +34,17 @@ void myDisplay(void){
 	gameManager->display();
 	frames++;
 
-	if(glutGet(GLUT_ELAPSED_TIME) - start > 1000){
+	if(glutGet(GLUT_ELAPSED_TIME) - start > 500){
 		start = glutGet(GLUT_ELAPSED_TIME);
 		#ifdef _MSC_VER
 			sprintf_s
 		#else
 			sprintf
 		#endif
-		(title, "%s (%d fps)", GAME_WINDOW_TITLE, frames);
-
+		(title, "%s (%d fps)", GAME_WINDOW_TITLE, 2*frames);
+		if(gameManager->isPaused()){
+			strcat(title, " (paused)");
+		}
 		glutSetWindowTitle(title);
 		frames = 0;
 	}

@@ -534,3 +534,7 @@ void GameManager::orangeRespawn(){
 		if (!o->isActive()) o->resetPosition();
 	}
 }
+
+bool GameManager::isPaused(){
+	return _isPaused;
+}
