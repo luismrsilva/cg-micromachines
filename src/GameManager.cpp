@@ -93,7 +93,7 @@ GameManager::GameManager(){
 
 
 	for (int i=0; i<5; i++){
-		Car *o = new Car(lightNum, lightNum);
+		Car *o = new Car(0, 0);
 		o->setPosition(-1.5f+(i*0.1f), 1.5f, 0);
 		o->rotateZ(90);
 		_car_lives.push_back(o);

@@ -52,10 +52,23 @@
 // Camera stuff
 #define GAME_CAMERA_MOVEMENT_SMOTHENESS		0.85
 
+
+
 // Car stuff
 
 #define GAME_CAR_SCALE	cm(13)
 #define CAR_FRONT		cm(3.25)
+
+
+#define CAR_BODY_COLOR	0.6,0,0
+
+#define CAR_HEADLIGHTS_AMBIENT		0.8, 0.6, 0.4, 1.0
+#define CAR_HEADLIGHTS_DIFFUSE		1.0, 0.8, 0.4, 1.0
+#define CAR_HEADLIGHTS_SPECULAR		1.0, 0.8, 0.6, 1.0
+#define CAR_HEADLIGHTS_ATTENUATION	0.1, 1.0, 8.0
+
+#define CAR_HEADLIGHTS_CUTOFF		10
+#define CAR_HEADLIGHTS_EXPONENT		0
 
 
 #endif //__GAME_CONFIG_INCLUDED
