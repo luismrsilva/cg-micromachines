@@ -61,7 +61,7 @@
 #define CAR_FRONT		cm(3.25)
 
 
-#define CAR_BODY_COLOR	0.6,0,0
+#define CAR_BODY_COLOR	0.8,0,0
 
 #define CAR_HEADLIGHTS_AMBIENT		0.8, 0.6, 0.4, 1.0
 #define CAR_HEADLIGHTS_DIFFUSE		1.0, 0.8, 0.4, 1.0

@@ -20,7 +20,7 @@ Candle::Candle(GLenum lightNum, double x, double y, double z) : StaticObject(x, 
 										+ CANDLE_WICK_HEIGHT
 										+ 2*CANDLE_FLAME_HEIGHT);
 
-	_lightsource->setAmbient(0.0, 0.0, 0.0, 1.0);
+	_lightsource->setAmbient(0.01, 0.01, 0.01, 1.0);
 	_lightsource->setDiffuse(1.0, 0.8, 0.4, 1.0);
 	_lightsource->setSpecular(1.0, 0.8, 0.6, 1.0);
 	_lightsource->setAttenuation(1, 0, 4);
