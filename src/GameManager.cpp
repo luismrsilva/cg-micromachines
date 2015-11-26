@@ -10,6 +10,7 @@
 #include <iostream>
 using namespace std;
 #include <string.h>
+#include <ctype.h>
 #include "GameManager.hpp"
 #include "LightSource.hpp"
 
@@ -303,7 +304,7 @@ void GameManager::drawOSD(){
 
 void GameManager::keyPressed(unsigned char key, int x, int y){
 	cout << "[" << key << "] ";
-	switch(key){
+	switch(toupper(key)){
 		case '1':
 		case '2':
 		case '3':
@@ -312,38 +313,31 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 			glutPostRedisplay();	// force draw
 			cout << "Changed to camera " << (key) << endl;
 			break;
-		case 'r':
 		case 'R':
 			resetGame();
 			cout << "Game resetted" << endl;
 			break;
-		case 's':
 		case 'S':
 			_isPaused = !_isPaused;
 			cout << "Game pause toggled" << endl;
 			break;
-		case 'l':
 		case 'L':
 			cout << "Global lighting toggled" << endl;
 			toggleLighting();
 			break;
-		case 'c':
 		case 'C':
 			cout << "Candles lighting toggled" << endl;
 			toggleCandles();
 			break;
-		case 'b':
 		case 'B':
 			cout << "Box drawing toggled" << endl;
 			for( auto o : _game_objects )
 				o->toggleBox();
 			break;
-		case 'g':
 		case 'G':
 			cout << "Gouraud shading toggled" << endl;
 			toggleShading();
 			break;
-		case 'n':
 		case 'N':
 			cout << "Main lighting toggled" << endl;
 			_globalLight->toggleState();
@@ -354,14 +348,12 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 				_car->toggleLight();
 			}
 			break;
-		case 'h':
 		case 'H':
 			cout << "Car light toggled" << endl;
 			if (!_globalLight->getState()) {
 				_car->toggleLight();
 			}
 			break;
-		case 'p':
 		case 'P':
 			cout << "No-clip toggled" << endl;
 			_isNoClip = !_isNoClip;
