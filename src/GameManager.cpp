@@ -32,6 +32,10 @@ GameManager::GameManager(){
 	/* Use (lightNum++) when creating a new light object */
 	GLenum lightNum = GL_LIGHT0;
 
+	/* Textures for Game pause and lose messages*/
+	_tpaused = new Texture((char*) "game_paused.png");
+	_tover = new Texture((char*) "game_over.png");
+
 	/* Global Directional Light */
 	_globalLight = new SpotLightSource(lightNum++);
 	_globalLight->setAmbient(0.05, 0.05, 0.05, 1.0);
@@ -181,9 +185,44 @@ void drawStartLine(GLfloat x, GLfloat y, GLfloat z){
 	glPopMatrix();
 }
 
+void GameManager::drawGameState(Texture *t){
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	_cameras[0]->update();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	#define POLY_WIDTH 	1.6
+	#define POLY_HEIGHT 0.6
+	glTranslatef(0.0-(POLY_WIDTH/2), 0.6, 1.0);
+
+	t->apply();
+
+	glBegin(GL_POLYGON);
+		glTexCoord2d(0, 0);
+		glVertex3f(0.0, 0.0, 0.0);
+
+		glTexCoord2d(1, 0);
+		glVertex3f(POLY_WIDTH, 0.0, 0.0);
+
+		glTexCoord2d(1, 1);
+		glVertex3f(POLY_WIDTH, POLY_HEIGHT, 0.0);
+
+		glTexCoord2d(0, 1);
+		glVertex3f(0.0, POLY_HEIGHT, 0.0);
+	glEnd();
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	_currentCamera->update();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+}
+
 void GameManager::display(){
 	D_TRACE();
 
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -234,7 +273,6 @@ void GameManager::display(){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-
 	/* Teapot for light debugging */
 	if(_enableTeaPot){
 		glPushMatrix();
@@ -247,28 +285,11 @@ void GameManager::display(){
 		glPopMatrix();
 	}
 
-	if (_isLoseState){	// draws top bar with losing message
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		_cameras[0]->update();
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		#define POLY_WIDTH 1.2
-		glTranslatef(0.0-(POLY_WIDTH/2), 1.2, 1.0);
-		glBegin(GL_POLYGON);
-			glColor3f(1.0, 1.0, 1.0);
-			glVertex3f(0.0, 0.0, 0.0);
-			glVertex3f(POLY_WIDTH, 0.0, 0.0);
-			glVertex3f(POLY_WIDTH, 0.3, 0.0);
-			glVertex3f(0.0, 0.3, 0.0);
-		glEnd();
-
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		_currentCamera->update();
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
+	if(_isPaused){
+		drawGameState(_tpaused);
+	}
+	else if(_isLoseState){
+		drawGameState(_tover);
 	}
 
 #ifdef SINGLEBUF
@@ -355,16 +376,8 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 }
 
 void GameManager::onTimer(int val){
-	if (!_isPaused){
-		update(((double) val)/1000.);
-		glutPostRedisplay();
-	} else{
-		idle();
-	}
-}
-
-void GameManager::idle(){
-	// stuff to do while paused
+	if (!_isPaused) update(((double) val)/1000.);
+	glutPostRedisplay();
 }
 
 void GameManager::carIsKilled(){

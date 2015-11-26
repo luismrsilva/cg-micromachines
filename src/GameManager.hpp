@@ -21,6 +21,7 @@ using namespace std;
 #include "Butter.hpp"
 #include "Orange.hpp"
 #include "Roadside.hpp"
+#include "Texture.hpp"
 #include "SpotLightSource.hpp"
 
 class GameManager {
@@ -31,7 +32,6 @@ class GameManager {
 		void reshape(GLsizei w, GLsizei h);
 		void keyPressed(unsigned char key, int x, int y);
 		void onTimer(int val);
-		void idle();
 		void endGame();
 		void resetGame();
 		void update(double delta_t);
@@ -44,6 +44,7 @@ class GameManager {
 		void toggleShading();
 	private:
 		void initGL();
+		void drawGameState(Texture *t);
 		Car *_car;
 		Table *_table;
 		Roadside *_roadside;
@@ -58,6 +59,7 @@ class GameManager {
 		bool _isPaused = false;
 		bool _isLoseState = false;
 		int _lives = 5;
+		Texture *_tover, *_tpaused;
 
 		enum KEYS{
 			UP, LEFT, DOWN, RIGHT
