@@ -248,6 +248,31 @@ void GameManager::display(){
 		o->draw();
 	}
 
+	/* Teapot for light debugging */
+	if(_enableTeaPot){
+		glPushMatrix();
+			glLoadIdentity();
+			glTranslatef(	GAME_TABLE_LIMIT/7,
+							GAME_TABLE_LIMIT/5,
+							GAME_TABLE_LIMIT/15);
+			glRotatef(90.0, 1, 0, 0);
+			glutSolidTeapot(GAME_TABLE_LIMIT/10.);
+		glPopMatrix();
+	}
+
+	/* Draw OSD */
+	drawOSD();
+
+
+#ifdef SINGLEBUF
+	glFlush();
+#else
+	glutSwapBuffers();
+#endif
+}
+
+/* Does not restore matrices */
+void GameManager::drawOSD(){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	_cameras[0]->update();
@@ -261,29 +286,6 @@ void GameManager::display(){
 		l->draw();
 		if (--lives == 0) break;
 	}
-	if (lighting_on)
-		glEnable(GL_LIGHTING);
-	else
-		glDisable(GL_LIGHTING);
-
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	_currentCamera->update();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	/* Teapot for light debugging */
-	if(_enableTeaPot){
-		glPushMatrix();
-			glLoadIdentity();
-			glTranslatef(	GAME_TABLE_LIMIT/7,
-							GAME_TABLE_LIMIT/5,
-							GAME_TABLE_LIMIT/15);
-			glRotatef(90.0, 1, 0, 0);
-			glutSolidTeapot(GAME_TABLE_LIMIT/10.);
-		glPopMatrix();
-	}
 
 	if(_isPaused){
 		drawGameState(_tpaused);
@@ -292,11 +294,11 @@ void GameManager::display(){
 		drawGameState(_tover);
 	}
 
-#ifdef SINGLEBUF
-	glFlush();
-#else
-	glutSwapBuffers();
-#endif
+	if (lighting_on)
+		glEnable(GL_LIGHTING);
+	else
+		glDisable(GL_LIGHTING);
+
 }
 
 void GameManager::keyPressed(unsigned char key, int x, int y){

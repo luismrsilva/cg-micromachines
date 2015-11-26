@@ -46,6 +46,7 @@ class GameManager {
 	private:
 		void initGL();
 		void drawGameState(Texture *t);
+		void drawOSD();
 		Car *_car;
 		Table *_table;
 		Roadside *_roadside;
