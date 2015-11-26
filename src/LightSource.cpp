@@ -51,6 +51,7 @@ bool LightSource::setState(bool state){
 	}else{
 		glDisable(_num);
 	}
+	D_TRACE(<< " " << this  << "  " << _num << " " << _state);
 	return _state;
 }
 

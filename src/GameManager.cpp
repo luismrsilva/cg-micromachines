@@ -65,7 +65,7 @@ GameManager::GameManager(){
 	_candles.push_back(new Candle(lightNum++,-0.8, -0.8, 0));
 	_candles.push_back(new Candle(lightNum++,-0.8,  0.8, 0));
 	_candles.push_back(new Candle(lightNum++, 0.0,  1.4, 0));
-	_candles.push_back(new Candle(lightNum++,-0.2, -1.4, 0));
+	//_candles.push_back(new Candle(lightNum++,-0.2, -1.4, 0));
 
 	_redCandle->setLightColor(1, 0, 0);
 
@@ -79,6 +79,8 @@ GameManager::GameManager(){
 		_game_objects.push_back( b );
 	}
 
+	_car = new Car(lightNum++, lightNum++);
+
 	/* Oranges */
 	for (int i=0; i<3; i++){
 		Orange *o = new Orange();
@@ -86,7 +88,6 @@ GameManager::GameManager(){
 		_game_objects.push_back(o);
 	}
 
-	_car = new Car(lightNum++, lightNum);
 	_car->reset();
 	_game_objects.push_back(_car);
 
