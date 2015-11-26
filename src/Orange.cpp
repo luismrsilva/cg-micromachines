@@ -90,9 +90,6 @@ void Orange::draw(){
 bool Orange::processCollisionWith(GameObject &obj){
 	D_TRACE();
 	if(GameObject::processCollisionWith(obj)){
-		Car &dobj = ((Car&)obj);
-
-		dobj.reset();
 		return true;
 	}
 	return false;

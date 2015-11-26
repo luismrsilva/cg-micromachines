@@ -93,10 +93,10 @@ GameManager::GameManager(){
 
 
 	for (int i=0; i<5; i++){
-		Car *o = new Car(lightNum, lightNum);
-		o->setPosition(-1.5f+(i*0.1f), 1.5f, 0);
-		o->rotateZ(90);
-		_car_lives.push_back(o);
+		Car *c = new Car(lightNum, lightNum);
+		c->setPosition(-1.5f+(i*0.1f), 1.5f, 0);
+		c->rotateZ(90);
+		_car_lives.push_back(c);
 	}
 
 	/** Cameras **/
@@ -218,7 +218,7 @@ void GameManager::display(){
 	bool lighting_on = glIsEnabled(GL_LIGHTING);
 	int lives = _lives;
 	glDisable(GL_LIGHTING);
-	for( auto l : _car_lives ) {
+	for( auto l : _car_lives ){
 		l->draw();
 		if (--lives == 0) break;
 	}
@@ -247,6 +247,30 @@ void GameManager::display(){
 		glPopMatrix();
 	}
 
+	if (_isLoseState){	// draws top bar with losing message
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		_cameras[0]->update();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+		#define POLY_WIDTH 1.2
+		glTranslatef(0.0-(POLY_WIDTH/2), 1.2, 1.0);
+		glBegin(GL_POLYGON);
+			glColor3f(1.0, 1.0, 1.0);
+			glVertex3f(0.0, 0.0, 0.0);
+			glVertex3f(POLY_WIDTH, 0.0, 0.0);
+			glVertex3f(POLY_WIDTH, 0.3, 0.0);
+			glVertex3f(0.0, 0.3, 0.0);
+		glEnd();
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		_currentCamera->update();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+	}
+
 #ifdef SINGLEBUF
 	glFlush();
 #else
@@ -255,6 +279,7 @@ void GameManager::display(){
 }
 
 void GameManager::keyPressed(unsigned char key, int x, int y){
+	cout << "[" << key << "] ";
 	switch(key){
 		case '1':
 		case '2':
@@ -316,14 +341,15 @@ void GameManager::keyPressed(unsigned char key, int x, int y){
 		case 'p':
 		case 'P':
 			cout << "No-clip toggled" << endl;
-			_no_clip = !_no_clip;
-			_car->setGhost(_no_clip);
+			_isNoClip = !_isNoClip;
+			_car->setGhost(_isNoClip);
 			break;
 		case 'T':	// Only Uppercase T
 			// Teapot for debugging.
 			_enableTeaPot = !_enableTeaPot;
 			break;
 		default:
+			cout << "Key has no binding" << endl;
 			break;
 	}
 }
@@ -341,17 +367,28 @@ void GameManager::idle(){
 	// stuff to do while paused
 }
 
+void GameManager::carIsKilled(){
+	if (--_lives <= 0){
+		endGame();
+	} else{
+		_car->reset();
+	}
+}
+
 void GameManager::endGame(){
 	/*
 		Stop car
 		Display losing message
 		Put everything grey ?
 	*/
+	_car->setSpeed(0, 0, 0);
+	_isLoseState = true;
 }
 
 void GameManager::resetGame(){
 	_lives = 5;
 	_car->reset();
+	_isLoseState = false;
 }
 
 void GameManager::update(double delta_t){
@@ -390,7 +427,7 @@ void GameManager::update(double delta_t){
 		_car->rotateZ(da);
 	}
 
-	if(_isKeyPressed[UP] ^ _isKeyPressed[DOWN]){
+	if((_isKeyPressed[UP] ^ _isKeyPressed[DOWN]) && !_isLoseState){
 		double da = delta_t*GAME_CAR_SPEED_ACCELARATION*(_isKeyPressed[UP] ? 1 : -0.5);
 		if(_car->getSpeed().getXYModulus() == 0.){
 			_car->setSpeed(Vector3(da, _car->getXYAngle()));
@@ -413,13 +450,13 @@ void GameManager::update(double delta_t){
 
 void GameManager::checkCollisions(){
 
-	if (_no_clip) return;
+	if (_isNoClip) return;
 
 	/* check for collisions */
 	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
 		if ((*i)->processCollisionWith(*_car)){
 			D_TRACE( << "COLISION!! " << typeid(*i).name() << " " << glutGet(GLUT_ELAPSED_TIME));
-			if (--_lives == 0) resetGame();
+			carIsKilled();
 		};
 	}
 	for(vector<Butter*>::iterator i = _butters.begin(); i != _butters.end(); i++){
@@ -431,8 +468,7 @@ void GameManager::checkCollisions(){
 		D_TRACE( << "COLISION!! " << typeid(_roadside).name() << " " << glutGet(GLUT_ELAPSED_TIME));
 	}
 	if (_car->isOutOfBounds()){	// Car fell off the table
-		_car->reset();
-		if (--_lives == 0) resetGame();
+		carIsKilled();
 	}
 }
 
@@ -448,8 +484,8 @@ bool GameManager::toggleLighting(){
 }
 
 void GameManager::toggleCandles(){
-	for( auto candle : _candles ) {
-		candle->toggleLight();
+	for( auto c : _candles ){
+		c->toggleLight();
 	}
 }
 
@@ -475,13 +511,13 @@ void GameManager::setKeyPressed(int glut_key, bool status){
 }
 
 void GameManager::orangeSpeedInc(float inc){
-	for( auto orange : _oranges ) {
-		orange->setSpeed(orange->getSpeed() * inc);
+	for( auto o : _oranges ){
+		o->setSpeed(o->getSpeed() * inc);
 	}
 }
 
 void GameManager::orangeRespawn(){
-	for( auto orange : _oranges ) {
-		if (!orange->isActive()) orange->resetPosition();
+	for( auto o : _oranges ){
+		if (!o->isActive()) o->resetPosition();
 	}
 }

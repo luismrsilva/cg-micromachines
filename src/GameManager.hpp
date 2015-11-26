@@ -38,6 +38,7 @@ class GameManager {
 		void setKeyPressed(int glut_key, bool status);
 		void orangeSpeedInc(float inc);
 		void orangeRespawn();
+		void carIsKilled();
 		bool toggleLighting();
 		void toggleCandles();
 		void toggleShading();
@@ -53,8 +54,9 @@ class GameManager {
 		vector<GameObject*> _game_objects;
 		vector<Camera*> _cameras;
 		bool *_isKeyPressed;
-		bool _no_clip = false;
+		bool _isNoClip = false;
 		bool _isPaused = false;
+		bool _isLoseState = false;
 		int _lives = 5;
 
 		enum KEYS{
