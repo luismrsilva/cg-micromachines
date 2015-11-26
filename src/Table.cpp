@@ -15,7 +15,7 @@ Table::Table(GLfloat x, GLfloat y, GLfloat z){
 	_box.changeTo(	-GAME_TABLE_LIMIT, GAME_TABLE_LIMIT,
 					-GAME_TABLE_LIMIT, GAME_TABLE_LIMIT);
 
-	_texture = new Texture("table_64x64x3.data");
+	_texture = new Texture((char*)"table.png");
 }
 
 Table::~Table(){
@@ -23,7 +23,8 @@ Table::~Table(){
 }
 
 void inline myglVertex(GLfloat x, GLfloat y){
-	glTexCoord2d((float)x/GAME_TABLE_LIMIT, (float)y/GAME_TABLE_LIMIT); /* not exactly right */
+	glTexCoord2d(GAME_TABLE_TEXTURE_SCALE*(float)x/GAME_TABLE_LIMIT,
+				GAME_TABLE_TEXTURE_SCALE*(float)y/GAME_TABLE_LIMIT);
 	glVertex3f(x, y, 0);
 }
 

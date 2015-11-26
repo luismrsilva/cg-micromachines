@@ -33,6 +33,7 @@
 #define GAME_WORLD_MAX 		1.6f
 #define GAME_TABLE_LIMIT 	1.5f
 
+#define GAME_TABLE_TEXTURE_SCALE	4
 
 // Subdivision settings
 #define GAME_TABLE_TILE_DIVISION_COUNT	128

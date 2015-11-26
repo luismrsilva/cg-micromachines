@@ -8,10 +8,10 @@
 
 # Compiling and running on Linux
 ## Compiling
-* Make sure you have g++, make, OpenGL, GLU and GLUT installed.
+* Make sure you have g++, make, OpenGL, GLU,  GLUT and SOIL installed.
 On Ubuntu (and variants), this command should install all of them:
  ```shell
- sudo apt-get install g++ make freeglut3-dev
+ sudo apt-get install g++ make freeglut3-dev libsoil-dev
  ```
 
 * Create a directory named `obj` inside the projet root directory, otherwise you'll get a bunch of errors.
@@ -31,3 +31,6 @@ or, if it's already compiled:
 ```shell
 ./micromachines
 ```
+## Compiling without SOIL
+If you wish, it is possible to compile the project without libSOIL (and no textures).
+To do this, simply define `NOSOIL` when compiling.
