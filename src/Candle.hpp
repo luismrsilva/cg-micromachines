@@ -19,6 +19,8 @@ class Candle : public StaticObject {
 		void setLightColor(GLfloat r, GLfloat g, GLfloat b);
 	private:
 		PointLightSource *_lightsource;
+		Material *_flameMaterial;
+		Material *_wickMaterial;
 
 };
 

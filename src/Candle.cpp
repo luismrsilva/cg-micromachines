@@ -11,8 +11,7 @@
 #include "PointLightSource.hpp"
 
 #define CANDLE_BODY_HEIGHT		cm(15)
-#define CANDLE_WICK_WIDTH		mm(1)
-#define CANDLE_WICK_HEIGHT		mm(3)
+#define CANDLE_WICK_HEIGHT		mm(9)
 #define CANDLE_FLAME_HEIGHT		mm(6)
 
 Candle::Candle(GLenum lightNum, double x, double y, double z) : StaticObject(x, y, z){
@@ -25,9 +24,16 @@ Candle::Candle(GLenum lightNum, double x, double y, double z) : StaticObject(x, 
 	_lightsource->setDiffuse(1.0, 0.8, 0.4, 1.0);
 	_lightsource->setSpecular(1.0, 0.8, 0.6, 1.0);
 	_lightsource->setAttenuation(1, 0, 4);
+
+	setMaterialColor(0.8, 0.0, 0.0);
+
+	_wickMaterial = new Material(0.5, 0.3, 0.1, 1.0);
+	_flameMaterial = new Material(0.9, 0.8, 0.2, 0.1);
 }
 
 Candle::~Candle(){
+	delete _wickMaterial;
+	delete _flameMaterial;
 }
 
 
@@ -46,20 +52,21 @@ void Candle::draw(){
 
 		/* body */
 		glTranslatef(pos->getX(), pos->getY(), pos->getZ());
-		applyMaterialColor(0.8f, 0.7f, 0.6f);
+		_material->apply();
 		gluCylinder(gluNewQuadric(), cm(1), cm(1),
 					CANDLE_BODY_HEIGHT, 12, 12);
 
 		/* wick */
-		glTranslatef(0, 0, CANDLE_BODY_HEIGHT);
-		applyMaterialColor(0.8f, 0.8f, 0.8f);
-		gluCylinder(gluNewQuadric(),	CANDLE_WICK_WIDTH,
-										CANDLE_WICK_WIDTH,
-										CANDLE_WICK_HEIGHT, 8, 8);
+		glTranslatef(0, 0, CANDLE_BODY_HEIGHT + CANDLE_WICK_HEIGHT/2);
+		_wickMaterial->apply();
+		glPushMatrix();
+			glScalef(0.125, 0.125, 1);
+			glutSolidSphere(CANDLE_WICK_HEIGHT, 8, 8);
+		glPopMatrix();
 
 		/* "flame" */
-		glTranslatef(0, 0, CANDLE_WICK_HEIGHT);
-		applyMaterialColor(1.0f, 0.7f, 0.3f);
+		glTranslatef(0, 0, CANDLE_WICK_HEIGHT + CANDLE_FLAME_HEIGHT/4);
+		_flameMaterial->apply();
 		glPushMatrix();
 			glScalef(0.125, 0.125, 1);
 			glutSolidSphere(CANDLE_FLAME_HEIGHT, 8, 8);
@@ -70,5 +77,9 @@ void Candle::draw(){
 }
 
 void Candle::toggleLight(){
-	_lightsource->toggleState();
+	if(_lightsource->toggleState()){
+		_flameMaterial->setEmission(10, 10, 5, 1.0);
+	}else{
+		_flameMaterial->setEmission(0, 0, 0, 1.0);
+	}
 }
