@@ -453,7 +453,7 @@ void GameManager::update(double delta_t){
 
 void GameManager::checkCollisions(){
 
-	if (_isNoClip) return;
+	if (_isNoClip || _isLoseState) return;
 
 	/* check for collisions */
 	for(vector<Orange*>::iterator i = _oranges.begin(); i != _oranges.end(); i++){
