@@ -2,9 +2,9 @@
 3D version of the first Micro Machines game for the Computer Graphics course.
 
 # Authors
-* Bruno Henriques
-* Luís Silva
-* Sofia Reis
+* Bruno Henriques ([@zettca](https://github.com/zettca))
+* Luís Silva ([@luismrsilva](https://github.com/luismrsilva))
+* Sofia Reis ([@sofiaisreis](https://github.com/sofiaisreis))
 
 # Compiling and running on Linux
 ## Compiling
